@@ -1,0 +1,10 @@
+body {
+    width: 350px;
+    height: 500px;
+    margin: 0;
+    overflow: hidden;
+}
+#settingsButton {
+    font-size: 32px !important;
+    color:white !important;
+}

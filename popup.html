@@ -1,8 +1,46 @@
 <html>
     <head>
+        <link href="/libs/material-icons/material-icons.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="/libs/materialize/materialize.min.css" media="screen,projection"/>
+        <link href="popup.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
         <div id="result"></div>
+        <div id="surfaceContainer" class="center">
+            <a href="#!" class="right"><i id="settingsButton" class="material-icons">settings</i></a>
+
+            <div id="circler" class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+            </div>
+
+            <table id="resultTable" style="display:none; text-align: center;">
+                <tbody>
+                  <tr>
+                    <td>Title</td>
+                    <td id="titleResult"></td>
+                  </tr>
+                  <tr>
+                    <td>Artist</td>
+                    <td id="artistResult"></td>
+                  </tr>
+                  <tr>
+                    <td>Year</td>
+                    <td id="yearResult"></td>
+                  </tr>
+                </tbody>
+            </table>              
+        </div>
+        <hr>
+        <script src="/libs/materialize/materialize.min.js"></script>
         <script src="./popup.js" type="module"></script>
     </body>
 </html>

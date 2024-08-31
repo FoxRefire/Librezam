@@ -5,9 +5,12 @@ let reservedFFmpeg = reserveFFmpeg()
 let audios = await getAudiosInTab()
 audios.forEach(async audio => {
     let pcm = await convertToPCM(audios[0], reservedFFmpeg)
-    document.getElementById("result").insertAdjacentHTML("beforeend", `
-        <h2>${JSON.stringify(await shazamGuess(pcm))}</h2>
-    `)
+    let result = await shazamGuess(pcm)
+    circler.style.display = "none"
+    resultTable.style.display = "block"
+    titleResult.innerText = result.title
+    artistResult.innerText = result.artist
+    yearResult.innerText = result.year
 })
 
 function reserveFFmpeg(){
@@ -28,7 +31,7 @@ async function sendMessagePromises(tabId){
     let promises = []
     let frames = await chrome.webNavigation.getAllFrames({tabId:tabId})
     frames.forEach(f => {
-        let promise = chrome.tabs.sendMessage(tabId, {time:5000}, {frameId:f.frameId})
+        let promise = chrome.tabs.sendMessage(tabId, {time:2500}, {frameId:f.frameId})
         promises.push(promise)
     })
     return promises

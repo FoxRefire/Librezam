@@ -8,7 +8,7 @@
     },
     "action": {
         "default_title": "Librezam",
-        "default_popup": "popup.html"
+        "default_popup": "/popup/guess.html"
     },
     "content_scripts": [
         {
@@ -17,7 +17,7 @@
           "all_frames": true
         }
     ],
-    "permissions": ["tabs", "webNavigation"],
+    "permissions": ["tabs", "webNavigation", "storage"],
     "host_permissions": ["<all_urls>"],
     "content_security_policy": {
         "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"

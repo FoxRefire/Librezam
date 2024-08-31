@@ -2,9 +2,9 @@ import "/libs/shazam-api.min.js";
 import { FFmpeg } from "/libs/ffmpeg/ffmpeg/dist/esm/index.js"
 
 let reservedFFmpeg = reserveFFmpeg()
-let audios = await getAudiosInTab()
+let audios = (await getAudiosInTab()).filter(a=> a.length)
 audios.forEach(async audio => {
-    let pcm = await convertToPCM(audios[0], reservedFFmpeg)
+    let pcm = await convertToPCM(audio, reservedFFmpeg)
     let result = await shazamGuess(pcm)
     circler.style.display = "none"
     resultTable.style.display = "block"

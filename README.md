@@ -4,6 +4,19 @@
   <div align="center">Song recognition webextension using Shazam API</div>
 </p>
 
+[![Firefox](https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png)](https://addons.mozilla.org/ja/firefox/addon/foxypgp/)
+
+## What is it?
+This is a browser extension that uses Shazam's internal API to recognize the music playing in the current tab.
+
+Requests unrelated to music recognition, such as telemetry, will not be made.
+
+This is unofficial project and is not affiliated or supported by *Shazam ltd.*
+
+## Screenshot
+![304658](https://github.com/user-attachments/assets/bf07a292-4f6e-4d16-91ad-dd07801825bd)
+
+
 ## Third-party libraries/Referenced codes
 * [Iconsax Bold Oval Icons](https://www.svgrepo.com/svg/495541/music-square-search)([MIT](https://www.svgrepo.com/page/licensing/#MIT)) //Extension Icon
 * [node-shazam-api](https://github.com/asivery/node-shazam-api)([GPL-2.0](https://github.com/asivery/node-shazam-api/blob/master/LICENSE)) //Create Audio Signature & Querying Shazam API

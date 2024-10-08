@@ -19,6 +19,19 @@
         <input type="number" id="recordLength" min="1500" max="7500" />
       </div>
 
+      
+      <a tabindex="0"  href="#modalConfirmClear" class="btn filled icon-left modal-trigger"><i class="material-icons">delete_forever</i>Clear Histories</a>
+      <div id="modalConfirmClear" class="modal">
+        <div class="modal-content">
+            <h4>Confirm</h4>
+            <p id="modalMsg">Are you sure to clear histories?</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect btn-flat">No</a>
+            <a id="clearConfirmed" href="#!" class="modal-close waves-effect btn-flat">Yes</a>
+        </div>
+    </div>
+
       <script src="/libs/materialize/materialize.min.js"></script>
       <script src="./settings.js" type="module"></script>
     </body>

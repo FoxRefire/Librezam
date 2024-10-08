@@ -5,3 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 recordLength.addEventListener("change", async () => {
     await chrome.storage.local.set({time: Number(recordLength.value)})
 })
+
+M.Modal.init(modalConfirmClear, null)
+clearConfirmed.addEventListener("click", () => {
+    chrome.storage.local.set({histories: []})
+})

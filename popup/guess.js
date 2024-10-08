@@ -1,17 +1,28 @@
 import "/libs/shazam-api.min.js";
 import { FFmpeg } from "/libs/ffmpeg/ffmpeg/dist/esm/index.js"
 
+writeHistory()
 let reservedFFmpeg = reserveFFmpeg()
 let audios = (await getAudiosInTab()).filter(a=> a.length)
 audios.forEach(async audio => {
     let pcm = await convertToPCM(audio, reservedFFmpeg)
     let result = await shazamGuess(pcm)
-    circler.style.display = "none"
-    resultTable.style.display = "block"
-    titleResult.innerText = result.title
-    artistResult.innerText = result.artist
-    yearResult.innerText = result.year
+    writeResult(result)
+    await saveHistory(result)
 })
+
+async function writeHistory(){
+    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    histories.forEach(history => {
+        document.getElementById("historyTBody").insertAdjacentHTML("afterbegin",`
+            <tr>
+                <td>${history.title}</td>
+                 <td>${history.artist}</td>
+                  <td>${history.year}</td>
+            </tr>
+        `)
+    })
+}
 
 function reserveFFmpeg(){
     let ffmpeg = new FFmpeg();
@@ -57,4 +68,23 @@ async function convertToPCM(audio, reservedFFmpeg){
         "out.pcm"
     ])
     return await ffmpeg.readFile("out.pcm");
+}
+
+function writeResult(result){
+    circler.style.display = "none"
+    resultTable.style.display = "block"
+
+    titleResult.innerText = result.title
+    artistResult.innerText  = result.artist
+    yearResult.innerText = result.year
+}
+
+async function saveHistory(result){
+    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    histories.push({
+        title: result.title,
+        artist: result.artist,
+        year: result.year
+    })
+    await chrome.storage.local.set({histories})
 }

@@ -7,6 +7,7 @@ let audios = (await getAudiosInTab()).filter(a=> a.length)
 audios.forEach(async audio => {
     let pcm = await convertToPCM(audio, reservedFFmpeg)
     let result = await shazamGuess(pcm)
+    console.log(JSON.stringify(result))
     writeResult(result)
     await saveHistory(result)
 })
@@ -52,7 +53,7 @@ async function sendMessagePromises(tabId, ms){
 async function shazamGuess(pcm){
     let shazam = new Shazam.Shazam()
     let samples = Shazam.s16LEToSamplesArray(pcm);
-    return await shazam.recognizeSong(samples)
+    return await shazam.fullRecognizeSong(samples)
 }
 
 async function convertToPCM(audio, reservedFFmpeg){
@@ -73,18 +74,23 @@ async function convertToPCM(audio, reservedFFmpeg){
 function writeResult(result){
     circler.style.display = "none"
     resultTable.style.display = "block"
+    streamProviders.style.display = "block"
 
-    titleResult.innerText = result.title
-    artistResult.innerText  = result.artist
-    yearResult.innerText = result.year
+    titleResult.innerText = result.track.title
+    artistResult.innerText  = result.track.subtitle
+    yearResult.innerText = result.track.sections[0].metadata[2].text
+
+    appleMusicLink.href = result.track.hub.options[0].actions[0].uri
+    deezerLink.href = result.track.hub.providers[1].actions[0].uri.replace("deezer-query://", "https://")
+    spotifyLink.href = "https://open.spotify.com/search/" + result.track.hub.providers[0].actions[0].uri.slice(15)
 }
 
 async function saveHistory(result){
     let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
     histories.push({
-        title: result.title,
-        artist: result.artist,
-        year: result.year
+        title: result.track.title,
+        artist: result.track.subtitle,
+        year: result.track.sections[0].metadata[2].text
     })
     await chrome.storage.local.set({histories})
 }

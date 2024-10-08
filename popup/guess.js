@@ -78,7 +78,7 @@ function writeResult(result){
 
     titleResult.innerText = result.track.title
     artistResult.innerText  = result.track.subtitle
-    yearResult.innerText = result.track.sections[0].metadata[2].text
+    yearResult.innerText = result.track.sections[0].metadata[2]?.text || ""
 
     appleMusicLink.href = result.track.hub.options[0].actions[0].uri
     deezerLink.href = result.track.hub.providers[1].actions[0].uri.replace("deezer-query://", "https://")
@@ -90,7 +90,7 @@ async function saveHistory(result){
     histories.push({
         title: result.track.title,
         artist: result.track.subtitle,
-        year: result.track.sections[0].metadata[2].text
+        year: result.track.sections[0].metadata[2]?.text || ""
     })
     await chrome.storage.local.set({histories})
 }

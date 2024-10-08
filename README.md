@@ -4,7 +4,7 @@
   <div align="center">Song recognition webextension using Shazam API</div>
 </p>
 
-[![Firefox](https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png)](https://addons.mozilla.org/ja/firefox/addon/foxypgp/)
+[![Firefox](https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png)](https://addons.mozilla.org/firefox/addon/librezam/)
 
 ## What is it?
 This is a browser extension that uses Shazam's internal API to recognize the music playing in the current tab.

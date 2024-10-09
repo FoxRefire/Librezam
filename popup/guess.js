@@ -82,6 +82,7 @@ function writeResult(result){
     appleMusicLink.href = result.track.hub.options[0].actions[0].uri
     deezerLink.href = result.track.hub.providers[1].actions[0].uri.replace("deezer-query://", "https://")
     spotifyLink.href = "https://open.spotify.com/search/" + result.track.hub.providers[0].actions[0].uri.slice(15)
+    youtubeLink.href = "https://www.youtube.com/results?search_query=" + result.track.hub.providers[0].actions[0].uri.slice(15)
 }
 
 async function saveHistory(result){

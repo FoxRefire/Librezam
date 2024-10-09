@@ -7,9 +7,8 @@ let audios = (await getAudiosInTab()).filter(a=> a.length)
 audios.forEach(async audio => {
     let pcm = await convertToPCM(audio, reservedFFmpeg)
     let result = await shazamGuess(pcm)
-    console.log(JSON.stringify(result))
     writeResult(result)
-    await saveHistory(result)
+    saveHistory(result)
 })
 
 async function writeHistory(){
@@ -86,11 +85,15 @@ function writeResult(result){
 }
 
 async function saveHistory(result){
-    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
-    histories.push({
+    let newItem = {
         title: result.track.title,
         artist: result.track.subtitle,
         year: result.track.sections[0].metadata[2]?.text || ""
-    })
+    }
+
+    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    histories = histories.filter(item => JSON.stringify(item) != JSON.stringify(newItem))
+    histories.push(newItem)
+
     await chrome.storage.local.set({histories})
 }

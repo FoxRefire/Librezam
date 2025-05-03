@@ -1,8 +1,153 @@
+:root {
+    --brand-color: rgb(26,112,216);
+}
+
+
 body {
     width: 350px;
     height: 500px;
     overflow-y: auto;
+    background-image: url("/images/background.png");
+    background-attachment: fixed;
 }
+
+
+/* header element positioning -------------------------------*/
+
+/* header container */
+#surfaceContainer {
+    height:56px;
+    align-items: center;
+    justify-content: center;
+}
+/* setting button */
 #settingsButton {
-    font-size: 32px !important;
+    font-size: 45px !important;
+    color:var(--brand-color);
+    margin:10px 9px;
+    &:hover {
+    transform:scale(1.1);
+    }
+}
+/* preloader animation */
+.preloader-wrapper.big {
+    width: 36px !important;
+    height: 36px !important;
+    margin:14px 14px;
+}
+.preloader-wrapper {
+    display:flex; /*display correction*/
+    float:left;
+}
+
+
+/* seperator style (hr) -------------------------------------*/
+
+hr {
+    width:96%;
+    border-radius:96%;
+    color: color-mix(in srgb, var(--md-sys-color-outline-variant) 90%, transparent 10%)
+}
+
+
+/* history table --------------------------------------------*/
+
+/* spacing */
+#historyTable * {
+    padding-inline:12px;
+}
+/* border adjust */
+#historyTable tr {
+    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%);
+}
+/* title clarity */
+#historyTable th {
+    text-decoration: underline;
+}
+
+
+/* result table ---------------------------------------------*/
+
+/* spacing */
+#resultTable * {
+    padding-inline:12px;
+}
+/* border adjust */
+#resultTable tr {
+    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 5%, transparent 75%);
+}
+/* title clarity */
+#resultTable td:not([id*="artistResult"], [id*="yearResult"], [id*="titleResult"]) {
+    font-weight: bold;
+}
+/* adjust spacing when #resultTable.active */
+#surfaceContainer:has(#resultTable:not([style="display:none; text-align: center;"])) {
+    margin-bottom:170px !important;
+/*
+56+56 for header specified header height above,
+114 for qol spacing between #streamProviders and #historyTable
+*/
+}
+
+
+/* streaming providers --------------------------------------*/
+
+#streamProviders a {
+    font-size:32px;
+    margin-inline:10px;
+    padding:12px 8px 6px 8px;
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
+    border-radius:5px;
+    background-color:rgba(15,100,150,0.0);
+    backdrop-filter: blur(50px);
+    &:hover {
+       border-width:2px;
+    }
+}
+
+
+/* settings layout ------------------------------------------*/
+
+/* header styling */
+nav, .nav-wrapper {
+    background-color:rgba(0,0,0,0.05) !important;
+}
+nav .brand-logo, nav .back_button {
+    color: var(--brand-color) !important;
+}
+nav .back_button {
+    margin-left:10px !important;
+    padding-inline:5px !important;
+    width:52px !important;
+    &:hover {
+        transform:scale(1.2) !important;
+    }
+}
+/* recording length input field */
+.input-field #recordLength, .input-field input {
+    margin-inline: 3% !important;
+}
+.input-field #recordLength {
+    font-size:32px !important;
+    margin-inline:3% !important;
+    width: 94% !important;
+    padding:12px 12px !important;
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%) !important;
+    border-radius:5px !important;
+    background-color:rgba(15,100,150,0.0) !important;
+    backdrop-filter: blur(25px) !important;
+    &:hover {
+        border-width:2px !important;
+    }
+
+}
+/* clear history button */
+body a[class="btn filled icon-left modal-trigger"] {
+    margin: 12px 3% !important;
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%) !important;
+    border-radius:5px !important;
+    &:hover {
+        border-width:2px !important;
+        color: var(--brand-color) !important;
+    }
 }

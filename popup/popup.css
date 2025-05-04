@@ -32,6 +32,7 @@ margin:10px 9px;
 #notification {
 font-size: 18px;
 color: orange;
+padding-top: 22px;
 }
 /* preloader animation */
 .preloader-wrapper.big {

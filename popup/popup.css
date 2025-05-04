@@ -10,7 +10,6 @@ body {
     background-image: url("/images/background.png"); /*default*/
     background-size: 100%;
     background-attachment: fixed;
-    clip-path: inset(0 round 4px);
 }
 
 /* header element positioning -------------------------------*/
@@ -30,10 +29,15 @@ body {
         transform:scale(1.1);
     }
 }
+/* notification */
 #notification {
     font-size: 18px;
     color: orange;
-    padding-top: 22px;
+}
+:root:has(#resultTable:not([style="display:none; text-align: center;"])) {
+    #notification {
+        padding-top:22px;
+    }
 }
 /* preloader animation */
 .preloader-wrapper.big {

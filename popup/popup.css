@@ -10,6 +10,7 @@ body {
     background-image: url("/images/background.png"); /*default*/
     background-size: 100%;
     background-attachment: fixed;
+    clip-path: inset(0 round 4px);
 }
 
 /* header element positioning -------------------------------*/

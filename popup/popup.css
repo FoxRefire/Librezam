@@ -192,6 +192,7 @@ body a[class="btn filled icon-left modal-trigger"] {
     box-sizing: border-box; /* Ensures padding/border is included in width */
     overflow-y: auto;
     background-size: 100%;
+    cursor: pointer;
     &:hover {
         transform:scale(1.1);
     }

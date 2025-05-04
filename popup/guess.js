@@ -1,6 +1,22 @@
 import "/libs/shazam-api.min.js";
 import { FFmpeg } from "/libs/ffmpeg/ffmpeg/dist/esm/index.js"
 
+// grab background option from storage
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("[BG DEBUG] guess DOM triggered");
+
+    chrome.storage.local.get('selectedBackgroundImage', (data) => {
+        if (data && data.selectedBackgroundImage) {
+            console.log(`[BG DEBUG] selectedBackgroundImage found: ${data.selectedBackgroundImage}`);
+            document.body.style.backgroundImage = data.selectedBackgroundImage;
+            console.log(`[BG DEBUG] Background image applied`);
+        } else {
+            console.error("[BG DEBUG] No selectedBackgroundImage found in storage");
+        }
+    });
+});
+
+
 writeHistory()
 let reservedFFmpeg = reserveFFmpeg()
 let audios = (await getAudiosInTab()).filter(a=> a.length)

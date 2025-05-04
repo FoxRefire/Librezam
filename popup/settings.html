@@ -6,33 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-      <!-- NavBar -->
-      <nav>
-        <div class="nav-wrapper">
-            <a class="brand-logo center">Settings</a>
-            <a href="/popup/guess.html"><i class="material-icons back_button">arrow_back</i></a>
+        <!-- NavBar -->
+        <nav>
+            <div class="nav-wrapper">
+                <a class="brand-logo center">Settings</a>
+                <a href="/popup/guess.html"><i class="material-icons back_button">arrow_back</i></a>
+            </div>
+        </nav>
+    
+        <div class="input-field">
+            <h5>Recording Length</h5>
+            <input type="number" id="recordLength" min="1500" max="7500" />
         </div>
-      </nav>
 
-      <div class="input-field">
-        <h5>Recording Length</h5>
-        <input type="number" id="recordLength" min="1500" max="7500" />
-      </div>
-
-      
-      <a tabindex="0"  href="#modalConfirmClear" class="btn filled icon-left modal-trigger"><i class="material-icons">delete_forever</i>Clear Histories</a>
-      <div id="modalConfirmClear" class="modal">
-        <div class="modal-content">
-            <h4>Confirm</h4>
-            <p id="modalMsg">Are you sure to clear histories?</p>
+        <div class="bg-selection">
+            <h5>Choose a Background</h5>
+            <div class="bg-opt-container">
+                <div class="bg-opt bg-opt-1" style="background-image: none;"></div>
+                <div class="bg-opt bg-opt-2" style="background-image: url('../images/background.png');"></div>
+                <div class="bg-opt bg-opt-3" style="background-image: url('../images/background-3.jpg');"></div>
+                <div class="bg-opt bg-opt-4" style="background-image: url('../images/background-4.jpg');"></div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect btn-flat">No</a>
-            <a id="clearConfirmed" href="#!" class="modal-close waves-effect btn-flat">Yes</a>
+              
+        <a tabindex="0"  href="#modalConfirmClear" class="btn filled icon-left modal-trigger"><i class="material-icons">delete_forever</i>Clear Histories</a>
+        <div id="modalConfirmClear" class="modal">
+            <div class="modal-content">
+                <h4>Confirm</h4>
+                <p id="modalMsg">Are you sure to clear histories?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect btn-flat">No</a>
+                <a id="clearConfirmed" href="#!" class="modal-close waves-effect btn-flat">Yes</a>
+            </div>
         </div>
-    </div>
 
-      <script src="/libs/materialize/materialize.min.js"></script>
-      <script src="./settings.js" type="module"></script>
+        <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./settings.js" type="module"></script>
     </body>
 </html>

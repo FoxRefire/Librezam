@@ -16,23 +16,23 @@ body {
 
 /* header container */
 #surfaceContainer {
-height:56px;
-align-items: center;
-justify-content: center;
+    height:56px;
+    align-items: center;
+    justify-content: center;
 }
 /* setting button */
 #settingsButton {
-font-size: 45px !important;
-color:var(--brand-color);
-margin:10px 9px;
-&:hover {
-    transform:scale(1.1);
-}
+    font-size: 45px !important;
+    color:var(--brand-color);
+    margin:10px 9px;
+    &:hover {
+        transform:scale(1.1);
+    }
 }
 #notification {
-font-size: 18px;
-color: orange;
-padding-top: 22px;
+    font-size: 18px;
+    color: orange;
+    padding-top: 22px;
 }
 /* preloader animation */
 .preloader-wrapper.big {
@@ -59,15 +59,15 @@ hr {
 
 /* spacing */
 #historyTable * {
-padding-inline:12px;
+    padding-inline:12px;
 }
 /* border adjust */
 #historyTable tr {
-border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%);
+    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%);
 }
 /* title clarity */
 #historyTable th {
-text-decoration: underline;
+    text-decoration: underline;
 }
 
 
@@ -75,19 +75,19 @@ text-decoration: underline;
 
 /* spacing */
 #resultTable * {
-padding-inline:12px;
+    padding-inline:12px;
 }
 /* border adjust */
 #resultTable tr {
-border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 5%, transparent 75%);
+    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 5%, transparent 75%);
 }
 /* title clarity */
 #resultTable td:not([id*="artistResult"], [id*="yearResult"], [id*="titleResult"]) {
-font-weight: bold;
+    font-weight: bold;
 }
 /* adjust spacing when #resultTable.active */
 #surfaceContainer:has(#resultTable:not([style="display:none; text-align: center;"])) {
-margin-bottom:170px !important;
+    margin-bottom:170px !important;
 /*
  5 *6+56 for header specified header height above,
  114 for qol spacing between #streamProviders and #historyTable
@@ -98,16 +98,16 @@ margin-bottom:170px !important;
 /* streaming providers --------------------------------------*/
 
 #streamProviders a {
-font-size:32px;
-margin-inline:10px;
-padding:12px 8px 6px 8px;
-border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
-border-radius:5px;
-background-color:rgba(15,100,150,0.0);
-backdrop-filter: blur(50px);
-&:hover {
-    border-width:2px;
-}
+    font-size:32px;
+    margin-inline:10px;
+    padding:12px 8px 6px 8px;
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
+    border-radius:5px;
+    background-color:rgba(15,100,150,0.0);
+    backdrop-filter: blur(50px);
+    &:hover {
+        border-width:2px;
+    }
 }
 
 

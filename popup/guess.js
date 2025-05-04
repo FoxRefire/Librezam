@@ -4,11 +4,21 @@ import { FFmpeg } from "/libs/ffmpeg/ffmpeg/dist/esm/index.js"
 writeHistory()
 let reservedFFmpeg = reserveFFmpeg()
 let audios = (await getAudiosInTab()).filter(a=> a.length)
+
+if(!audios.length){
+    showError("No audio elements detected...")
+}
+
 audios.forEach(async audio => {
     let pcm = await convertToPCM(audio, reservedFFmpeg)
     let result = await shazamGuess(pcm)
-    writeResult(result)
-    saveHistory(result)
+
+    if(result){
+        writeResult(result)
+        saveHistory(result)
+    } else {
+        showError("Song was not recognized...")
+    }
 })
 
 async function writeHistory(){
@@ -97,4 +107,9 @@ async function saveHistory(result){
     histories.push(newItem)
 
     await chrome.storage.local.set({histories})
+}
+
+function showError(msg) {
+    circler.style.display = "none"
+    notification.innerText = msg
 }

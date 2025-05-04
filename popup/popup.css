@@ -29,6 +29,10 @@ body {
     transform:scale(1.1);
     }
 }
+#notification {
+    font-size: 18px;
+    color: orange;
+}
 /* preloader animation */
 .preloader-wrapper.big {
     width: 36px !important;

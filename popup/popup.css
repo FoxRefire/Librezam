@@ -34,11 +34,7 @@ body {
     font-size: 18px;
     color: orange;
 }
-:root:has(#resultTable:not([style="display:none; text-align: center;"])) {
-    #notification {
-        padding-top:22px;
-    }
-}
+
 /* preloader animation */
 .preloader-wrapper.big {
     width: 36px !important;

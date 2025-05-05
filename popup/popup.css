@@ -7,11 +7,10 @@ body {
     width: 350px;
     height: 500px;
     overflow-y: auto;
-    background-image: url("/images/background.png");
-    background-size: 100%
+    background-image: url("/images/background-2.jpg"); /*default*/
+    background-size: 100%;
     background-attachment: fixed;
 }
-
 
 /* header element positioning -------------------------------*/
 
@@ -27,13 +26,15 @@ body {
     color:var(--brand-color);
     margin:10px 9px;
     &:hover {
-    transform:scale(1.1);
+        transform:scale(1.1);
     }
 }
+/* notification */
 #notification {
     font-size: 18px;
     color: orange;
 }
+
 /* preloader animation */
 .preloader-wrapper.big {
     width: 36px !important;
@@ -89,9 +90,9 @@ hr {
 #surfaceContainer:has(#resultTable:not([style="display:none; text-align: center;"])) {
     margin-bottom:170px !important;
 /*
-56+56 for header specified header height above,
-114 for qol spacing between #streamProviders and #historyTable
-*/
+ 5 *6+56 for header specified header height above,
+ 114 for qol spacing between #streamProviders and #historyTable
+ */
 }
 
 
@@ -106,7 +107,7 @@ hr {
     background-color:rgba(15,100,150,0.0);
     backdrop-filter: blur(50px);
     &:hover {
-       border-width:2px;
+        border-width:2px;
     }
 }
 
@@ -120,6 +121,7 @@ nav, .nav-wrapper {
 nav .brand-logo, nav .back_button {
     color: var(--brand-color) !important;
 }
+
 nav .back_button {
     margin-left:10px !important;
     padding-inline:5px !important;
@@ -129,6 +131,9 @@ nav .back_button {
     }
 }
 /* recording length input field */
+.input-field h5 {
+    margin-inline: 3% !important;
+}
 .input-field #recordLength, .input-field input {
     margin-inline: 3% !important;
 }
@@ -155,4 +160,39 @@ body a[class="btn filled icon-left modal-trigger"] {
         border-width:2px !important;
         color: var(--brand-color) !important;
     }
+}
+
+/* background selection options */
+.bg-selection {
+    margin-inline:3%;
+    padding-bottom:5px;
+    width: 94%;
+    height:auto;
+}
+.bg-opt-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.bg-opt {
+    width: 22%;
+    height:40px;
+    margin-top:2.5px;
+    margin-bottom:2.5px;
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
+    border-radius:5px;
+    background-color:rgba(15,100,150,0.0);
+    backdrop-filter: blur(25px);
+    box-sizing: border-box; /* Ensures padding/border is included in width */
+    overflow-y: auto;
+    background-size: 100%;
+    cursor: pointer;
+    &:hover {
+        transform:scale(1.1);
+    }
+}
+.bg-selected {
+    border:2px solid limegreen;
 }

@@ -1,6 +1,10 @@
 import "/libs/shazam-api.min.js";
 import { FFmpeg } from "/libs/ffmpeg/ffmpeg/dist/esm/index.js"
 
+// grab background option from storage
+document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage) || "url('/images/background-2.jpg')"
+
+
 writeHistory()
 let reservedFFmpeg = reserveFFmpeg()
 let audios = (await getAudiosInTab()).filter(a=> a.length)

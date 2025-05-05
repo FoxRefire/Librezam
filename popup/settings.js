@@ -16,18 +16,14 @@ clearConfirmed.addEventListener("click", () => {
 
 // sync background by retrieving background-image-style (no further communication needed across different html pages)
 
-document.addEventListener('DOMContentLoaded', () => {
-    chrome.storage.local.get('selectedBackgroundImage', (data) => {
-        if (data.selectedBackgroundImage) {
-            document.body.style.backgroundImage = data.selectedBackgroundImage;
-        }
-    });
+document.addEventListener('DOMContentLoaded', async () => {
+    document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage) || "url('/images/background-2.jpg')";
 
     document.querySelectorAll('.bg-opt').forEach(opt => {
         opt.addEventListener('click', () => {
             const bgImage = opt.style.backgroundImage;
             document.body.style.backgroundImage = bgImage;
-            chrome.storage.local.set({ selectedBackgroundImage: bgImage });
+            chrome.storage.local.set({ bgImage: bgImage });
         });
     });
 });

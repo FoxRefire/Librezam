@@ -7,7 +7,7 @@ body {
     width: 350px;
     height: 500px;
     overflow-y: auto;
-    background-image: url("/images/background.png"); /*default*/
+    background-image: url("/images/background-2.jpg"); /*default*/
     background-size: 100%;
     background-attachment: fixed;
 }

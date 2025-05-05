@@ -31,27 +31,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-/*
-// sync background by retrieving bg-opt-# (requires cross communication between guess files and settings files)
-
-document.addEventListener('DOMContentLoaded', async () => {
-    chrome.storage.local.get('selectedBackgroundClass', (data) => {
-        if (data.selectedBackgroundClass) {
-            const savedOpt = document.querySelector(`.${data.selectedBackgroundClass}`);
-            if (savedOpt) {
-                document.body.style.backgroundImage = savedOpt.style.backgroundImage;
-            }
-        }
-    });
-    document.querySelectorAll('.bg-opt').forEach(opt => {
-        opt.addEventListener('click', () => {
-            const bgClass = opt.classList.value.split(' ').find(cls => cls.startsWith('bg-opt-'));
-            if (bgClass) {
-                document.body.style.backgroundImage = opt.style.backgroundImage;
-                chrome.storage.local.set({ selectedBackgroundClass: bgClass });
-            }
-        });
-    });
-});
-*/

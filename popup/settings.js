@@ -14,6 +14,18 @@ clearConfirmed.addEventListener("click", () => {
     chrome.storage.local.set({ histories: [] });
 });
 
+exportHistories.addEventListener("click", async () => {
+    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    let csvContents = "Name,Artist,Year\n"
+    histories.forEach(history => {
+        csvContents += `${history.name},${history.artist},${history.year}`
+    })
+    let a = document.createElement('a')
+    a.href = URL.createObjectURL(new Blob([csvContents], {type: "text/plain"}))
+    a.download = "Librezam_histories.csv"
+    a.click()
+});
+
 // sync background by retrieving background-image-style
 document.addEventListener('DOMContentLoaded', async () => {
     let currBgImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage);

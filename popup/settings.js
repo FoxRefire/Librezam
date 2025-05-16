@@ -18,7 +18,7 @@ exportHistories.addEventListener("click", async () => {
     let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
     let csvContents = "Name,Artist,Year\n"
     histories.forEach(history => {
-        csvContents += `${history.name},${history.artist},${history.year}`
+        csvContents += `${history.title},${history.artist},${history.year}\n`
     })
     let a = document.createElement('a')
     a.href = URL.createObjectURL(new Blob([csvContents], {type: "text/plain"}))

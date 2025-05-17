@@ -12,12 +12,13 @@ if(!audios.length){
 }
 let recognizeBackend = await chrome.storage.local.get("backend").then(o => o.backend)
 audios.forEach(async audio => {
-    let result = recognizeBackend == "shazam" ? await shazamGuess(audio) : await auddGuess(audio)
-    if(result){
+    try{
+        let result = recognizeBackend == "shazam" ? await shazamGuess(audio) : await auddGuess(audio)
         writeResult(result)
         saveHistory(result)
-    } else {
+    } catch(e) {
         showError("Song was not recognized...")
+        console.log(e)
     }
 })
 

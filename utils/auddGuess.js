@@ -1,6 +1,6 @@
 export async function auddGuess(audio) {
     let response = await getResponse(audio)
-    console.log(response)
+    console.log(JSON.stringify(response))
     return {
         title: response.result.title,
         artist: response.result.artist,

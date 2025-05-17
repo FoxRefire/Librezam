@@ -6,7 +6,7 @@ let reservedFFmpeg = reserveFFmpeg()
 export async function shazamGuess(audio) {
     let pcm = await convertToPCM(audio, reservedFFmpeg)
     let response = await getResponse(pcm)
-    console.log(response)
+    console.log(JSON.stringify(response))
 
     return {
         title: response.track.title,

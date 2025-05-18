@@ -10,7 +10,7 @@ let audios = (await getAudiosInTab()).filter(a=> a.length)
 if(!audios.length){
     showError("No audio elements detected...")
 }
-let recognizeBackend = await chrome.storage.local.get("backend").then(o => o.backend)
+let recognizeBackend = await chrome.storage.local.get("backend").then(o => o.backend) || "shazam"
 audios.forEach(async audio => {
     try{
         let result = recognizeBackend == "shazam" ? await shazamGuess(audio) : await auddGuess(audio)

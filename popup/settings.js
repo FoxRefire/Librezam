@@ -11,6 +11,12 @@ recognizeBackend.addEventListener("change", async () => {
     await chrome.storage.local.set({ backend: recognizeBackend.value })
 })
 
+// Show coverart on recognized
+isShowCoverart.checked = await chrome.storage.local.get("isShowCoverart").then(o => o.isShowCoverart) || false
+isShowCoverart.addEventListener("change", async () => {
+    await chrome.storage.local.set({ isShowCoverart: isShowCoverart.checked })
+})
+
 // Clear History
 M.Modal.init(modalConfirmClear, null);
 clearConfirmed.addEventListener("click", () => {

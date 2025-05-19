@@ -83,7 +83,9 @@ body {
 hr {
     width:96%;
     border-radius:96%;
-    color: color-mix(in srgb, var(--md-sys-color-outline-variant) 90%, transparent 10%)
+    margin-top:0px;
+    padding-top:0px;
+    color: color-mix(in srgb, var(--md-sys-color-outline-variant) 90%, transparent 10%);
 }
 
 
@@ -119,11 +121,9 @@ hr {
 }
 /* adjust spacing when #resultTable.active */
 #surfaceContainer:has(#resultTable:not([style="display:none; text-align: center;"])) {
-    margin-bottom:170px !important;
-/*
- 5 *6+56 for header specified header height above,
- 114 for qol spacing between #streamProviders and #historyTable
- */
+    height:auto;
+    padding-bottom:8px;
+    background-size:100% 100%;
 }
 
 
@@ -132,7 +132,7 @@ hr {
 #streamProviders a {
     font-size:32px;
     margin-inline:10px;
-    padding:12px 8px 6px 8px;
+    padding:12px 8px 4px 8px;
     border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
     border-radius:5px;
     background-color:rgba(15,100,150,0.0);

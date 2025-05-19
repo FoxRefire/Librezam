@@ -15,7 +15,8 @@ export async function shazamGuess(audio) {
         apple: response.track.hub.options[0].actions[0].uri,
         deezer: response.track.hub.providers[1].actions[0].uri.replace("deezer-query://", "https://"),
         spotify: "https://open.spotify.com/search/" + response.track.hub.providers[0].actions[0].uri.slice(15),
-        youtube: "https://www.youtube.com/results?search_query=" + response.track.hub.providers[0].actions[0].uri.slice(15)
+        youtube: "https://www.youtube.com/results?search_query=" + response.track.hub.providers[0].actions[0].uri.slice(15),
+        art: response.track.share.image
     }
 }
 

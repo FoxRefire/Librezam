@@ -14,7 +14,7 @@ let recognizeBackend = await chrome.storage.local.get("backend").then(o => o.bac
 audios.forEach(async audio => {
     try{
         let result = recognizeBackend == "shazam" ? await shazamGuess(audio) : await auddGuess(audio)
-        writeResult(result)
+        await writeResult(result)
         saveHistory(result)
     } catch(e) {
         showError("Song was not recognized...")
@@ -52,10 +52,15 @@ async function sendMessagePromises(tabId, ms){
     return promises
 }
 
-function writeResult(result){
+async function writeResult(result){
     circler.style.display = "none"
     resultTable.style.display = "block"
     streamProviders.style.display = "block"
+
+    let isShowCoverart = await chrome.storage.local.get("isShowCoverart").then(o => o.isShowCoverart) || false
+    if(isShowCoverart){
+        surfaceContainer.style.backgroundImage = `url('${result.art}')`
+    }
 
     let elms = ["title", "artist", "year", "apple", "deezer", "spotify", "youtube"]
     elms.forEach(out => {

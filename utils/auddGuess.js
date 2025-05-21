@@ -5,7 +5,7 @@ export async function auddGuess(audio) {
         title: response.result.title,
         artist: response.result.artist,
         year: response.result.release_date?.slice(0,4) || "",
-        apple: response.result.apple_music.url,
+        apple: response.result.apple_music.url || "",
         deezer: response.result.deezer.link || "",
         spotify: response.result.spotify.external_urls.spotify || "",
         youtube: "https://www.youtube.com/results?search_query=" + encodeURIComponent(`${response.result.title} ${response.result.artist}`),

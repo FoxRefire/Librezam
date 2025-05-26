@@ -145,6 +145,18 @@ hr {
 
 /* settings layout ------------------------------------------*/
 
+/* popup spacing */
+:root:has(a.brand-logo) { /* give the Settings header a .class that is unique to the "Settings" Popup */
+    .input-field h5,
+    .input-field #recordLength,
+    .input-field input,
+    .input-field.col.s12,
+    .bg-selection,
+    form
+    {
+        margin-inline: 3% !important;
+    }
+}
 /* header styling */
 nav, .nav-wrapper {
     background-color:rgba(0,0,0,0.05) !important;
@@ -162,12 +174,6 @@ nav .back_button {
     }
 }
 /* recording length input field */
-.input-field h5 {
-    margin-inline: 3% !important;
-}
-.input-field #recordLength, .input-field input {
-    margin-inline: 3% !important;
-}
 .input-field #recordLength {
     font-size:32px !important;
     margin-inline:3% !important;
@@ -180,8 +186,21 @@ nav .back_button {
     &:hover {
         border-width:2px !important;
     }
-
 }
+/* recognize backend input */
+.input-field.col.s12 {
+    & .select-wrapper {
+        margin-inline:-3% !important;
+        width:100% !important;
+        border-radius:10px;
+    }
+    & .select-dropdown.dropdown-trigger {
+        border-bottom: none !important;
+        border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%) !important;
+        border-radius: 5px !important;
+    }
+}
+
 /* clear history button */
 body a[class="btn filled icon-left modal-trigger"] {
     margin: 12px 3% !important;
@@ -226,4 +245,8 @@ body a[class="btn filled icon-left modal-trigger"] {
 }
 .bg-selected {
     border:2px solid limegreen;
+}
+
+#exportHistories {
+    margin-inline-start: 3%;
 }

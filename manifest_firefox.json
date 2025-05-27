@@ -22,6 +22,10 @@
     "content_security_policy": {
         "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
     },
+    "web_accessible_resources": [{
+        "resources": ["/utils/fixHeadlessAudio.js"],
+        "matches": ["<all_urls>"]
+    }],
     "browser_specific_settings": {
         "gecko": {
             "id": "Librezam@Librezam"

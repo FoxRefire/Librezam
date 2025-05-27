@@ -1,6 +1,6 @@
 // When a message is received on clicking an icon, the audio in the DOM element is retrieved and responds to the pop-up script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    let elements = Array.from(document.querySelectorAll('audio, video')).filter(media => !media.paused)
+    let elements = findMediaElements()
     let promises = []
     elements.forEach(elem => {
         let stream = createStream(elem)
@@ -18,6 +18,18 @@ const script = document.createElement('script');
 script.type = 'text/javascript';
 script.src = chrome.runtime.getURL("/utils/fixHeadlessAudio.js");
 (document.head || document.documentElement).appendChild(script);
+
+// Ensure Shadow-root is explored recursively (Fix for some websites such as reddit)
+// https://stackoverflow.com/a/75787966/27020071
+function findMediaElements() {
+    const elements = Array.from(document.querySelectorAll('audio, video'))
+    for (const {shadowRoot} of document.querySelectorAll("*")) {
+        if (shadowRoot) {
+            elements.push(...shadowRoot.querySelectorAll("audio, video"));
+        }
+    }
+    return elements.filter(media => !media.paused);
+}
 
 function recordStream(stream, ms){
     return new Promise(resolve => {

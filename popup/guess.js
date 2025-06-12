@@ -24,12 +24,14 @@ audios.forEach(async audio => {
 
 async function writeHistory(){
     let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    const escapeStr = t => new Option(t).innerHTML
+
     histories.forEach(history => {
         document.getElementById("historyTBody").insertAdjacentHTML("afterbegin",`
             <tr>
-                <td>${history.title}</td>
-                <td>${history.artist}</td>
-                <td>${history.year}</td>
+                <td>${escapeStr(history.title)}</td>
+                <td>${escapeStr(history.artist)}</td>
+                <td>${escapeStr(history.year)}</td>
             </tr>
         `)
     })

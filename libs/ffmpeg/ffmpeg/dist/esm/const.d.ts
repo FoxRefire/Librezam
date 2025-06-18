@@ -1,10 +1,11 @@
 export declare const MIME_TYPE_JAVASCRIPT = "text/javascript";
 export declare const MIME_TYPE_WASM = "application/wasm";
-export declare const CORE_VERSION = "0.12.6";
+export declare const CORE_VERSION = "0.12.9";
 export declare const CORE_URL: string;
 export declare enum FFMessageType {
     LOAD = "LOAD",
     EXEC = "EXEC",
+    FFPROBE = "FFPROBE",
     WRITE_FILE = "WRITE_FILE",
     READ_FILE = "READ_FILE",
     DELETE_FILE = "DELETE_FILE",

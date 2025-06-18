@@ -40,7 +40,7 @@ export declare class FFmpeg {
     on(event: "log", callback: LogEventCallback): void;
     on(event: "progress", callback: ProgressEventCallback): void;
     /**
-     * Unlisten to log or prgress events from `ffmpeg.exec()`.
+     * Unlisten to log or progress events from `ffmpeg.exec()`.
      *
      * @category FFmpeg
      */
@@ -75,6 +75,23 @@ export declare class FFmpeg {
      * @category FFmpeg
      */
     exec: (args: string[], timeout?: number, { signal }?: FFMessageOptions) => Promise<number>;
+    /**
+     * Execute ffprobe command.
+     *
+     * @example
+     * ```ts
+     * const ffmpeg = new FFmpeg();
+     * await ffmpeg.load();
+     * await ffmpeg.writeFile("video.avi", ...);
+     * // Getting duration of a video in seconds: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 video.avi -o output.txt
+     * await ffmpeg.ffprobe(["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", "video.avi", "-o", "output.txt"]);
+     * const data = ffmpeg.readFile("output.txt");
+     * ```
+     *
+     * @returns `0` if no error, `!= 0` if timeout (1) or error.
+     * @category FFmpeg
+     */
+    ffprobe: (args: string[], timeout?: number, { signal }?: FFMessageOptions) => Promise<number>;
     /**
      * Terminate all ongoing API calls and terminate web worker.
      * `FFmpeg.load()` must be called again before calling any other APIs.

@@ -13,11 +13,11 @@ const load = async ({ coreURL: _coreURL, wasmURL: _wasmURL, workerURL: _workerUR
         importScripts(_coreURL);
     }
     catch {
-        if (!_coreURL)
+        if (!_coreURL || _coreURL === CORE_URL)
             _coreURL = CORE_URL.replace('/umd/', '/esm/');
         // when web worker type is `module`.
         self.createFFmpegCore = (await import(
-        /* webpackIgnore: true */ /* @vite-ignore */ _coreURL)).default;
+        /* @vite-ignore */ _coreURL)).default;
         if (!self.createFFmpegCore) {
             throw ERROR_IMPORT_FAILURE;
         }
@@ -42,6 +42,13 @@ const load = async ({ coreURL: _coreURL, wasmURL: _wasmURL, workerURL: _workerUR
 const exec = ({ args, timeout = -1 }) => {
     ffmpeg.setTimeout(timeout);
     ffmpeg.exec(...args);
+    const ret = ffmpeg.ret;
+    ffmpeg.reset();
+    return ret;
+};
+const ffprobe = ({ args, timeout = -1 }) => {
+    ffmpeg.setTimeout(timeout);
+    ffmpeg.ffprobe(...args);
     const ret = ffmpeg.ret;
     ffmpeg.reset();
     return ret;
@@ -104,6 +111,9 @@ self.onmessage = async ({ data: { id, type, data: _data }, }) => {
                 break;
             case FFMessageType.EXEC:
                 data = exec(_data);
+                break;
+            case FFMessageType.FFPROBE:
+                data = ffprobe(_data);
                 break;
             case FFMessageType.WRITE_FILE:
                 data = writeFile(_data);

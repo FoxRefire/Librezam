@@ -34,6 +34,7 @@ export class FFmpeg {
                     case FFMessageType.MOUNT:
                     case FFMessageType.UNMOUNT:
                     case FFMessageType.EXEC:
+                    case FFMessageType.FFPROBE:
                     case FFMessageType.WRITE_FILE:
                     case FFMessageType.READ_FILE:
                     case FFMessageType.DELETE_FILE:
@@ -146,6 +147,34 @@ export class FFmpeg {
      */
     timeout = -1, { signal } = {}) => this.#send({
         type: FFMessageType.EXEC,
+        data: { args, timeout },
+    }, undefined, signal);
+    /**
+     * Execute ffprobe command.
+     *
+     * @example
+     * ```ts
+     * const ffmpeg = new FFmpeg();
+     * await ffmpeg.load();
+     * await ffmpeg.writeFile("video.avi", ...);
+     * // Getting duration of a video in seconds: ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 video.avi -o output.txt
+     * await ffmpeg.ffprobe(["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", "video.avi", "-o", "output.txt"]);
+     * const data = ffmpeg.readFile("output.txt");
+     * ```
+     *
+     * @returns `0` if no error, `!= 0` if timeout (1) or error.
+     * @category FFmpeg
+     */
+    ffprobe = (
+    /** ffprobe command line args */
+    args, 
+    /**
+     * milliseconds to wait before stopping the command execution.
+     *
+     * @defaultValue -1
+     */
+    timeout = -1, { signal } = {}) => this.#send({
+        type: FFMessageType.FFPROBE,
         data: { args, timeout },
     }, undefined, signal);
     /**

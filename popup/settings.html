@@ -1,13 +1,13 @@
 <html>
     <head>
         <link href="/libs/material-icons/material-icons.css" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="/libs/materialize/materialize.min.css" media="screen,projection"/>
+        <link rel="stylesheet" href="/libs/materialize/materialize.min.css"/>
         <link href="popup.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
         <!-- NavBar -->
-        <nav>
+        <nav class="nav navbar">
             <div class="nav-wrapper">
                 <a class="brand-logo center">Settings</a>
                 <a href="/popup/guess.html"><i class="material-icons back_button">arrow_back</i></a>
@@ -48,15 +48,15 @@
         </div>
 
         <a tabindex="0" id="exportHistories" class="btn filled icon-left"><i class="material-icons">save_as</i>Export as CSV</a>
-        <a tabindex="0" href="#modalConfirmClear" class="btn filled icon-left modal-trigger"><i class="material-icons">delete_forever</i>Clear Histories</a>
-        <div id="modalConfirmClear" class="modal">
+        <button tabindex="0" popovertarget="modalConfirmClear" class="btn filled icon-left modal-trigger"><i class="material-icons">delete_forever</i>Clear Histories</button>
+        <div id="modalConfirmClear" class="modal" popover>
             <div class="modal-content">
                 <h4>Confirm</h4>
-                <p id="modalMsg">Are you sure to clear histories?</p>
+                <p>Are you sure to clear histories?</p>
             </div>
             <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect btn-flat">No</a>
-                <a id="clearConfirmed" href="#!" class="modal-close waves-effect btn-flat">Yes</a>
+                <button tabindex="0" popovertarget="modalConfirmClear" class="waves-effect btn-flat">No</button>
+                <button tabindex="0" id="clearConfirmed" popovertarget="modalConfirmClear" class="waves-effect btn-flat">Yes</button>
             </div>
         </div>
 

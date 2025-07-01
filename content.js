@@ -4,9 +4,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let promises = []
     elements.forEach(elem => {
         let dataPromise
-        if(elem.currentSrc.origin == document.location.origin) {
+        if(new URL(elem.currentSrc).origin == document.location.origin) {
             let stream = createStream(elem)
-            dataPromise = recordStream(audioStream, Number(request.time)).then(data => Array.from(data))
+            dataPromise = recordStream(stream, Number(request.time)).then(data => Array.from(data))
         } else {
             dataPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, Number(request.time))
         }

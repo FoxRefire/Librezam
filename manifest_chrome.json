@@ -17,7 +17,10 @@
           "all_frames": true
         }
     ],
-    "permissions": ["tabs", "webNavigation", "storage"],
+    "background":{
+        "service_worker":"background/background.js"
+    },
+    "permissions": ["tabs", "webNavigation", "storage", "offscreen"],
     "host_permissions": ["<all_urls>"],
     "content_security_policy": {
         "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"

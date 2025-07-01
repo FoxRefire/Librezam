@@ -3,10 +3,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let elements = findMediaElements()
     let promises = []
     elements.forEach(elem => {
-        let stream = createStream(elem)
-        let audioStream = new MediaStream(stream.getAudioTracks())
-
-        let dataPromise = recordStream(audioStream, Number(request.time)).then(data => Array.from(data))
+        let dataPromise
+        if(elem.currentSrc.origin == document.location.origin) {
+            let stream = createStream(elem)
+            dataPromise = recordStream(audioStream, Number(request.time)).then(data => Array.from(data))
+        } else {
+            dataPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, Number(request.time))
+        }
         promises.push(dataPromise)
     })
     Promise.allSettled(promises).then(arr => sendResponse(arr.map(r => r.value)))
@@ -51,5 +54,14 @@ function createStream(elem){
         source.connect(audioCtx.destination)
         elem.classList.add("librezamFlag")
     }
-    return stream
+    return new MediaStream(stream.getAudioTracks())
+}
+
+function recordStreamCORS(mediaSrc, currentTime, ms){
+    return chrome.runtime.sendMessage({
+        action:"CORSRun",
+        mediaSrc,
+        currentTime,
+        ms
+    })
 }

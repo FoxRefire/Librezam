@@ -17,6 +17,9 @@
           "all_frames": true
         }
     ],
+    "background":{
+        "scripts":["background/background.js"]
+    },
     "permissions": ["tabs", "webNavigation", "storage"],
     "host_permissions": ["<all_urls>"],
     "content_security_policy": {

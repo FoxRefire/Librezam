@@ -3,7 +3,8 @@ let sitesNoDouble = [
 ]
 
 let sitesDisable = [
-    "www.netflix.com"
+    "www.netflix.com",
+    "www.dailymotion.com"
 ]
 
 if(!sitesDisable.includes(location.hostname)) {

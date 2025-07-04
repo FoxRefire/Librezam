@@ -1,18 +1,29 @@
 let sitesNoDouble = [
-"soundcloud.com"
+    "soundcloud.com"
 ]
 
-let originalPlay = HTMLMediaElement.prototype.play
-HTMLMediaElement.prototype.play = function (...args) {
-    if(sitesNoDouble.includes(location.hostname)) {
-        this.classList.add("librezamFlag")
-    }
-    if(!isElemDOMAppended(this)) {
-        document.body.append(this)
-        console.log("Workaround injected")
-    }
+let sitesDisable = [
+    "www.netflix.com"
+]
 
-    return originalPlay.apply(this, args)
+if(!sitesDisable.includes(location.hostname)) {
+    injectWorkaround()
+}
+
+
+function injectWorkaround() {
+    let originalPlay = HTMLMediaElement.prototype.play
+    HTMLMediaElement.prototype.play = function (...args) {
+        if(sitesNoDouble.includes(location.hostname)) {
+            this.classList.add("librezamFlag")
+        }
+        if(!isElemDOMAppended(this)) {
+            document.body.append(this)
+            console.log("Headless element appended", this)
+        }
+
+        return originalPlay.apply(this, args)
+    }
 }
 
 function isElemDOMAppended(elem){

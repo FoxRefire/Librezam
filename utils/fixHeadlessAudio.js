@@ -2,29 +2,17 @@ let sitesNoDouble = [
     "soundcloud.com"
 ]
 
-let sitesDisable = [
-    "www.netflix.com",
-    "www.dailymotion.com"
-]
-
-if(!sitesDisable.includes(location.hostname)) {
-    injectWorkaround()
-}
-
-
-function injectWorkaround() {
-    let originalPlay = HTMLMediaElement.prototype.play
-    HTMLMediaElement.prototype.play = function (...args) {
-        if(sitesNoDouble.includes(location.hostname)) {
-            this.classList.add("librezamFlag")
-        }
-        if(!isElemDOMAppended(this)) {
-            document.body.append(this)
-            console.log("Headless element appended", this)
-        }
-
-        return originalPlay.apply(this, args)
+let originalPlay = HTMLMediaElement.prototype.play
+HTMLMediaElement.prototype.play = function (...args) {
+    if(sitesNoDouble.includes(location.hostname)) {
+        this.classList.add("librezamFlag")
     }
+    if(!isElemDOMAppended(this) && this.tagName == "AUDIO") {
+        document.body.append(this)
+        console.log("Headless element appended", this)
+    }
+
+    return originalPlay.apply(this, args)
 }
 
 function isElemDOMAppended(elem){

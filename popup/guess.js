@@ -1,5 +1,6 @@
 import { shazamGuess } from "/utils/shazamGuess.js"
 import { auddGuess } from "/utils/auddGuess.js"
+import { acrGuess } from "/utils/acrGuess.js"
 
 // grab background option from storage
 document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage) || "url('/images/background-2.jpg')"
@@ -11,9 +12,21 @@ if(!audios.length){
     showError("No audio elements detected...")
 }
 let recognizeBackend = await chrome.storage.local.get("backend").then(o => o.backend) || "shazam"
+let recognize = null
+switch(recognizeBackend) {
+    case "shazam":
+        recognize = shazamGuess
+        break;
+    case "audd":
+        recognize = auddGuess
+        break
+    case "acr":
+        recognize = acrGuess
+        break
+}
 audios.forEach(async audio => {
     try{
-        let result = recognizeBackend == "shazam" ? await shazamGuess(audio) : await auddGuess(audio)
+        let result = await recognize(audio)
         await writeResult(result)
         saveHistory(result)
     } catch(e) {

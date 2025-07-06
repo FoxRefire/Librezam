@@ -14,7 +14,8 @@ export async function auddGuess(audio) {
 }
 async function getResponse(audio) {
     let body = new FormData()
-    body.append("api_token", "test")
+    let auddToken = await chrome.storage.local.get("auddToken").then(o => o.auddToken) || "test"
+    body.append("api_token", auddToken)
     body.append("file", new Blob([audio]))
     body.append("return", "apple_music,spotify,deezer")
 

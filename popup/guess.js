@@ -1,6 +1,6 @@
-import { shazamGuess } from "/utils/shazamGuess.js"
-import { auddGuess } from "/utils/auddGuess.js"
-import { acrGuess } from "/utils/acrGuess.js"
+import { shazamGuess } from "/backendModules/shazamGuess.js"
+import { auddGuess } from "/backendModules/auddGuess.js"
+import { acrGuess } from "/backendModules/acrGuess.js"
 
 // grab background option from storage
 document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage) || "url('/images/background-2.jpg')"

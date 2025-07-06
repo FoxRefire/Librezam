@@ -4,7 +4,7 @@
     "version": "3.0",
     "manifest_version": 3,
     "icons": {
-        "128": "icon.png"
+        "128": "images/icon.png"
     },
     "action": {
         "default_title": "Librezam",
@@ -12,7 +12,7 @@
     },
     "content_scripts": [
         {
-          "js": ["content.js"],
+          "js": ["content/content.js"],
           "matches": ["<all_urls>"],
           "all_frames": true
         }
@@ -26,7 +26,7 @@
         "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
     },
     "web_accessible_resources": [{
-        "resources": ["/utils/fixHeadlessAudio.js"],
+        "resources": ["/content/fixHeadlessAudio.js"],
         "matches": ["<all_urls>"]
     }]
 }

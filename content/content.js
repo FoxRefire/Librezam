@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // Workaround for some websites librezam wont work
 const script = document.createElement('script');
 script.type = 'text/javascript';
-script.src = chrome.runtime.getURL("/utils/fixHeadlessAudio.js");
+script.src = chrome.runtime.getURL("/content/workaround.js");
 (document.head || document.documentElement).appendChild(script);
 
 // Ensure Shadow-root is explored recursively (Fix for some websites such as reddit)

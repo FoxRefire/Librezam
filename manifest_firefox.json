@@ -26,7 +26,7 @@
         "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
     },
     "web_accessible_resources": [{
-        "resources": ["/content/fixHeadlessAudio.js"],
+        "resources": ["/content/workaround.js"],
         "matches": ["<all_urls>"]
     }],
     "browser_specific_settings": {

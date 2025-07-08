@@ -1,7 +1,7 @@
 {
     "name": "Librezam",
     "description": "Opensource song recognition extension using shazam API",
-    "version": "3.1",
+    "version": "3.2",
     "manifest_version": 3,
     "icons": {
         "128": "images/icon.png"

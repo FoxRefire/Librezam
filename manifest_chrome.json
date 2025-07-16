@@ -18,9 +18,10 @@
         }
     ],
     "background":{
-        "service_worker":"background/background.js"
+        "service_worker":"background/background.js",
+        "type": "module"
     },
-    "permissions": ["tabs", "webNavigation", "storage", "offscreen"],
+    "permissions": ["tabs", "webNavigation", "storage", "notifications", "offscreen"],
     "host_permissions": ["<all_urls>"],
     "content_security_policy": {
         "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"

@@ -1,9 +1,15 @@
+import { Recognize } from "/backendModules/Recognize.js"
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if(request.action == "CORSRun"){
-        if(!chrome.offscreen) {
+    if(chrome.offscreen) {
+        offscreenRun(request).then(d => sendResponse(d))
+    } else {
+        if(request.action == "CORSRun"){
             CORSRun(request.mediaSrc, request.currentTime, request.ms).then(d => sendResponse(d))
-        } else {
-            offscreenCORSRun(request.mediaSrc, request.currentTime, request.ms).then(d => sendResponse(d))
+        }
+
+        if(request.action == "AutoGuess"){
+            AutoGuess(request.aud).then(d => sendResponse(d))
         }
     }
     return true
@@ -20,18 +26,26 @@ async function CORSRun(mediaSrc, currentTime, ms){
     return await recordStream(stream, ms).then(data => Array.from(data))
 }
 
-async function offscreenCORSRun(mediaSrc, currentTime, ms) {
+async function AutoGuess(audios) {
+    audios = audios.map(arr => new Uint8Array(arr)).filter(a=> a.length)
+    audios.forEach(async audio => {
+        try {
+            let result = await Recognize(audio)
+            await showNotification(result)
+            await saveHistory(result)
+        } catch(e) {
+            console.log("Song was not recognized", e)
+        }
+    })
+}
+
+async function offscreenRun(request) {
     await chrome.offscreen.createDocument({
         url: '/background/offscreen.html',
         reasons: ['WORKERS'],
         justification: 'Workaround of using the DOM on Chromium service worker'
     })
-    let result = await chrome.runtime.sendMessage({
-        action: "CORSRun",
-        mediaSrc,
-        currentTime,
-        ms
-    })
+    let result = await chrome.runtime.sendMessage(request)
     await chrome.offscreen.closeDocument()
     return result
 }
@@ -55,4 +69,33 @@ function recordStream(stream, ms){
         recorder.start()
         setTimeout(() => recorder.stop(), ms)
     })
+}
+
+async function showNotification(result) {
+    let previousResult = await chrome.storage.local.get("histories").then(o => o.histories?.at(-1))
+    let currentResult = Object.fromEntries(Object.entries(result).filter(([key]) => ["title", "artist", "year"].includes(key)))
+
+    if(JSON.stringify(previousResult) != JSON.stringify(currentResult)) {
+        await chrome.notifications.create({
+            type: "basic",
+            iconUrl: "images/icon.png",
+            title: "Song recognized!",
+            message: `${result.artist} - ${result.title}(${result.year})`,
+                                          priority: 2
+        })
+    }
+}
+
+async function saveHistory(result){
+    let newItem = {
+        title: result.title,
+        artist: result.artist,
+        year: result.year
+    }
+
+    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    histories = histories.filter(item => JSON.stringify(item) != JSON.stringify(newItem))
+    histories.push(newItem)
+
+    await chrome.storage.local.set({histories})
 }

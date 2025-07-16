@@ -4,6 +4,7 @@ import { Recognize } from "/backendModules/Recognize.js"
 document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage) || "url('/images/background-2.jpg')"
 
 writeHistory()
+autoModeController()
 
 let audios = (await getAudiosInTab()).filter(a=> a.length)
 if(!audios.length){
@@ -91,4 +92,12 @@ async function saveHistory(result){
 function showError(msg) {
     circler.style.display = "none"
     notification.innerText = msg
+}
+
+async function autoModeController() {
+    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
+    isAutoMode.checked = await sendMessagePromises(tabId, {action: "QueryAutoMode"}).then(r => Boolean(r?.[0]))
+    isAutoMode.addEventListener("change", async evt => {
+        await sendMessagePromises(tabId, {action: "SetAutoMode", checked: evt.target.checked})
+    })
 }

@@ -1,10 +1,18 @@
 // When a message is received on clicking an icon, the audio in the DOM element is retrieved and responds to the pop-up script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if(request.action == "Record"){
+    if(request.action == "Record") {
         ActionRecord(Number(request.time)).then(r => sendResponse(r))
+    }
+    if(request.action == "QueryAutoMode") {
+        sendResponse(window.isAutoMode)
+    }
+    if(request.action == "SetAutoMode") {
+        window.isAutoMode = Boolean(request.checked)
+        sendResponse(window.isAutoMode)
     }
     return true
 })
+autoGuess()
 
 
 function ActionRecord(time) {
@@ -72,4 +80,20 @@ function recordStreamCORS(mediaSrc, currentTime, ms){
         currentTime,
         ms
     })
+}
+
+function autoGuess() {
+    let lastRun = 0
+    setInterval(() => {
+        let now = Date.now()
+        if(window.isAutoMode && now - lastRun >= 25000) {
+            lastRun = now
+            ActionRecord(3200).then(aud => {
+                chrome.runtime.sendMessage({
+                    action:"AutoGuess",
+                    aud: aud
+                })
+            })
+        }
+    }, 750)
 }

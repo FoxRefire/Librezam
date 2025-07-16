@@ -4,8 +4,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(chrome.offscreen) {
         offscreenRun(request).then(d => sendResponse(d))
     } else {
-        if(request.action == "CORSRun"){
-            CORSRun(request.mediaSrc, request.currentTime, request.ms).then(d => sendResponse(d))
+        if(request.action == "CORSRecord"){
+            CORSRecord(request.mediaSrc, request.currentTime, request.ms).then(d => sendResponse(d))
         }
 
         if(request.action == "AutoGuess"){
@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true
 })
 
-async function CORSRun(mediaSrc, currentTime, ms){
+async function CORSRecord(mediaSrc, currentTime, ms){
     let elem = new Audio(mediaSrc)
     console.log(elem)
     elem.crossOrigin = "anonymous"

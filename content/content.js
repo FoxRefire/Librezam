@@ -1,7 +1,7 @@
 // When a message is received on clicking an icon, the audio in the DOM element is retrieved and responds to the pop-up script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(request.action == "Record") {
-        ActionRecord(Number(request.time)).then(r => sendResponse(r))
+        mainRecorder(Number(request.time)).then(r => sendResponse(r))
     }
     if(request.action == "QueryAutoMode") {
         sendResponse(window.isAutoMode)
@@ -13,9 +13,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true
 })
 autoGuess()
+injectWorkaround()
 
 
-function ActionRecord(time) {
+function mainRecorder(time) {
     let elements = findMediaElements()
     let promises = []
     elements.forEach(elem => {
@@ -32,12 +33,6 @@ function ActionRecord(time) {
     return Promise.allSettled(promises).then(arr => arr.map(r => r.value))
 }
 
-// Workaround for some websites librezam wont work
-const script = document.createElement('script');
-script.type = 'text/javascript';
-script.src = chrome.runtime.getURL("/content/workaround.js");
-(document.head || document.documentElement).appendChild(script);
-
 // Ensure Shadow-root is explored recursively (Fix for some websites such as reddit)
 // https://stackoverflow.com/a/75787966/27020071
 function findMediaElements() {
@@ -48,17 +43,6 @@ function findMediaElements() {
         }
     }
     return elements.filter(media => !media.paused);
-}
-
-function recordStream(stream, ms){
-    return new Promise(resolve => {
-        let data = []
-        let recorder = new MediaRecorder(stream)
-        recorder.ondataavailable = e => data.push(e.data)
-        recorder.onstop = _ => data[0].arrayBuffer().then(ab => resolve(new Uint8Array(ab)))
-        recorder.start()
-        setTimeout(() => recorder.stop(), ms)
-    })
 }
 
 function createStream(elem){
@@ -73,9 +57,20 @@ function createStream(elem){
     return new MediaStream(stream.getAudioTracks())
 }
 
+function recordStream(stream, ms){
+    return new Promise(resolve => {
+        let data = []
+        let recorder = new MediaRecorder(stream)
+        recorder.ondataavailable = e => data.push(e.data)
+        recorder.onstop = _ => data[0].arrayBuffer().then(ab => resolve(new Uint8Array(ab)))
+        recorder.start()
+        setTimeout(() => recorder.stop(), ms)
+    })
+}
+
 function recordStreamCORS(mediaSrc, currentTime, ms){
     return chrome.runtime.sendMessage({
-        action:"CORSRun",
+        action:"CORSRecord",
         mediaSrc,
         currentTime,
         ms
@@ -88,7 +83,7 @@ function autoGuess() {
         let now = Date.now()
         if(window.isAutoMode && now - lastRun >= 25000) {
             lastRun = now
-            ActionRecord(3200).then(aud => {
+            mainRecorder(3200).then(aud => {
                 chrome.runtime.sendMessage({
                     action:"AutoGuess",
                     aud: aud
@@ -96,4 +91,11 @@ function autoGuess() {
             })
         }
     }, 750)
+}
+
+function injectWorkaround() {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = chrome.runtime.getURL("/content/workaround.js");
+    (document.head || document.documentElement).appendChild(script);
 }

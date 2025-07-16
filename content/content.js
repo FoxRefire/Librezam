@@ -1,20 +1,28 @@
 // When a message is received on clicking an icon, the audio in the DOM element is retrieved and responds to the pop-up script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if(request.action == "Record"){
+        ActionRecord(Number(request.time)).then(r => sendResponse(r))
+    }
+    return true
+})
+
+
+function ActionRecord(time) {
     let elements = findMediaElements()
     let promises = []
     elements.forEach(elem => {
         let dataPromise
         if(new URL(elem.currentSrc).origin == document.location.origin) {
             let stream = createStream(elem)
-            dataPromise = recordStream(stream, Number(request.time)).then(data => Array.from(data))
+            dataPromise = recordStream(stream, time).then(data => Array.from(data))
         } else {
-            dataPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, Number(request.time))
+            dataPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, time)
         }
         promises.push(dataPromise)
     })
-    Promise.allSettled(promises).then(arr => sendResponse(arr.map(r => r.value)))
-    return true
-})
+
+    return Promise.allSettled(promises).then(arr => arr.map(r => r.value))
+}
 
 // Workaround for some websites librezam wont work
 const script = document.createElement('script');

@@ -39,18 +39,18 @@ async function writeHistory(){
 async function getAudiosInTab(){
     let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
     let time = await chrome.storage.local.get("time").then(o => Number(o.time)) || 3200
-    let responses = await sendMessagePromises(tabId, time).then(p => Promise.allSettled(p)).then(arr => arr.map(r => r.value))
+    let responses = await sendMessagePromises(tabId, {action: "Record", time: time})
     return [].concat(...responses).map(arr => new Uint8Array(arr))
 }
 
-async function sendMessagePromises(tabId, ms){
+async function sendMessagePromises(tabId, request){
     let promises = []
     let frames = await chrome.webNavigation.getAllFrames({tabId:tabId})
     frames.forEach(f => {
-        let promise = chrome.tabs.sendMessage(tabId, {time: ms}, {frameId:f.frameId})
+        let promise = chrome.tabs.sendMessage(tabId, request, {frameId:f.frameId})
         promises.push(promise)
     })
-    return promises
+    return Promise.allSettled(promises).then(arr => arr.map(r => r.value))
 }
 
 async function writeResult(result){

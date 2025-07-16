@@ -11,22 +11,12 @@ HTMLMediaElement.prototype.play = function (...args) {
     if(testHost(sitesNoDouble)) {
         this.classList.add("librezamFlag")
     }
-    if(!isElemDOMAppended(this) && this.tagName == "AUDIO" && !testHost(sitesNoAppend)) {
+    if(!this.isConnected && this.tagName == "AUDIO" && !testHost(sitesNoAppend)) {
         document.body.append(this)
         console.log("Headless element appended", this)
     }
 
     return originalPlay.apply(this, args)
-}
-
-function isElemDOMAppended(elem){
-    if(elem.parentNode == null) {
-        return false
-    } else if(elem.parentNode.constructor.name.match("^(HTMLDocument|ShadowRoot)$")) {
-        return true
-    } else {
-        return isElemDOMAppended(elem.parentNode)
-    }
 }
 
 function testHost(hosts){

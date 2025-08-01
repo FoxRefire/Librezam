@@ -1,10 +1,7 @@
 import "/libs/shazam-api.min.js"
-import { FFmpeg } from "/libs/ffmpeg/ffmpeg/dist/esm/index.js"
-
-let reservedFFmpeg = reserveFFmpeg()
 
 export async function shazamGuess(audio) {
-    let pcm = await convertToPCM(audio, reservedFFmpeg)
+    let pcm = await convertToPCM(audio)
     let response = await getResponse(pcm)
     console.log(JSON.stringify(response))
 
@@ -20,31 +17,24 @@ export async function shazamGuess(audio) {
     }
 }
 
-function reserveFFmpeg() {
-    let ffmpeg = new FFmpeg();
-    let reserve = ffmpeg.load({
-        coreURL: "/libs/ffmpeg/core/dist/esm/ffmpeg-core.js",
-    })
-    return [ffmpeg, reserve]
-}
+async function convertToPCM(audio) {
+    const audioContext = new AudioContext({
+        sampleRate: 16000
+    });
 
-async function convertToPCM(audio, reservedFFmpeg) {
-    let [ffmpeg, reserve] = reservedFFmpeg
-    await reserve
-    await ffmpeg.writeFile("audio.webm", new Uint8Array(audio));
-    await ffmpeg.exec([
-        "-i", "audio.webm",
-        "-ar", "16000",
-        "-ac", "1",
-        "-f", "s16le",
-        "-y",
-        "out.pcm"
-    ])
-    return await ffmpeg.readFile("out.pcm");
+    const audioBuffer = await audioContext.decodeAudioData(audio.buffer);
+    const channelData = audioBuffer.getChannelData(0);
+    const pcmData = new Int16Array(channelData.length);
+
+    for (let i = 0; i < channelData.length; i++) {
+        pcmData[i] = Math.max(-32768, Math.min(32767, channelData[i] * 32767));
+    }
+
+    return new Uint8Array(pcmData.buffer);
 }
 
 async function getResponse(pcm) {
-    let shazam = new Shazam.Shazam()
-    let samples = Shazam.s16LEToSamplesArray(pcm);
+    let shazam = new ShazamAPI.Shazam()
+    let samples = ShazamAPI.s16LEToSamplesArray(pcm);
     return await shazam.fullRecognizeSong(samples)
 }

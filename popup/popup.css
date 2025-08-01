@@ -70,11 +70,16 @@ body {
 .preloader-wrapper.big {
     width: 36px !important;
     height: 36px !important;
-    margin:14px 14px;
+    margin:14px 14px 0px;
 }
 .preloader-wrapper {
     display:flex; /*display correction*/
     float:left;
+}
+
+/* toggle automode */
+label:has(#isAutoMode) {
+    margin:10px
 }
 
 

@@ -37,8 +37,8 @@ exportHistories.addEventListener("click", async () => {
 });
 
 // Background theme
-let currBgImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage);
-document.body.style.backgroundImage = currBgImage || "url('/images/background-2.jpg')";
+let currBgImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage) || 'url("/images/background-2.jpg")'
+document.body.style.backgroundImage = currBgImage;
 
 document.querySelectorAll('.bg-opt').forEach(opt => {
     opt.style.backgroundImage == currBgImage && opt.classList.add("bg-selected")

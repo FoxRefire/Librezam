@@ -1,14 +1,16 @@
 export async function acrGuess(audio) {
     let response = await getResponse(audio)
     console.log(JSON.stringify(response))
+    let metadata = response.metadata?.music?.[0] || response.metadata?.humming?.[0]
+
     return {
-        title: response.metadata.music[0].title,
-        artist: response.metadata.music[0].artists[0].name,
-        year: response.metadata.music[0].release_date?.slice(0,4) || "",
-        apple: "",
-        deezer: "",
-        spotify: "",
-        youtube: "",
+        title: metadata.title,
+        artist: metadata.artists?.[0].name,
+        year: metadata.release_date?.slice(0,4) || "",
+        apple: "https://music.apple.com/search?term=" + encodeURIComponent(`${metadata.title} ${metadata?.artists?.[0].name}`),
+        deezer: `https://www.deezer.com/track/${metadata.external_metadata?.deezer?.track?.id}`,
+        spotify: `https://open.spotify.com/track/${metadata.external_metadata?.spotify?.track?.id}`,
+        youtube: `https://www.youtube.com/watch?v=${metadata.external_metadata?.youtube?.vid}`,
         art: ""
     }
 }

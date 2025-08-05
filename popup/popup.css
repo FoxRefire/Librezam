@@ -121,8 +121,9 @@ hr {
     border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 5%, transparent 75%);
 }
 /* title clarity */
-#resultTable td:not([id*="artistResult"], [id*="yearResult"], [id*="titleResult"]) {
+#resultTable td:not(.result) {
     font-weight: bold;
+    user-select:none
 }
 /* adjust spacing when #resultTable.active */
 #surfaceContainer:has(#resultTable:not([style="display:none; text-align: center;"])) {

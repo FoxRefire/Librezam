@@ -6,7 +6,7 @@ document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").
 writeHistory()
 autoModeController()
 
-let audios = (await getAudiosInTab()).filter(a=> a.length)
+let audios = (await recordAudiosInTab()).filter(a=> a.length)
 if(!audios.length){
     showError("No audio elements detected...")
 }
@@ -37,7 +37,7 @@ async function writeHistory(){
     })
 }
 
-async function getAudiosInTab(){
+async function recordAudiosInTab(){
     let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
     let time = await chrome.storage.local.get("time").then(o => Number(o.time)) || 3200
     let responses = await sendMessagePromises(tabId, {action: "Record", time: time})

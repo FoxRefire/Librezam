@@ -18,19 +18,19 @@ injectWorkaround()
 
 function mainRecorder(time) {
     let elements = findMediaElements()
-    let promises = []
+    let audioPromises = []
     elements.forEach(elem => {
-        let dataPromise
+        let audioPromise
         if(new URL(elem.currentSrc).origin == document.location.origin) {
             let stream = createStream(elem)
-            dataPromise = recordStream(stream, time).then(data => Array.from(data))
+            audioPromise = recordStream(stream, time).then(data => Array.from(data))
         } else {
-            dataPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, time)
+            audioPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, time)
         }
-        promises.push(dataPromise)
+        audioPromises.push(audioPromise)
     })
 
-    return Promise.allSettled(promises).then(arr => arr.map(r => r.value))
+    return Promise.allSettled(audioPromises).then(arr => arr.map(r => r.value))
 }
 
 // Ensure Shadow-root is explored recursively (Fix for some websites such as reddit)

@@ -5,22 +5,27 @@ document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").
 
 writeHistory()
 autoModeController()
+await recordAudiosInTab()
+guess()
 
-let audios = (await recordAudiosInTab()).filter(a=> a.length)
-if(!audios.length){
-    showError("No audio elements detected...")
-}
-
-audios.forEach(async audio => {
-    try{
-        let result = await Recognize(audio)
-        await writeResult(result)
-        saveHistory(result)
-    } catch(e) {
-        showError("Song was not recognized...")
-        console.log(e)
+async function guess() {
+    let audios = (await getNextRecorded()).filter(a=> a.length)
+    if(!audios.length){
+        showError("No audio elements detected...")
     }
-})
+
+    audios.forEach(async audio => {
+        try{
+            let result = await Recognize(audio)
+            await writeResult(result)
+            saveHistory(result)
+        } catch(e) {
+            showError("Song was not recognized...")
+            console.log(e)
+            guess()
+        }
+    })
+}
 
 async function writeHistory(){
     let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
@@ -39,8 +44,13 @@ async function writeHistory(){
 
 async function recordAudiosInTab(){
     let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
-    let time = await chrome.storage.local.get("time").then(o => Number(o.time)) || 3200
-    let responses = await sendMessagePromises(tabId, {action: "Record", time: time})
+    let times = await chrome.storage.local.get("times").then(o => Number(o.times)) || [3200, 12000]
+    let responses = await sendMessagePromises(tabId, {action: "Record", times: times})
+}
+
+async function getNextRecorded() {
+    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
+    let responses = await sendMessagePromises(tabId, {action: "GetNextRecorded"})
     return [].concat(...responses).map(arr => new Uint8Array(arr))
 }
 

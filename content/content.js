@@ -1,7 +1,8 @@
 // When a message is received on clicking an icon, the audio in the DOM element is retrieved and responds to the pop-up script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(request.action == "Record") {
-        mainRecorder(Number(request.time)).then(r => sendResponse(r))
+        mainRecorder(request.times)
+        sendResponse(true)
     }
     if(request.action == "QueryAutoMode") {
         sendResponse(window.isAutoMode)
@@ -10,27 +11,37 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         window.isAutoMode = Boolean(request.checked)
         sendResponse(window.isAutoMode)
     }
+    if(request.action == "GetNextRecorded") {
+        getNextRecorded().then(r => sendResponse(r))
+    }
     return true
 })
+let audioPromisesMap = []
 autoGuess()
 injectWorkaround()
 
 
-function mainRecorder(time) {
+function mainRecorder(times) {
     let elements = findMediaElements()
-    let audioPromises = []
-    elements.forEach(elem => {
-        let audioPromise
-        if(new URL(elem.currentSrc).origin == document.location.origin) {
-            let stream = createStream(elem)
-            audioPromise = recordStream(stream, time).then(data => Array.from(data))
-        } else {
-            audioPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, time)
-        }
-        audioPromises.push(audioPromise)
-    })
 
-    return Promise.allSettled(audioPromises).then(arr => arr.map(r => r.value))
+    times.forEach(time => {
+        let audioPromises = []
+        elements.forEach(elem => {
+            let audioPromise
+            if(new URL(elem.currentSrc).origin == document.location.origin) {
+                let stream = createStream(elem)
+                audioPromise = recordStream(stream, time).then(data => Array.from(data))
+            } else {
+                audioPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, time)
+            }
+            audioPromises.push(audioPromise)
+        })
+        audioPromisesMap.push(audioPromises)
+    })
+}
+
+function getNextRecorded() {
+    return Promise.allSettled(audioPromisesMap.shift()).then(arr => arr.map(r => r.value))
 }
 
 // Ensure Shadow-root is explored recursively (Fix for some websites such as reddit)

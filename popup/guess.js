@@ -8,11 +8,17 @@ autoModeController()
 await recordAudiosInTab()
 guess()
 
-async function guess() {
+async function guess(retries = 0) {
     let audios = (await getNextRecorded()).filter(a=> a.length)
+    console.log(audios)
     if(!audios.length){
-        showError("No audio elements detected...")
+        if(retries == 0) {
+            showError("No audio elements detected...")
+        } else {
+            showError("Song was not recognized...")
+        }
     }
+
 
     audios.forEach(async audio => {
         try{
@@ -20,9 +26,8 @@ async function guess() {
             await writeResult(result)
             saveHistory(result)
         } catch(e) {
-            showError("Song was not recognized...")
             console.log(e)
-            guess()
+            guess(++retries)
         }
     })
 }

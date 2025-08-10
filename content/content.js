@@ -23,6 +23,7 @@ injectWorkaround()
 
 function mainRecorder(times) {
     let elements = findMediaElements()
+    audioPromisesMap = []
 
     times.forEach(time => {
         let audioPromises = []

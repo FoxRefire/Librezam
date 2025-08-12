@@ -223,6 +223,14 @@ document.querySelectorAll('.bg-opt').forEach(opt => {
                 if (isDragging) return; // avoid click after a drag
                 const currentlyIncluded = chip.getAttribute('data-included') === 'true';
                 if (currentlyIncluded) {
+                    // prevent disabling the last enabled backend
+                    const enabledChipsNow = Array.from(list.querySelectorAll('.chip[data-included="true"]'));
+                    if (enabledChipsNow.length <= 1) {
+                        if (window.M && M.toast) {
+                            M.toast({ html: 'At least one backend must be enabled' });
+                        }
+                        return;
+                    }
                     chip.setAttribute('data-included', 'false');
                     chip.classList.remove('blue', 'lighten-4');
                     chip.classList.add('grey', 'lighten-2');

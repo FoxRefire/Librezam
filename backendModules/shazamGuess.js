@@ -22,7 +22,7 @@ async function convertToPCM(audio) {
         sampleRate: 16000
     });
 
-    const audioBuffer = await audioContext.decodeAudioData(audio.buffer);
+    const audioBuffer = await audioContext.decodeAudioData(new Uint8Array(audio).buffer);
     const channelData = audioBuffer.getChannelData(0);
     const pcmData = new Int16Array(channelData.length);
 

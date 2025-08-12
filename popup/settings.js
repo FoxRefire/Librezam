@@ -132,6 +132,14 @@ document.querySelectorAll('.bg-opt').forEach(opt => {
         deleteBtn.innerHTML = '<i class="material-icons">delete</i>';
         deleteBtn.title = 'Delete rule';
         deleteBtn.addEventListener('click', () => {
+            // prevent deleting the last rule
+            const allRuleCards = container.querySelectorAll('.fallback-rule-card');
+            if (allRuleCards.length <= 1) {
+                if (window.M && M.toast) {
+                    M.toast({ html: 'At least one fallback rule must exist' });
+                }
+                return;
+            }
             card.remove();
             saveRulesFromDom();
         });

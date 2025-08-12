@@ -3,33 +3,45 @@ import { Recognize } from "/backendModules/Recognize.js"
 // grab background option from storage
 document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage) || "url('/images/background-2.jpg')"
 
-writeHistory()
-autoModeController()
-await recordAudiosInTab()
-guess()
+main()
 
-async function guess(retries = 0) {
-    let audios = (await getNextRecorded()).filter(a=> a.length)
-    console.log(audios)
-    if(!audios.length){
-        if(retries == 0) {
+async function main() {
+    writeHistory()
+    autoModeController()
+
+    let fallbackRules = await chrome.storage.local.get("fallbackRules").then(o => o.fallbackRules)
+    await recordAudiosInTab(fallbackRules)
+    let backendsMap = Object.values(fallbackRules)
+
+    for(let backends of backendsMap) {
+        let audios = await getNextRecorded().then(r => r.filter(a=> a.length))
+        console.log(audios)
+        if(!audios.length) {
             showError("No audio elements detected...")
-        } else {
-            showError("Song was not recognized...")
+        }
+
+        for(let backend of backends) {
+            let isFound = await getResult(audios, backend)
+            if(isFound) {
+                return
+            }
         }
     }
+    showError("Song was not recognized...")
+}
 
-
-    audios.forEach(async audio => {
+async function getResult(audios, backend) {
+    for(let audio of audios) {
         try{
-            let result = await Recognize(audio)
+            let result = await Recognize(audio, backend)
             await writeResult(result)
             saveHistory(result)
+            return true
         } catch(e) {
             console.log(e)
-            guess(++retries)
         }
-    })
+    }
+    return false
 }
 
 async function writeHistory(){
@@ -47,9 +59,9 @@ async function writeHistory(){
     })
 }
 
-async function recordAudiosInTab(){
+async function recordAudiosInTab(fallbackRules){
     let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
-    let times = await chrome.storage.local.get("times").then(o => Number(o.times)) || [3200, 12000]
+    let times = Object.keys(fallbackRules).map(t => Number(t))
     let responses = await sendMessagePromises(tabId, {action: "Record", times: times})
 }
 

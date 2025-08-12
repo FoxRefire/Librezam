@@ -2,10 +2,9 @@ import { shazamGuess } from "/backendModules/shazamGuess.js"
 import { auddGuess } from "/backendModules/auddGuess.js"
 import { acrGuess } from "/backendModules/acrGuess.js"
 
-export async function Recognize(audio) {
-    let recognizeBackend = await chrome.storage.local.get("backend").then(o => o.backend) || "shazam"
+export async function Recognize(audio, backend) {
     let backendCall = null
-    switch(recognizeBackend) {
+    switch(backend) {
         case "shazam":
             backendCall = shazamGuess
             break;

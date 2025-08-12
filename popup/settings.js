@@ -62,9 +62,9 @@ document.querySelectorAll('.bg-opt').forEach(opt => {
     ];
 
     const defaultFallbackRules = {
-        3500: ['shazam', 'acr'],
-        7200: ['acr'],
-        12000: ['shazam', 'audd', 'acr']
+        3500: ['shazam'],
+        7200: ['shazam'],
+        12000: ['shazam']
     };
 
     const container = document.getElementById('fallbackRulesContainer');

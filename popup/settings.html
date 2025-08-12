@@ -29,6 +29,19 @@
             </select>
         </div>
 
+        <!-- Fallback Rules Section -->
+        <div class="section" id="fallbackRulesSection">
+            <h5>Recognition Fallback Rules</h5>
+            <p class="grey-text text-darken-1" style="margin-top: -8px;">
+                Define recording lengths (ms) and the backend order to try when recognition fails.
+            </p>
+            <div id="fallbackRulesContainer" class="fallback-rules-container"></div>
+            <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                <button id="addFallbackRule" class="btn filled icon-left"><i class="material-icons">add</i>Add Rule</button>
+                <button id="resetFallbackRules" class="btn-flat">Reset to Default</button>
+            </div>
+        </div>
+
         <form action="#">
             <h5>Show coverart on recognized</h5>
             <p>

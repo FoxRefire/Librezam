@@ -256,3 +256,81 @@ body a[class="btn filled icon-left modal-trigger"] {
 #exportHistories {
     margin-inline-start: 3%;
 }
+
+/* ----------------------------------------------------------
+   Fallback rules (Settings)
+-----------------------------------------------------------*/
+#fallbackRulesSection {
+    margin-inline: 3%;
+    margin-top: 8px;
+}
+#fallbackRulesSection > h5 {
+    margin-bottom: 6px;
+}
+#fallbackRulesSection p {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.fallback-rules-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+.fallback-rule-card.card {
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 40%, transparent 60%);
+    border-radius: 8px;
+    background-color: rgba(15,100,150,0.05);
+    backdrop-filter: blur(18px);
+}
+.fallback-rule-card .card-content {
+    padding: 12px 14px;
+}
+.fallback-rule-card .card-title {
+    font-size: 1.1rem;
+    color: var(--md-sys-color-on-surface);
+}
+.fallback-rule-card .btn-flat.right {
+    color: color-mix(in srgb, var(--md-sys-color-on-surface) 80%, transparent 20%);
+}
+.fallback-rule-card .row {
+    margin-bottom: 8px;
+}
+.fallback-duration-input {
+    font-size: 16px;
+    padding: 10px 10px;
+    width: 100%;
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
+    border-radius: 6px;
+    background-color: rgba(15,100,150,0.05);
+}
+.fallback-backends-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.fallback-backends-list .chip {
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
+    font-weight: 500;
+    user-select: none;
+    transition: transform .08s ease, background-color .1s ease, border-color .1s ease;
+}
+.fallback-backends-list .chip[data-included="true"] {
+    border-color: color-mix(in srgb, var(--brand-color) 50%, transparent 50%);
+}
+.fallback-backends-list .chip:hover {
+    transform: translateY(-1px) scale(1.02);
+}
+.fallback-backends-list .chip.drag-over {
+    outline: 2px dashed var(--brand-color);
+    outline-offset: 2px;
+}
+#addFallbackRule {
+    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
+    border-radius: 6px;
+}
+#addFallbackRule:hover {
+    color: var(--brand-color);
+}
+#resetFallbackRules {
+    color: color-mix(in srgb, var(--md-sys-color-on-surface) 85%, transparent 15%);
+}

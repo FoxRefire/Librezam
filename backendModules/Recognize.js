@@ -3,6 +3,7 @@ import { auddGuess } from "/backendModules/auddGuess.js"
 import { acrGuess } from "/backendModules/acrGuess.js"
 
 export async function Recognize(audio, backend) {
+    console.log(audio)
     let backendCall = null
     switch(backend) {
         case "shazam":

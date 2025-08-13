@@ -13,20 +13,19 @@
                 <a href="/popup/guess.html"><i class="material-icons back_button">arrow_back</i></a>
             </div>
         </nav>
-    
-        <div class="input-field">
-            <h5>Recording Length</h5>
-            <input type="number" id="recordLength" min="1500" max="7500" />
-        </div>
 
-        <div class="input-field col s12">
-            <h5>Recognize Backend</h5>
+        <!-- Fallback Rules Section -->
+        <div class="section" id="fallbackRulesSection">
+            <h5>Recognition Rules</h5>
+            <p class="grey-text text-darken-1" style="margin-top: -8px;">
+                Define recording lengths (ms) and the backend order to try when recognition fails.
+            </p>
             <a href="/popup/apiSettings.html">API Settings</a>
-            <select id="recognizeBackend">
-                <option value="shazam">Shazam</option>
-                <option value="audd">Audd</option>
-                <option value="acr">ACRCloud</option>
-            </select>
+            <div id="fallbackRulesContainer" class="fallback-rules-container"></div>
+            <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                <button id="addFallbackRule" class="btn filled icon-left"><i class="material-icons">add</i>Add Rule</button>
+                <button id="resetFallbackRules" class="btn-flat">Reset to Default</button>
+            </div>
         </div>
 
         <form action="#">

@@ -3,24 +3,49 @@ import { Recognize } from "/backendModules/Recognize.js"
 // grab background option from storage
 document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").then(d => d.bgImage) || "url('/images/background-2.jpg')"
 
-writeHistory()
-autoModeController()
+main()
 
-let audios = (await getAudiosInTab()).filter(a=> a.length)
-if(!audios.length){
-    showError("No audio elements detected...")
+async function main() {
+    writeHistory()
+    autoModeController()
+
+    let fallbackRules = await chrome.storage.local.get("fallbackRules").then(o => o.fallbackRules) || {"3500":["shazam"],"7200":["shazam"],"12000":["shazam"]}
+    let times = Object.keys(fallbackRules).map(t => Number(t))
+    let backendsMap = Object.values(fallbackRules)
+
+    await recordAudiosInTab(times)
+
+    for(let backends of backendsMap) {
+        let audios = await getNextRecorded().then(r => r.filter(a=> a.length))
+        console.log(audios)
+        if(!audios.length) {
+            showError("No audio elements detected...")
+            return
+        }
+
+        for(let backend of backends) {
+            let isFound = await getResult(audios, backend)
+            if(isFound) {
+                return
+            }
+        }
+    }
+    showError("Song was not recognized...")
 }
 
-audios.forEach(async audio => {
-    try{
-        let result = await Recognize(audio)
-        await writeResult(result)
-        saveHistory(result)
-    } catch(e) {
-        showError("Song was not recognized...")
-        console.log(e)
+async function getResult(audios, backend) {
+    for(let audio of audios) {
+        try{
+            let result = await Recognize(audio, backend)
+            await writeResult(result)
+            saveHistory(result)
+            return true
+        } catch(e) {
+            console.log(e)
+        }
     }
-})
+    return false
+}
 
 async function writeHistory(){
     let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
@@ -37,15 +62,18 @@ async function writeHistory(){
     })
 }
 
-async function getAudiosInTab(){
-    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
-    let time = await chrome.storage.local.get("time").then(o => Number(o.time)) || 3200
-    let responses = await sendMessagePromises(tabId, {action: "Record", time: time})
+async function recordAudiosInTab(times){
+    return await sendMessagePromises({action: "Record", times: times})
+}
+
+async function getNextRecorded() {
+    let responses = await sendMessagePromises({action: "GetNextRecorded"})
     return [].concat(...responses).map(arr => new Uint8Array(arr))
 }
 
-async function sendMessagePromises(tabId, request){
+async function sendMessagePromises(request){
     let promises = []
+    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
     let frames = await chrome.webNavigation.getAllFrames({tabId:tabId})
     frames.forEach(f => {
         let promise = chrome.tabs.sendMessage(tabId, request, {frameId:f.frameId})
@@ -95,9 +123,8 @@ function showError(msg) {
 }
 
 async function autoModeController() {
-    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
-    isAutoMode.checked = await sendMessagePromises(tabId, {action: "QueryAutoMode"}).then(r => Boolean(r?.[0]))
+    isAutoMode.checked = await sendMessagePromises({action: "QueryAutoMode"}).then(r => Boolean(r?.[0]))
     isAutoMode.addEventListener("change", async evt => {
-        await sendMessagePromises(tabId, {action: "SetAutoMode", checked: evt.target.checked})
+        await sendMessagePromises({action: "SetAutoMode", checked: evt.target.checked})
     })
 }

@@ -10,8 +10,10 @@ async function main() {
     autoModeController()
 
     let fallbackRules = await chrome.storage.local.get("fallbackRules").then(o => o.fallbackRules)
-    await recordAudiosInTab(fallbackRules)
+    let times = Object.keys(fallbackRules).map(t => Number(t))
     let backendsMap = Object.values(fallbackRules)
+
+    await recordAudiosInTab(times)
 
     for(let backends of backendsMap) {
         let audios = await getNextRecorded().then(r => r.filter(a=> a.length))
@@ -59,20 +61,18 @@ async function writeHistory(){
     })
 }
 
-async function recordAudiosInTab(fallbackRules){
-    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
-    let times = Object.keys(fallbackRules).map(t => Number(t))
-    let responses = await sendMessagePromises(tabId, {action: "Record", times: times})
+async function recordAudiosInTab(times){
+    return await sendMessagePromises({action: "Record", times: times})
 }
 
 async function getNextRecorded() {
-    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
-    let responses = await sendMessagePromises(tabId, {action: "GetNextRecorded"})
+    let responses = await sendMessagePromises({action: "GetNextRecorded"})
     return [].concat(...responses).map(arr => new Uint8Array(arr))
 }
 
-async function sendMessagePromises(tabId, request){
+async function sendMessagePromises(request){
     let promises = []
+    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
     let frames = await chrome.webNavigation.getAllFrames({tabId:tabId})
     frames.forEach(f => {
         let promise = chrome.tabs.sendMessage(tabId, request, {frameId:f.frameId})
@@ -122,9 +122,8 @@ function showError(msg) {
 }
 
 async function autoModeController() {
-    let tabId = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0].id)
-    isAutoMode.checked = await sendMessagePromises(tabId, {action: "QueryAutoMode"}).then(r => Boolean(r?.[0]))
+    isAutoMode.checked = await sendMessagePromises({action: "QueryAutoMode"}).then(r => Boolean(r?.[0]))
     isAutoMode.addEventListener("change", async evt => {
-        await sendMessagePromises(tabId, {action: "SetAutoMode", checked: evt.target.checked})
+        await sendMessagePromises({action: "SetAutoMode", checked: evt.target.checked})
     })
 }

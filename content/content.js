@@ -62,7 +62,7 @@ function findMediaElements() {
 
 function createStream(elem){
     let mediaStream
-    if(!elem.mediaStream) {
+    if(!elem.mediaStream?.active) {
         let stream = elem.captureStream ? elem.captureStream() : elem.mozCaptureStream()
         mediaStream = new MediaStream(stream.getAudioTracks())
         elem.mediaStream = mediaStream

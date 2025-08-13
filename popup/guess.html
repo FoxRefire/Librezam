@@ -7,7 +7,23 @@
     </head>
     <body>
         <div id="surfaceContainer" class="center">
-            <a href="/popup/settings.html" class="right"><i id="settingsButton" class="material-icons">settings</i></a>
+            <!-- Dropdown trigger -->
+            <a class='dropdown-trigger right' href='#' data-target='dropdownMenu'>
+                <i id="menuButton" class="material-icons">more_vert</i>
+            </a>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdownMenu' class='dropdown-content'>
+                <li><a href="/popup/settings.html"><i class="material-icons left">settings</i>Settings</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li>
+                    <label class="auto-mode-toggle">
+                        <i class="material-icons left">flash_auto</i>
+                        <input id="isAutoMode" class="filled-in" type="checkbox">
+                        <span>Auto recognition</span>
+                    </label>
+                </li>
+            </ul>
 
             <div id="circler" class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue-only">
@@ -47,10 +63,6 @@
             </div>
         </div>
 
-        <label>
-          <input id="isAutoMode" class="filled-in" type="checkbox">
-          <span>Auto recognition</span>
-        </label>
         <hr>
         <table id="historyTable" style="text-align: center;">
           <thead>

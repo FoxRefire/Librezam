@@ -6,6 +6,9 @@ document.body.style.backgroundImage = await chrome.storage.local.get("bgImage").
 main()
 
 async function main() {
+    // Initialize dropdown menu
+    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
+    
     writeHistory()
     autoModeController()
 

@@ -1,15 +1,3 @@
-// Recording Length
-recordLength.value = await chrome.storage.local.get("time").then(o => o.time) || 3200
-recordLength.addEventListener("change", async () => {
-    await chrome.storage.local.set({ time: Number(recordLength.value) });
-});
-
-// Recognize Backend
-recognizeBackend.value = await chrome.storage.local.get("backend").then(o => o.backend) || "shazam"
-M.FormSelect.init(recognizeBackend,null)
-recognizeBackend.addEventListener("change", async () => {
-    await chrome.storage.local.set({ backend: recognizeBackend.value })
-})
 
 // Show coverart on recognized
 isShowCoverart.checked = await chrome.storage.local.get("isShowCoverart").then(o => o.isShowCoverart) || false

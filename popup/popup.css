@@ -308,6 +308,9 @@ body a[class="btn filled icon-left modal-trigger"] {
     flex-wrap: wrap;
     gap: 8px;
 }
+.chip {
+    color: gray !important;
+}
 .fallback-backends-list .chip {
     border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
     font-weight: 500;

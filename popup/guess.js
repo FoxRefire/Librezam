@@ -20,6 +20,7 @@ async function main() {
         console.log(audios)
         if(!audios.length) {
             showError("No audio elements detected...")
+            return
         }
 
         for(let backend of backends) {

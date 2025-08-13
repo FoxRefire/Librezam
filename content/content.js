@@ -61,7 +61,16 @@ function findMediaElements() {
 }
 
 function createStream(elem){
-    let stream = elem.captureStream ? elem.captureStream() : elem.mozCaptureStream()
+    let mediaStream
+    if(!elem.mediaStream) {
+        let stream = elem.captureStream ? elem.captureStream() : elem.mozCaptureStream()
+        mediaStream = new MediaStream(stream.getAudioTracks())
+        elem.mediaStream = mediaStream
+        console.log(elem.mediaStream)
+    } else {
+        mediaStream = elem.mediaStream
+        console.log("debug!")
+    }
 
     if (!elem.classList.contains("librezamFlag") && !elem.captureStream){
         let audioCtx = new AudioContext()
@@ -69,7 +78,7 @@ function createStream(elem){
         source.connect(audioCtx.destination)
         elem.classList.add("librezamFlag")
     }
-    return new MediaStream(stream.getAudioTracks())
+    return mediaStream
 }
 
 function recordStream(stream, ms){

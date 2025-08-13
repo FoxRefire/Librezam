@@ -9,7 +9,7 @@ async function main() {
     writeHistory()
     autoModeController()
 
-    let fallbackRules = await chrome.storage.local.get("fallbackRules").then(o => o.fallbackRules)
+    let fallbackRules = await chrome.storage.local.get("fallbackRules").then(o => o.fallbackRules) || {"3500":["shazam"],"7200":["shazam"],"12000":["shazam"]}
     let times = Object.keys(fallbackRules).map(t => Number(t))
     let backendsMap = Object.values(fallbackRules)
 

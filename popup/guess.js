@@ -21,7 +21,6 @@ async function main() {
 
     for(let backends of backendsMap) {
         let audios = await getNextRecorded().then(r => r.filter(a=> a.length))
-        console.log(audios)
         if(!audios.length) {
             showError("No audio elements detected...")
             return

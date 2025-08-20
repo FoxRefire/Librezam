@@ -66,10 +66,8 @@ function createStream(elem){
         let stream = elem.captureStream ? elem.captureStream() : elem.mozCaptureStream()
         mediaStream = new MediaStream(stream.getAudioTracks())
         elem.mediaStream = mediaStream
-        console.log(elem.mediaStream)
     } else {
         mediaStream = elem.mediaStream
-        console.log("debug!")
     }
 
     if (!elem.classList.contains("librezamFlag") && !elem.captureStream){

@@ -18,6 +18,7 @@ async function main() {
     await recordAudiosInTab(times)
 
     for(let backends of backendsMap) {
+        showStatus("Listening...")
         let audios = await getNextRecorded().then(r => r.filter(a=> a.length))
         if(!audios.length) {
             showError("No audio elements detected...")
@@ -37,9 +38,11 @@ async function main() {
 async function getResult(audios, backend) {
     for(let audio of audios) {
         try{
+            showStatus(`Querying with ${backend}...`)
             let result = await Recognize(audio, backend)
             await writeResult(result)
             saveHistory(result)
+            showStatus("")
             return true
         } catch(e) {
             console.log(e)
@@ -119,6 +122,12 @@ async function saveHistory(result){
 function showError(msg) {
     circler.style.display = "none"
     notification.innerText = msg
+    notification.style.color = "orange"
+}
+
+function showStatus(msg) {
+    notification.innerText = msg
+    notification.style.color = "white"
 }
 
 async function autoModeController() {
@@ -153,6 +162,7 @@ async function startMicRecognition() {
         
         // Try recognition with fallback
         for(let backends of backendsMap) {
+            showStatus(`Listening...`)
             let audio = await micAudios.shift()
             if(!audio) {
                 showError("No audio recorded from microphone...")

@@ -17,6 +17,15 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
 
     function sortNumericAsc(a, b) { return Number(a) - Number(b); }
 
+    function formatDuration(ms) {
+        if (ms < 1000) {
+            return `${ms}ms`;
+        } else {
+            const seconds = (ms / 1000).toFixed(1);
+            return `${seconds}s`;
+        }
+    }
+
     function ensureUniqueDuration(targetValue, existingValues, step = 100) {
         let v = Number(targetValue);
         const seen = new Set(existingValues.map(Number));
@@ -86,23 +95,70 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
             saveRulesFromDom();
         });
 
-        // Duration input
+        // Duration slider
         const durationRow = document.createElement('div');
         durationRow.className = 'row';
         const durationField = document.createElement('div');
         durationField.className = 'input-field col s12';
+        
+        // Hidden input for storing the actual value
         const durationInput = document.createElement('input');
-        durationInput.type = 'number';
+        durationInput.type = 'hidden';
         durationInput.className = 'fallback-duration-input';
-        durationInput.min = '1000';
-        durationInput.step = '100';
         durationInput.value = String(duration);
-        const durationLabel = document.createElement('label');
-        durationLabel.className = 'active';
-        durationLabel.textContent = 'Recording length (ms)';
+        
+        // Value display
+        const valueDisplay = document.createElement('div');
+        valueDisplay.className = 'duration-value-display';
+        valueDisplay.textContent = formatDuration(duration);
+        valueDisplay.style.textAlign = 'center';
+        valueDisplay.style.fontSize = '16px';
+        valueDisplay.style.fontWeight = '500';
+        valueDisplay.style.color = 'var(--md-sys-color-on-surface)';
+        valueDisplay.style.marginBottom = '8px';
+        
+        // Slider container
+        const sliderContainer = document.createElement('div');
+        sliderContainer.className = 'duration-slider-container';
+        sliderContainer.style.marginBottom = '8px';
+        
+        // Range slider
+        const durationSlider = document.createElement('input');
+        durationSlider.type = 'range';
+        durationSlider.className = 'duration-slider';
+        durationSlider.min = '1500';
+        durationSlider.max = '13000';
+        durationSlider.step = '100';
+        durationSlider.value = String(duration);
+        durationSlider.style.width = '100%';
+        
+        // Min/Max labels
+        const minLabel = document.createElement('div');
+        minLabel.textContent = '1.5s';
+        minLabel.style.fontSize = '12px';
+        minLabel.style.color = 'var(--md-sys-color-on-surface-variant)';
+        minLabel.style.textAlign = 'left';
+        
+        const maxLabel = document.createElement('div');
+        maxLabel.textContent = '13s';
+        maxLabel.style.fontSize = '12px';
+        maxLabel.style.color = 'var(--md-sys-color-on-surface-variant)';
+        maxLabel.style.textAlign = 'right';
+        
+        const labelsRow = document.createElement('div');
+        labelsRow.style.display = 'flex';
+        labelsRow.style.justifyContent = 'space-between';
+        labelsRow.style.alignItems = 'center';
+        labelsRow.appendChild(minLabel);
+        labelsRow.appendChild(maxLabel);
+        
+        sliderContainer.appendChild(durationSlider);
+        sliderContainer.appendChild(labelsRow);
+        
+        durationField.appendChild(valueDisplay);
+        durationField.appendChild(sliderContainer);
         durationField.appendChild(durationInput);
-        durationField.appendChild(durationLabel);
-
+        
         durationRow.appendChild(durationField);
 
         // Single interactive list: click to enable/disable, drag to reorder
@@ -269,16 +325,24 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
             saveRulesFromDom();
         });
 
-        // Events
-        durationInput.addEventListener('change', () => {
+        // Slider events
+        durationSlider.addEventListener('input', () => {
+            const newValue = Number(durationSlider.value);
+            valueDisplay.textContent = formatDuration(newValue);
+            durationInput.value = String(newValue);
+        });
+
+        durationSlider.addEventListener('change', () => {
             const otherValues = Array.from(container.querySelectorAll('.fallback-duration-input'))
                 .filter(inp => inp !== durationInput)
                 .map(inp => Number(inp.value));
-            const unique = ensureUniqueDuration(durationInput.value, otherValues);
+            let unique = ensureUniqueDuration(durationInput.value, otherValues);
             if (unique !== Number(durationInput.value)) {
+                durationSlider.value = String(unique);
+                valueDisplay.textContent = formatDuration(unique);
                 durationInput.value = String(unique);
                 if (window.M && M.toast) {
-                    M.toast({ html: 'Adjusted to unique duration: ' + unique });
+                    M.toast({ html: 'Adjusted to unique duration: ' + formatDuration(unique) });
                 }
             }
             saveRulesFromDom();
@@ -303,13 +367,15 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         // Determine a suggested duration
         const existing = Array.from(container.querySelectorAll('.fallback-duration-input')).map(i => Number(i.value));
         const base = existing.length ? Math.max(...existing) + 1500 : 3500;
-        const unique = ensureUniqueDuration(base, existing);
+        // Ensure the value is within the slider range (1500-13000)
+        const clampedBase = Math.max(1500, Math.min(13000, base));
+        const unique = ensureUniqueDuration(clampedBase, existing);
         const card = createRuleCard(unique, ['shazam']);
         container.appendChild(card);
         saveRulesFromDom();
-        // Focus new input
-        const input = card.querySelector('.fallback-duration-input');
-        input && input.focus();
+        // Focus new slider
+        const slider = card.querySelector('.duration-slider');
+        slider && slider.focus();
     });
 
     resetBtn.addEventListener('click', async () => {

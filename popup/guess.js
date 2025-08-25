@@ -59,7 +59,6 @@ async function writeHistory(){
             <tr>
                 <td>${escapeStr(history.title)}</td>
                 <td>${escapeStr(history.artist)}</td>
-                <td>${escapeStr(history.year)}</td>
             </tr>
         `)
     })
@@ -109,8 +108,7 @@ async function writeResult(result){
 async function saveHistory(result){
     let newItem = {
         title: result.title,
-        artist: result.artist,
-        year: result.year
+        artist: result.artist
     }
 
     let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []

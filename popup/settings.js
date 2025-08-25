@@ -14,9 +14,9 @@ clearConfirmed.addEventListener("click", () => {
 // Export CSV
 exportHistories.addEventListener("click", async () => {
     let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
-    let csvContents = "Title,Artist,Year\n"
+    let csvContents = "Title,Artist\n"
     histories.forEach(history => {
-        csvContents += `${history.title},${history.artist},${history.year}\n`
+        csvContents += `${history.title},${history.artist}\n`
     })
     let a = document.createElement('a')
     a.href = URL.createObjectURL(new Blob([csvContents], {type: "text/plain"}))

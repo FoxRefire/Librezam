@@ -1,3 +1,4 @@
+import { getStorage } from "../storageHelper/storageHelper.js"
 export async function auddGuess(audio) {
     let response = await getResponse(audio)
     console.log(JSON.stringify(response))
@@ -14,7 +15,7 @@ export async function auddGuess(audio) {
 }
 async function getResponse(audio) {
     let body = new FormData()
-    let auddToken = await chrome.storage.local.get("auddToken").then(o => o.auddToken) || "test"
+    let auddToken = await getStorage("auddToken")
     body.append("api_token", auddToken)
     body.append("file", new Blob([audio]))
     body.append("return", "apple_music,spotify,deezer")

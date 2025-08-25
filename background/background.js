@@ -1,4 +1,5 @@
 import { Recognize } from "/backendModules/Recognize.js"
+import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(chrome.offscreen) {
@@ -72,7 +73,7 @@ function recordStream(stream, ms){
 }
 
 async function showNotification(result) {
-    let previousResult = await chrome.storage.local.get("histories").then(o => o.histories?.at(-1))
+    let previousResult = await getStorage("histories")?.at(-1)
     let currentResult = Object.fromEntries(Object.entries(result).filter(([key]) => ["title", "artist", "year"].includes(key)))
 
     if(JSON.stringify(previousResult) != JSON.stringify(currentResult)) {
@@ -89,13 +90,12 @@ async function showNotification(result) {
 async function saveHistory(result){
     let newItem = {
         title: result.title,
-        artist: result.artist,
-        year: result.year
+        artist: result.artist
     }
 
-    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    let histories = await getStorage("histories") || []
     histories = histories.filter(item => JSON.stringify(item) != JSON.stringify(newItem))
     histories.push(newItem)
 
-    await chrome.storage.local.set({histories})
+    await setStorage("histories", histories)
 }

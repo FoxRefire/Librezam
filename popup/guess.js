@@ -1,4 +1,5 @@
 import { Recognize } from "/backendModules/Recognize.js"
+import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 
 main()
 
@@ -10,7 +11,7 @@ async function main() {
     autoModeController()
     micRecognitionController()
 
-    let fallbackRules = await chrome.storage.local.get("fallbackRules").then(o => o.fallbackRules) || {"3500":["shazam"],"7200":["shazam"],"12000":["shazam"]}
+    let fallbackRules = await getStorage("fallbackRules")
     let times = Object.keys(fallbackRules).map(t => Number(t))
     let backendsMap = Object.values(fallbackRules)
 
@@ -48,7 +49,7 @@ async function getResult(audios, backend) {
 }
 
 async function writeHistory(){
-    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    let histories = await getStorage("histories")
     const escapeStr = t => new Option(t).innerHTML
 
     histories.forEach(history => {
@@ -86,7 +87,7 @@ async function writeResult(result){
     resultTable.style.display = "block"
     streamProviders.style.display = "block"
 
-    let isShowCoverart = await chrome.storage.local.get("isShowCoverart").then(o => o.isShowCoverart) || false
+    let isShowCoverart = await getStorage("isShowCoverart")
     if(isShowCoverart){
         surfaceContainer.style.backgroundImage = `url('${result.art}')`
     }
@@ -108,11 +109,11 @@ async function saveHistory(result){
         artist: result.artist
     }
 
-    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    let histories = await getStorage("histories")
     histories = histories.filter(item => JSON.stringify(item) != JSON.stringify(newItem))
     histories.push(newItem)
 
-    await chrome.storage.local.set({histories})
+    await setStorage("histories", histories)
 }
 
 function showError(msg) {
@@ -143,7 +144,7 @@ async function startMicRecognition() {
         notification.innerText = ""
         
         // Get fallback rules
-        let fallbackRules = await chrome.storage.local.get("fallbackRules").then(o => o.fallbackRules) || {"3500":["shazam"],"7200":["shazam"],"12000":["shazam"]}
+        let fallbackRules = await getStorage("fallbackRules")
         let times = Object.keys(fallbackRules).map(t => Number(t))
         let backendsMap = Object.values(fallbackRules)
         

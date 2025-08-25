@@ -1,12 +1,13 @@
+import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 // Clear History
 M.Modal.init(modalConfirmClear, null);
 clearConfirmed.addEventListener("click", () => {
-    chrome.storage.local.set({ histories: [] });
+    setStorage("histories", [])
 });
 
 // Export CSV
 exportHistories.addEventListener("click", async () => {
-    let histories = await chrome.storage.local.get("histories").then(o => o.histories) || []
+    let histories = await getStorage("histories") || []
     let csvContents = "Title,Artist\n"
     histories.forEach(history => {
         csvContents += `${history.title},${history.artist}\n`

@@ -1,3 +1,4 @@
+import { getStorage } from "../storageHelper/storageHelper.js"
 export async function acrGuess(audio) {
     let response = await getResponse(audio)
     console.log(JSON.stringify(response))
@@ -17,9 +18,9 @@ export async function acrGuess(audio) {
 
 async function getResponse(audio) {
     let body = new FormData()
-    let host = await chrome.storage.local.get("acrHost").then(o => o.acrHost) || ""
-    let accessKey = await chrome.storage.local.get("acrKey").then(o => o.acrKey) || ""
-    let accessSecret = await chrome.storage.local.get("acrSecret").then(o => o.acrSecret) || ""
+    let host = await getStorage("acrHost")
+    let accessKey = await getStorage("acrKey")
+    let accessSecret = await getStorage("acrSecret")
     let timestamp = (new Date()).getTime()/1000
     body.append("access_key", accessKey)
     body.append("data_type", "audio")

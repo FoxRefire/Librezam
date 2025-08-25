@@ -1,17 +1,18 @@
-auddToken.value = await chrome.storage.local.get("auddToken").then(o => o.auddToken) || "test"
+import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
+auddToken.value = await getStorage("auddToken")
 auddToken.addEventListener("change", async () => {
-    await chrome.storage.local.set({ auddToken: auddToken.value })
+    await setStorage("auddToken", auddToken.value)
 })
 
-acrHost.value = await chrome.storage.local.get("acrHost").then(o => o.acrHost) || ""
+acrHost.value = await getStorage("acrHost")
 acrHost.addEventListener("change", async () => {
-    await chrome.storage.local.set({ acrHost: acrHost.value })
+    await setStorage("acrHost", acrHost.value)
 })
-acrKey.value = await chrome.storage.local.get("acrKey").then(o => o.acrKey) || ""
+acrKey.value = await getStorage("acrKey")
 acrKey.addEventListener("change", async () => {
-    await chrome.storage.local.set({ acrKey: acrKey.value })
+    await setStorage("acrKey", acrKey.value)
 })
-acrSecret.value = await chrome.storage.local.get("acrSecret").then(o => o.acrSecret) || ""
+acrSecret.value = await getStorage("acrSecret")
 acrSecret.addEventListener("change", async () => {
-    await chrome.storage.local.set({ acrSecret: acrSecret.value })
+    await setStorage("acrSecret", acrSecret.value)
 })

@@ -1,3 +1,4 @@
+import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper.js"
 (function initFallbackRulesUI() {
     const BACKENDS = [
         { key: 'shazam', label: 'Shazam' },
@@ -6,11 +7,7 @@
         { key: 'tencent', label: 'Tencent' },
     ];
 
-    const defaultFallbackRules = {
-        3500: ['shazam'],
-        7200: ['shazam'],
-        12000: ['shazam']
-    };
+    const defaultFallbackRules = Defaults.fallbackRules
 
     const container = document.getElementById('fallbackRulesContainer');
     const addBtn = document.getElementById('addFallbackRule');
@@ -28,7 +25,7 @@
     }
 
     async function loadRules() {
-        const stored = await chrome.storage.local.get('fallbackRules').then(o => o.fallbackRules);
+        const stored = await getStorage("fallbackRules")
         // Validate and normalize
         const rulesObj = (stored && typeof stored === 'object') ? stored : defaultFallbackRules;
         return rulesObj;
@@ -48,7 +45,7 @@
                 result[duration] = ordered;
             }
         });
-        chrome.storage.local.set({ fallbackRules: result });
+        setStorage("fallbackRules", result)
     }
 
     function renderRules(rulesObj) {
@@ -316,7 +313,7 @@
     });
 
     resetBtn.addEventListener('click', async () => {
-        await chrome.storage.local.set({ fallbackRules: defaultFallbackRules });
+        await setStorage("fallbackRules", defaultFallbackRules)
         renderRules(defaultFallbackRules);
         if (window.M && M.toast) {
             M.toast({ html: 'Fallback rules reset to default' });

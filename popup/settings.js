@@ -47,6 +47,7 @@ document.querySelectorAll('.bg-opt').forEach(opt => {
         { key: 'shazam', label: 'Shazam' },
         { key: 'audd', label: 'Audd' },
         { key: 'acr', label: 'ACRCloud' },
+        { key: 'tencent', label: 'Tencent' },
     ];
 
     const defaultFallbackRules = {

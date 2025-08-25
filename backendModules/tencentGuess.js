@@ -82,7 +82,7 @@ async function getResponse(pcm) {
         body: b64.encode(pcm)
     }).then(r => r.json())
 
-    response.songlist.forEach(song => {
+    response.songlist?.forEach(song => {
         song.songname = b64.decode(song.songname)
         song.singername = b64.decode(song.singername)
         song.albumname = b64.decode(song.albumname)

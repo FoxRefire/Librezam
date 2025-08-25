@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <link href="/libs/material-icons/material-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="/libs/materialize/materialize.min.css"/>
+        <link href="popup.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <!-- NavBar -->
+        <nav class="nav navbar">
+            <div class="nav-wrapper">
+                <a class="brand-logo center">Interface</a>
+                <a href="/popup/settingsMenu.html"><i class="material-icons back_button">arrow_back</i></a>
+            </div>
+        </nav>
+
+        <form action="#">
+            <h5>Show coverart on recognized</h5>
+            <p>
+                <label>
+                    <input id="isShowCoverart" type="checkbox" class="filled-in"/>
+                    <span>Enable</span>
+                </label>
+            </p>
+        </form>
+
+        <div class="bg-selection">
+            <h5>Theme</h5>
+            <div class="bg-opt-container">
+                <div class="bg-opt" style="background-image: none;"></div>
+                <div class="bg-opt" style="background-image: url('/images/background-2.jpg');"></div>
+                <div class="bg-opt" style="background-image: url('/images/background-3.jpg');"></div>
+                <div class="bg-opt" style="background-image: url('/images/background-4.jpg');"></div>
+            </div>
+        </div>
+
+        <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./uiSettings.js" type="module"></script>
+        <script src="./syncBackground.js" type="module"></script>
+    </body>
+</html>

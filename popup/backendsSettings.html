@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <link href="/libs/material-icons/material-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="/libs/materialize/materialize.min.css"/>
+        <link href="popup.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <!-- NavBar -->
+        <nav class="nav navbar">
+            <div class="nav-wrapper">
+                <a class="brand-logo center">Backends</a>
+                <a href="/popup/settingsMenu.html"><i class="material-icons back_button">arrow_back</i></a>
+            </div>
+        </nav>
+
+        <!-- Fallback Rules Section -->
+        <div class="section" id="fallbackRulesSection">
+            <h5>Recognition Rules</h5>
+            <p class="grey-text text-darken-1" style="margin-top: -8px;">
+                Define recording lengths (ms) and the backend order to try when recognition fails.
+            </p>
+            <div id="fallbackRulesContainer" class="fallback-rules-container"></div>
+            <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                <button id="addFallbackRule" class="btn filled icon-left"><i class="material-icons">add</i>Add Rule</button>
+                <button id="resetFallbackRules" class="btn-flat">Reset to Default</button>
+            </div>
+        </div>
+
+        <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./backendsSettings.js" type="module"></script>
+        <script src="./syncBackground.js" type="module"></script>
+    </body>
+</html>

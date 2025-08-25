@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <link href="/libs/material-icons/material-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="/libs/materialize/materialize.min.css"/>
+        <link href="popup.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <!-- NavBar -->
+        <nav class="nav navbar">
+            <div class="nav-wrapper">
+                <a class="brand-logo center">History</a>
+                <a href="/popup/settingsMenu.html"><i class="material-icons back_button">arrow_back</i></a>
+            </div>
+        </nav><br>
+
+        <p><button tabindex="0" id="exportHistories" class="btn filled icon-left"><i class="material-icons">save_as</i>Export as CSV</button></p>
+        <p><button tabindex="0" popovertarget="modalConfirmClear" class="btn filled icon-left modal-trigger"><i class="material-icons">delete_forever</i>Clear Histories</button></p>
+        <div id="modalConfirmClear" class="modal" popover>
+            <div class="modal-content">
+                <h4>Confirm</h4>
+                <p>Are you sure to clear histories?</p>
+            </div>
+            <div class="modal-footer">
+                <button tabindex="0" popovertarget="modalConfirmClear" class="waves-effect btn-flat">No</button>
+                <button tabindex="0" id="clearConfirmed" popovertarget="modalConfirmClear" class="waves-effect btn-flat">Yes</button>
+            </div>
+        </div>
+
+        <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./historySettings.js" type="module"></script>
+        <script src="./syncBackground.js" type="module"></script>
+    </body>
+</html>

@@ -185,6 +185,10 @@ async function startMicRecognition() {
 
 async function recordFromMicrophone(times) {
     try {
+        if(await navigator.permissions.query({ name: 'microphone' }).then(r => r.state !== "granted")) {
+            window.open("/popup/grantMicrophone.html", "_blank")
+            throw new Error("Microphone access denied")
+        }
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
         const recorder = new MediaRecorder(stream)
         const data = []

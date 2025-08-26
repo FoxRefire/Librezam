@@ -424,6 +424,37 @@ body a[class="btn filled icon-left modal-trigger"] {
     outline: 2px dashed var(--brand-color);
     outline-offset: 2px;
 }
+
+/* Touch reorder styles */
+.fallback-backends-list .chip.reordering {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(26, 112, 216, 0.4);
+    border-color: var(--brand-color);
+    background-color: rgba(26, 112, 216, 0.1);
+    z-index: 10;
+    position: relative;
+}
+
+.fallback-backends-list .chip.is-dragging {
+    opacity: 0.7;
+    transform: scale(1.05);
+}
+
+/* Mobile touch feedback */
+@media (hover: none) and (pointer: coarse) {
+    .fallback-backends-list .chip {
+        touch-action: manipulation;
+    }
+    
+    .fallback-backends-list .chip:active {
+        transform: scale(0.95);
+    }
+    
+    .fallback-backends-list .chip.reordering:active {
+        transform: scale(1.05);
+    }
+}
+
 #addFallbackRule {
     border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
     border-radius: 6px;

@@ -161,7 +161,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         
         durationRow.appendChild(durationField);
 
-        // Single interactive list: click to enable/disable, drag to reorder
+        // Single interactive list: click to enable/disable, drag to reorder (enabled only)
         const listLabel = document.createElement('div');
         listLabel.textContent = 'Backends: click to enable/disable; drag to reorder (enabled only)';
         listLabel.style.margin = '8px 0 4px';
@@ -176,6 +176,15 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         let draggingKey = null;
         let draggingEl = null;
         let isDragging = false;
+
+        // Touch reorder state
+        let touchStartTime = 0;
+        let touchStartY = 0;
+        let touchStartX = 0;
+        let longPressTimer = null;
+        let isLongPress = false;
+        let selectedChip = null;
+        let reorderMode = false;
 
         function insertDraggedRelativeTo(targetChip, clientX) {
             if (!draggingEl || draggingEl === targetChip) return;
@@ -209,6 +218,51 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
             if (closest) insertDraggedRelativeTo(closest, clientX);
         }
 
+        // Touch reorder functions
+        function startTouchReorder(chip) {
+            if (chip.getAttribute('data-included') !== 'true') return;
+            
+            reorderMode = true;
+            selectedChip = chip;
+            chip.classList.add('reordering');
+            
+            // Show reorder instructions
+            if (window.M && M.toast) {
+                M.toast({ html: 'Tap other chips to reorder, tap again to finish' });
+            }
+        }
+
+        function handleTouchReorder(targetChip) {
+            if (!reorderMode || !selectedChip || targetChip === selectedChip) return;
+            
+            if (targetChip.getAttribute('data-included') === 'true') {
+                // Move selected chip to position of target chip
+                const enabledChips = Array.from(list.querySelectorAll('.chip[data-included="true"]'));
+                const targetIndex = enabledChips.indexOf(targetChip);
+                const selectedIndex = enabledChips.indexOf(selectedChip);
+                
+                if (targetIndex !== -1 && selectedIndex !== -1) {
+                    if (targetIndex < selectedIndex) {
+                            list.insertBefore(selectedChip, targetChip);
+                    } else {
+                        list.insertBefore(selectedChip, targetChip.nextSibling);
+                    }
+                    saveRulesFromDom();
+                }
+            }
+            
+            // Exit reorder mode
+            exitTouchReorder();
+        }
+
+        function exitTouchReorder() {
+            if (selectedChip) {
+                selectedChip.classList.remove('reordering');
+                selectedChip = null;
+            }
+            reorderMode = false;
+        }
+
         // Build chips for all backends
         const chipsByKey = {};
         BACKENDS.forEach(b => {
@@ -224,9 +278,15 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
             chip.classList.toggle('lighten-2', !isIncluded);
             chip.draggable = isIncluded;
 
-            // Toggle include on click (suppressed when dragging)
+            // Toggle include on click (suppressed when dragging or reordering)
             chip.addEventListener('click', (e) => {
-                if (isDragging) return; // avoid click after a drag
+                if (isDragging || reorderMode) {
+                    if (reorderMode) {
+                        handleTouchReorder(chip);
+                    }
+                    return;
+                }
+                
                 const currentlyIncluded = chip.getAttribute('data-included') === 'true';
                 if (currentlyIncluded) {
                     // prevent disabling the last enabled backend
@@ -256,6 +316,49 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
                     }
                 }
                 saveRulesFromDom();
+            });
+
+            // Touch events for mobile reordering
+            chip.addEventListener('touchstart', (e) => {
+                if (chip.getAttribute('data-included') !== 'true') return;
+                
+                touchStartTime = Date.now();
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                
+                longPressTimer = setTimeout(() => {
+                    if (Date.now() - touchStartTime >= 500) { // 500ms long press
+                        isLongPress = true;
+                        startTouchReorder(chip);
+                    }
+                }, 500);
+            });
+
+            chip.addEventListener('touchend', (e) => {
+                if (longPressTimer) {
+                    clearTimeout(longPressTimer);
+                    longPressTimer = null;
+                }
+                
+                if (isLongPress) {
+                    isLongPress = false;
+                    e.preventDefault();
+                }
+            });
+
+            chip.addEventListener('touchmove', (e) => {
+                if (longPressTimer) {
+                    const touch = e.touches[0];
+                    const deltaX = Math.abs(touch.clientX - touchStartX);
+                    const deltaY = Math.abs(touch.clientY - touchStartY);
+                    
+                    // If moved more than threshold, cancel long press
+                    if (deltaX > 10 || deltaY > 10) {
+                        clearTimeout(longPressTimer);
+                        longPressTimer = null;
+                        isLongPress = false;
+                    }
+                }
             });
 
             // Drag behavior (only meaningful when included)

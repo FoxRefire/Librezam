@@ -75,7 +75,11 @@ async function convertToPCM(audio) {
 
 
 async function getResponse(pcm) {
-    let shazam = new ShazamAPI.Shazam()
+    let [language, country] = Intl.DateTimeFormat().resolvedOptions().locale.split("-").filter((_, i, a) => i === 0 || i === a.length - 1)
+    let shazam = new ShazamAPI.Shazam({
+        language,
+        country
+    })
     let samples = ShazamAPI.s16LEToSamplesArray(pcm);
     return await shazam.fullRecognizeSong(samples)
 }

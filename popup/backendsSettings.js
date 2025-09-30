@@ -5,6 +5,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         { key: 'audd', label: 'Audd' },
         { key: 'acr', label: 'ACRCloud' },
         { key: 'tencent', label: 'Tencent' },
+        { key: 'netease', label: 'NetEase' },
     ];
 
     const defaultFallbackRules = Defaults.fallbackRules

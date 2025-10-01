@@ -108,7 +108,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         durationInput.className = 'fallback-duration-input';
         durationInput.value = String(duration);
         
-        // Value display
+        // Value display (editable)
         const valueDisplay = document.createElement('div');
         valueDisplay.className = 'duration-value-display';
         valueDisplay.textContent = formatDuration(duration);
@@ -117,6 +117,12 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         valueDisplay.style.fontWeight = '500';
         valueDisplay.style.color = 'var(--md-sys-color-on-surface)';
         valueDisplay.style.marginBottom = '8px';
+        valueDisplay.style.cursor = 'pointer';
+        valueDisplay.style.border = '1px solid transparent';
+        valueDisplay.style.borderRadius = '4px';
+        valueDisplay.style.padding = '4px 8px';
+        valueDisplay.style.transition = 'border-color 0.2s ease';
+        valueDisplay.title = 'Click to edit duration';
         
         // Slider container
         const sliderContainer = document.createElement('div');
@@ -429,28 +435,121 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
             saveRulesFromDom();
         });
 
-        // Slider events
-        durationSlider.addEventListener('input', () => {
-            const newValue = Number(durationSlider.value);
-            valueDisplay.textContent = formatDuration(newValue);
-            durationInput.value = String(newValue);
-        });
+        // Function to update all duration-related elements
+        function updateDuration(newValue) {
+            const clampedValue = Math.max(1500, Math.min(13000, newValue));
+            valueDisplay.textContent = formatDuration(clampedValue);
+            durationInput.value = String(clampedValue);
+            durationSlider.value = String(clampedValue);
+        }
 
-        durationSlider.addEventListener('change', () => {
+        // Function to validate and ensure unique duration
+        function validateAndSaveDuration() {
             const otherValues = Array.from(container.querySelectorAll('.fallback-duration-input'))
                 .filter(inp => inp !== durationInput)
                 .map(inp => Number(inp.value));
             let unique = ensureUniqueDuration(durationInput.value, otherValues);
             if (unique !== Number(durationInput.value)) {
-                durationSlider.value = String(unique);
-                valueDisplay.textContent = formatDuration(unique);
-                durationInput.value = String(unique);
+                updateDuration(unique);
                 if (window.M && M.toast) {
                     M.toast({ html: 'Adjusted to unique duration: ' + formatDuration(unique) });
                 }
             }
             saveRulesFromDom();
+        }
+
+        // Slider events
+        durationSlider.addEventListener('input', () => {
+            const newValue = Number(durationSlider.value);
+            updateDuration(newValue);
         });
+
+        durationSlider.addEventListener('change', () => {
+            validateAndSaveDuration();
+        });
+
+        // Editable value display events
+        let isEditing = false;
+        let originalValue = '';
+
+        valueDisplay.addEventListener('click', () => {
+            if (isEditing) return;
+            
+            isEditing = true;
+            originalValue = valueDisplay.textContent;
+            valueDisplay.contentEditable = 'true';
+            valueDisplay.style.borderColor = 'var(--md-sys-color-primary)';
+            valueDisplay.style.backgroundColor = 'var(--md-sys-color-surface-variant)';
+            
+            // Select all text for easy editing
+            const range = document.createRange();
+            range.selectNodeContents(valueDisplay);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+        });
+
+        valueDisplay.addEventListener('blur', () => {
+            if (!isEditing) return;
+            finishEditing();
+        });
+
+        valueDisplay.addEventListener('keydown', (e) => {
+            if (!isEditing) return;
+            
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                finishEditing();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                cancelEditing();
+            }
+        });
+
+        function finishEditing() {
+            if (!isEditing) return;
+            
+            isEditing = false;
+            valueDisplay.contentEditable = 'false';
+            valueDisplay.style.borderColor = 'transparent';
+            valueDisplay.style.backgroundColor = 'transparent';
+            
+            // Parse the input value
+            const inputText = valueDisplay.textContent.trim();
+            let newValue = 0;
+            
+            // Handle different input formats (e.g., "3.5s", "3500ms", "3500")
+            if (inputText.endsWith('s')) {
+                newValue = parseFloat(inputText.slice(0, -1)) * 1000;
+            } else if (inputText.endsWith('ms')) {
+                newValue = parseFloat(inputText.slice(0, -2));
+            } else {
+                newValue = parseFloat(inputText);
+            }
+            
+            if (isNaN(newValue) || newValue < 1500 || newValue > 13000) {
+                // Reset to original value if input is invalid
+                valueDisplay.textContent = originalValue;
+                if (window.M && M.toast) {
+                    M.toast({ html: 'Duration must be between 1500ms and 13000ms' });
+                }
+            } else {
+                // Round to nearest 100ms step
+                newValue = Math.round(newValue / 100) * 100;
+                updateDuration(newValue);
+                validateAndSaveDuration();
+            }
+        }
+
+        function cancelEditing() {
+            if (!isEditing) return;
+            
+            isEditing = false;
+            valueDisplay.contentEditable = 'false';
+            valueDisplay.textContent = originalValue;
+            valueDisplay.style.borderColor = 'transparent';
+            valueDisplay.style.backgroundColor = 'transparent';
+        }
 
         cardContent.appendChild(title);
         cardContent.appendChild(deleteBtn);

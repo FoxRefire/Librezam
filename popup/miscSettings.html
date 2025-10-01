@@ -9,17 +9,23 @@
         <!-- NavBar -->
         <nav class="nav navbar">
             <div class="nav-wrapper">
-                <a class="brand-logo center">Interface</a>
+                <a class="brand-logo center">Miscellaneous</a>
                 <a href="/popup/settingsMenu.html"><i class="material-icons back_button">arrow_back</i></a>
             </div>
         </nav>
 
         <form action="#">
-            <h5>Show coverart on recognized</h5>
+            <h5>Options</h5>
             <p>
                 <label>
                     <input id="isShowCoverart" type="checkbox" class="filled-in"/>
-                    <span>Enable</span>
+                    <span>Show coverart on recognized</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input id="isRecordAnotherTab" type="checkbox" class="filled-in"/>
+                    <span>Record another tab audio</span>
                 </label>
             </p>
         </form>
@@ -35,7 +41,7 @@
         </div>
 
         <script src="/libs/materialize/materialize.min.js"></script>
-        <script src="./uiSettings.js" type="module"></script>
+        <script src="./miscSettings.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>
     </body>
 </html>

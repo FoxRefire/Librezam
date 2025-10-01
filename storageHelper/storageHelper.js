@@ -1,5 +1,6 @@
 export const Defaults = {
     isShowCoverart: false,
+    isRecordAnotherTab: false,
     bgImage: 'url("/images/background-2.jpg")',
     fallbackRules: {"3500":["shazam"],"7200":["shazam"],"12000":["shazam"]},
     histories: [],

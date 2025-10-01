@@ -24,7 +24,7 @@
     "permissions": ["tabs", "webNavigation", "storage", "notifications"],
     "host_permissions": ["<all_urls>"],
     "web_accessible_resources": [{
-        "resources": ["/content/workaround.js"],
+        "resources": ["/content/workaround.js", "/content/appendAudioBuffer.js"],
         "matches": ["<all_urls>"]
     }],
     "commands": {

@@ -18,7 +18,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 })
 let audioPromisesMap = []
 autoGuess()
-injectWorkaround()
+injectScript("/content/workaround.js")
+injectScript("/content/appendAudioBuffer.js")
 
 
 function mainRecorder(times) {
@@ -115,11 +116,11 @@ function autoGuess() {
     }, 750)
 }
 
-function injectWorkaround() {
+function injectScript(src) {
     if(document instanceof HTMLDocument) {
         const script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = chrome.runtime.getURL("/content/workaround.js");
+        script.src = chrome.runtime.getURL(src);
         (document.head || document.documentElement).appendChild(script);
     }
 }

@@ -27,6 +27,20 @@
         "resources": ["/content/workaround.js"],
         "matches": ["<all_urls>"]
     }],
+    "commands": {
+        "tab-recognize": {
+            "suggested_key": {
+                "default": "Ctrl+E"
+            },
+            "description": "Recognize from tab audio"
+        },
+        "mic-recognize": {
+            "suggested_key": {
+                "default": "Ctrl+Alt+E"
+            },
+            "description": "Recognize from microphone"
+        }
+    },
     "browser_specific_settings": {
         "gecko": {
             "id": "Librezam@Librezam"

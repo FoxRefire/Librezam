@@ -84,11 +84,14 @@ async function getNextRecorded() {
 async function sendMessagePromises(request){
     let promises = []
     let tab = await chrome.tabs.query({active:true, currentWindow:true})
+    let tabId = tab[0].id
     let isRecordAnotherTab = await getStorage("isRecordAnotherTab")
     if(!tab.audible && isRecordAnotherTab){
-        tab = await chrome.tabs.query({audible:true, currentWindow:true})
+        let anotherTab = await chrome.tabs.query({audible:true, currentWindow:true})
+        if(anotherTab.length){
+            tabId = anotherTab[0].id
+        }
     }
-    let tabId = tab[0].id
     let frames = await chrome.webNavigation.getAllFrames({tabId:tabId})
     frames.forEach(f => {
         let promise = chrome.tabs.sendMessage(tabId, request, {frameId:f.frameId})

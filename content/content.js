@@ -29,7 +29,7 @@ function mainRecorder(times) {
         let audioPromises = []
         elements.forEach(elem => {
             let audioPromise
-            if(new URL(elem.currentSrc).origin == document.location.origin) {
+            if(!elem.currentSrc || new URL(elem.currentSrc).origin == document.location.origin) {
                 let stream = createStream(elem)
                 audioPromise = recordStream(stream, time).then(data => Array.from(data))
             } else {

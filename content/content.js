@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 let audioPromisesMap = []
 autoGuess()
 injectScript("/content/workaround.js")
-injectScript("/content/appendAudioBuffer.js")
+//injectScript("/content/appendAudioBuffer.js") //disabled because it has critical issue
 
 
 function mainRecorder(times) {

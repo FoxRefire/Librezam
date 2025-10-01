@@ -1,16 +1,23 @@
 import { Recognize } from "/backendModules/Recognize.js"
 import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 
-main()
+init()
+if(window.location.search.includes("mic=true")) {
+    startMicRecognition()
+} else {
+    startTabRecognition()
+}
 
-async function main() {
+function init() {
     // Initialize dropdown menu
     M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
     
     writeHistory()
     autoModeController()
     micRecognitionController()
+}
 
+async function startTabRecognition() {
     let fallbackRules = await getStorage("fallbackRules")
     let times = Object.keys(fallbackRules).map(t => Number(t))
     let backendsMap = Object.values(fallbackRules)

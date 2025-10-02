@@ -7,7 +7,9 @@ export const Defaults = {
     auddToken: "test",
     acrHost: "",
     acrKey: "",
-    acrSecret: ""
+    acrSecret: "",
+    acrMode: "both",
+    tencentMode: "both"
 }
 
 export async function getStorage(key) {

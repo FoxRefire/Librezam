@@ -1,3 +1,5 @@
+import { getStorage } from "../storageHelper/storageHelper.js"
+
 export async function tencentGuess(audio) {
     let pcm = await convertToPCM(audio)
     let response = await getResponse(pcm)
@@ -77,11 +79,27 @@ let b64 = {
 
 async function getResponse(pcm) {
     let sessionId = Date.now()
-    let response = await fetch(`https://c6.y.qq.com/youtu/humming/search?sessionid=${sessionId}&recognizetype=1&fpType=5`, {
-        method: "POST",
-        body: b64.encode(pcm)
-    }).then(r => r.json())
-
+    
+    // Get the current mode setting
+    let tencentMode = await getStorage("tencentMode")
+    let response
+    
+    if (tencentMode === "humming") {
+        // Humming mode only (fpType=4)
+        response = await makeRequest(pcm, sessionId, 4)
+    } else if (tencentMode === "original") {
+        // Original mode only (fpType=5)
+        response = await makeRequest(pcm, sessionId, 5)
+    } else { // "both" mode
+        // Try original mode first (fpType=5)
+        response = await makeRequest(pcm, sessionId, 5)
+        
+        // If original didn't match, try humming mode (fpType=4)
+        if (response.message === "not_match") {
+            response = await makeRequest(pcm, sessionId, 4)
+        }
+    }
+    
     response.songlist?.forEach(song => {
         song.songname = b64.decode(song.songname)
         song.singername = b64.decode(song.singername)
@@ -89,4 +107,11 @@ async function getResponse(pcm) {
     })
 
     return response
+}
+
+async function makeRequest(pcm, sessionId, fpType) {
+    return await fetch(`https://c6.y.qq.com/youtu/humming/search?sessionid=${sessionId}&recognizetype=1&fpType=${fpType}`, {
+        method: "POST",
+        body: b64.encode(pcm)
+    }).then(r => r.json())
 }

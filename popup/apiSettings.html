@@ -18,12 +18,42 @@
         <input id=auddToken type="text"/>
 
         <h5>ACRCloud</h5>
+        <form id="acrMode">
+            <label>
+                <input class="with-gap" name="acrMode" value="both" type="radio" />
+                <span>Both</span>
+            </label>
+            <label>
+                <input class="with-gap" name="acrMode" value="original" type="radio" />
+                <span>Original</span>
+            </label>
+            <label>
+                <input class="with-gap" name="acrMode" value="humming" type="radio"  />
+                <span>Humming</span>
+            </label>
+        </form>
         <h6>Host</h6>
         <input id=acrHost type="text"/>
         <h6>Access Key</h6>
         <input id=acrKey type="text"/>
         <h6>Access Secret</h6>
         <input id=acrSecret type="text"/>
+
+        <h5>Tencent</h5>
+        <form id="tencentMode">
+            <label>
+                <input class="with-gap" name="tencentMode" value="both" type="radio" />
+                <span>Both</span>
+            </label>
+            <label>
+                <input class="with-gap" name="tencentMode" value="original" type="radio" />
+                <span>Original</span>
+            </label>
+            <label>
+                <input class="with-gap" name="tencentMode" value="humming" type="radio"  />
+                <span>Humming</span>
+            </label>
+        </form>
 
         <script src="/libs/materialize/materialize.min.js"></script>
         <script src="./apiSettings.js" type="module"></script>

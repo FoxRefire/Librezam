@@ -9,7 +9,6 @@ export async function shazamGuess(audio) {
         title: response.track.title,
         artist: response.track.subtitle,
         year: response.track.sections[0].metadata[2]?.text || "",
-        apple: response.track.hub.options[0].actions[0]?.uri,
         art: response.track.share.image
     }
 }

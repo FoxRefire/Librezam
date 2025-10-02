@@ -2,16 +2,23 @@ import { getStorage } from "../storageHelper/storageHelper.js"
 export async function auddGuess(audio) {
     let response = await getResponse(audio)
     console.log(JSON.stringify(response))
-    return {
+    let result = {
         title: response.result.title,
         artist: response.result.artist,
         year: response.result.release_date?.slice(0,4) || "",
-        apple: response.result.apple_music?.url || "",
-        deezer: response.result.deezer?.link || "",
-        spotify: response.result.spotify?.external_urls.spotify || "",
-        youtube: "https://www.youtube.com/results?search_query=" + encodeURIComponent(`${response.result.title} ${response.result.artist}`),
         art: response.result.song_link+"?thumb"
     }
+    if(response.result.apple_music?.url){
+        result.apple = response.result.apple_music?.url
+    }
+    if(response.result.deezer?.link){
+        result.deezer = response.result.deezer?.link
+    }
+    if(response.result.spotify?.external_urls.spotify){
+        result.spotify = response.result.spotify?.external_urls.spotify
+    }
+
+    return result
 }
 async function getResponse(audio) {
     let body = new FormData()

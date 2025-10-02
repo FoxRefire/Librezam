@@ -25,5 +25,22 @@ export async function Recognize(audio, backend) {
             break
     }
 
-    return await backendCall(audio)
+    return await backendCall(audio).then(result => addStreamLinks(result))
+}
+
+function addStreamLinks(result) {
+    let query = encodeURIComponent(`${result.title} ${result.artist}`)
+    if(!result.apple){
+        result.apple = `https://music.apple.com/search?term=${query}`
+    }
+    if(!result.deezer){
+        result.deezer = `https://www.deezer.com/search/${query}`
+    }
+    if(!result.spotify){
+        result.spotify = `https://open.spotify.com/search/${query}`
+    }
+    if(!result.youtube){
+        result.youtube = `https://www.youtube.com/results?search_query=${query}`
+    }
+    return result
 }

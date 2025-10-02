@@ -15,6 +15,21 @@ export async function acrGuess(audio) {
     } else { // "both" mode - try original first, then humming
         metadata = response.metadata?.music?.[0] || response.metadata?.humming?.[0]
     }
+    
+    let result = {
+        title: metadata.title,
+        artist: metadata.artists?.[0].name,
+        year: metadata.release_date?.slice(0,4) || "",
+    }
+    if(metadata.external_metadata?.deezer?.track?.id){
+        result.deezer = `https://www.deezer.com/track/${metadata.external_metadata?.deezer?.track?.id}`
+    }
+    if(metadata.external_metadata?.spotify?.track?.id){
+        result.spotify = `https://open.spotify.com/track/${metadata.external_metadata?.spotify?.track?.id}`
+    }
+    if(metadata.external_metadata?.youtube?.vid){
+        result.youtube = `https://www.youtube.com/watch?v=${metadata.external_metadata?.youtube?.vid}`
+    }
 
     return {
         title: metadata.title,

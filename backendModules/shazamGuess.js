@@ -9,10 +9,6 @@ export async function shazamGuess(audio) {
         title: response.track.title,
         artist: response.track.subtitle,
         year: response.track.sections[0].metadata[2]?.text || "",
-        apple: response.track.hub.options[0].actions[0]?.uri,
-        deezer: response.track.hub.providers[1].actions[0].uri.replace("deezer-query://", "https://"),
-        spotify: "https://open.spotify.com/search/" + response.track.hub.providers[0].actions[0].uri.slice(15),
-        youtube: "https://www.youtube.com/results?search_query=" + response.track.hub.providers[0].actions[0].uri.slice(15),
         art: response.track.share.image
     }
 }

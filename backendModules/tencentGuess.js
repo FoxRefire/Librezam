@@ -8,7 +8,7 @@ export async function tencentGuess(audio) {
     return {
         title: response.songlist[0].songname,
         artist: response.songlist[0]?.singername,
-        year: response.songlist[0]?.albumname,
+        album: response.songlist[0]?.albumname,
         art: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${response.songlist[0]?.albummid}.jpg`
     }
 }

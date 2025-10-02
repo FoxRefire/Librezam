@@ -19,7 +19,7 @@ export async function acrGuess(audio) {
     let result = {
         title: metadata.title,
         artist: metadata.artists?.[0].name,
-        year: metadata.release_date?.slice(0,4) || "",
+        album: metadata.album?.name
     }
     if(metadata.external_metadata?.deezer?.track?.id){
         result.deezer = `https://www.deezer.com/track/${metadata.external_metadata?.deezer?.track?.id}`
@@ -31,16 +31,7 @@ export async function acrGuess(audio) {
         result.youtube = `https://www.youtube.com/watch?v=${metadata.external_metadata?.youtube?.vid}`
     }
 
-    return {
-        title: metadata.title,
-        artist: metadata.artists?.[0].name,
-        year: metadata.release_date?.slice(0,4) || "",
-        apple: "https://music.apple.com/search?term=" + encodeURIComponent(`${metadata.title} ${metadata?.artists?.[0].name}`),
-        deezer: `https://www.deezer.com/track/${metadata.external_metadata?.deezer?.track?.id}`,
-        spotify: `https://open.spotify.com/track/${metadata.external_metadata?.spotify?.track?.id}`,
-        youtube: `https://www.youtube.com/watch?v=${metadata.external_metadata?.youtube?.vid}`,
-        art: ""
-    }
+    return result
 }
 
 async function getResponse(audio) {

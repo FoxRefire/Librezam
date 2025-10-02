@@ -9,7 +9,8 @@ export const Defaults = {
     acrKey: "",
     acrSecret: "",
     acrMode: "both",
-    tencentMode: "both"
+    tencentMode: "both",
+    selectedStreamingProviders: ["apple", "deezer", "spotify", "youtube"]
 }
 
 export async function getStorage(key) {

@@ -465,3 +465,140 @@ body a[class="btn filled icon-left modal-trigger"] {
 #resetFallbackRules {
     color: color-mix(in srgb, var(--md-sys-color-on-surface) 85%, transparent 15%);
 }
+
+/* Streaming Providers Settings Styles */
+.container {
+    padding: 20px;
+}
+
+.selected-providers, .available-providers {
+    margin: 20px 0;
+}
+
+.selected-list, .available-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.provider-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    user-select: none;
+}
+
+.provider-item.selected {
+    background-color: var(--brand-color);
+    border-color: var(--brand-color);
+}
+
+.provider-item.available {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.provider-item.available:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.provider-item.selected {
+    cursor: grab;
+}
+
+.provider-item.selected:active {
+    cursor: grabbing;
+}
+
+.provider-icon {
+    margin-right: 8px;
+    border-radius: 50%;
+}
+
+.provider-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.remove-btn {
+    margin-left: 8px;
+    font-size: 18px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.remove-btn:hover {
+    opacity: 1;
+}
+
+.provider-item.dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+}
+
+.provider-item.drag-over {
+    border-color: var(--brand-color);
+    background-color: rgba(26, 112, 216, 0.1);
+}
+
+/* Mobile touch feedback for streaming providers */
+@media (hover: none) and (pointer: coarse) {
+    .provider-item {
+        touch-action: manipulation;
+    }
+    
+    .provider-item:active {
+        transform: scale(0.95);
+    }
+    
+    .provider-item.selected:active {
+        transform: scale(1.05);
+    }
+}
+
+/* Reset button styles */
+.reset-section {
+    margin-top: 30px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#resetProviders {
+    background-color: var(--brand-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#resetProviders:hover {
+    background-color: color-mix(in srgb, var(--brand-color) 85%, black 15%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 112, 216, 0.3);
+}
+
+#resetProviders:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(26, 112, 216, 0.2);
+}
+
+#resetProviders .material-icons {
+    font-size: 18px;
+}

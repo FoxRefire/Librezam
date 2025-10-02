@@ -9,10 +9,6 @@ export async function tencentGuess(audio) {
         title: response.songlist[0].songname,
         artist: response.songlist[0]?.singername,
         year: response.songlist[0]?.albumname,
-        apple: "",
-        deezer: "",
-        spotify: "",
-        youtube: "",
         art: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${response.songlist[0]?.albummid}.jpg`
     }
 }

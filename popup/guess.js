@@ -110,13 +110,55 @@ async function writeResult(result){
         surfaceContainer.style.backgroundImage = `url('${result.art}')`
     }
 
-    let elms = ["title", "artist", "album", "apple", "deezer", "spotify", "youtube"]
+    // Update basic info
+    let elms = ["title", "artist", "album"]
     elms.forEach(out => {
         let outElm = document.querySelector(`.result.${out}`)
-        if(!outElm.classList.contains("stream")) {
-            outElm.innerText = result[out]
-        } else {
-            outElm.href = result[out]
+        outElm.innerText = result[out]
+    })
+
+    // Update streaming providers
+    await updateStreamingProviders(result)
+}
+
+async function updateStreamingProviders(result) {
+    const selectedProviders = await getStorage("selectedStreamingProviders") || ["apple", "deezer", "spotify", "youtube"]
+    
+    // Provider icons mapping
+    const providerIcons = {
+        'apple': '/images/apple.png',
+        'deezer': '/images/deezer.png',
+        'spotify': '/images/spotify.png',
+        'youtube': '/images/youtube.png',
+        'youtube_music': '/images/ytmusic.png',
+        'kkbox': '/images/kkbox.png',
+        'soundcloud': '/images/soundcloud.png',
+        'tidal': '/images/tidal.png',
+        'qq_music': '/images/qqmusic.png',
+        'netease_music': '/images/netease.png',
+        'google_search': '/images/google.png',
+        'duckduckgo_search': '/images/duckduckgo.png',
+        'musicbrainz': '/images/musicbrainz.png'
+    }
+    
+    // Clear existing providers
+    streamProviders.innerHTML = ''
+    
+    // Add selected providers
+    selectedProviders.forEach(providerId => {
+        if (result[providerId]) {
+            const providerElement = document.createElement('a')
+            providerElement.className = `result stream ${providerId}`
+            providerElement.href = result[providerId]
+            providerElement.target = '_blank'
+            
+            const img = document.createElement('img')
+            img.src = providerIcons[providerId] || '/images/youtube.png'
+            img.width = 32
+            img.className = 'circle responsive-img'
+            
+            providerElement.appendChild(img)
+            streamProviders.appendChild(providerElement)
         }
     })
 }

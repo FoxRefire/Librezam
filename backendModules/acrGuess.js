@@ -2,7 +2,19 @@ import { getStorage } from "../storageHelper/storageHelper.js"
 export async function acrGuess(audio) {
     let response = await getResponse(audio)
     console.log(JSON.stringify(response))
-    let metadata = response.metadata?.music?.[0] || response.metadata?.humming?.[0]
+    
+    // Get the current mode setting
+    let acrMode = await getStorage("acrMode")
+    let metadata = null
+    
+    // Select metadata based on mode
+    if (acrMode === "original") {
+        metadata = response.metadata?.music?.[0]
+    } else if (acrMode === "humming") {
+        metadata = response.metadata?.humming?.[0]
+    } else { // "both" mode - try original first, then humming
+        metadata = response.metadata?.music?.[0] || response.metadata?.humming?.[0]
+    }
 
     return {
         title: metadata.title,

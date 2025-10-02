@@ -6,7 +6,7 @@ export async function neteaseGuess(audio) {
     return {
         title: response[0].song.name,
         artist: response[0].song?.artists?.[0]?.name,
-        year: response[0].song.album?.name,
+        album: response[0].song.album?.name,
         art: response[0].song.album?.picUrl
     }
 }

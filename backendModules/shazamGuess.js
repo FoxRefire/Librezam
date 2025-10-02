@@ -8,7 +8,7 @@ export async function shazamGuess(audio) {
     return {
         title: response.track.title,
         artist: response.track.subtitle,
-        year: response.track.sections[0].metadata[2]?.text || "",
+        album: response.track.sections[0].metadata[0]?.text || "",
         art: response.track.share.image
     }
 }

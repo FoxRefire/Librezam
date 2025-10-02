@@ -5,7 +5,7 @@ export async function auddGuess(audio) {
     let result = {
         title: response.result.title,
         artist: response.result.artist,
-        year: response.result.release_date?.slice(0,4) || "",
+        album: response.result?.album,
         art: response.result.song_link+"?thumb"
     }
     if(response.result.apple_music?.url){

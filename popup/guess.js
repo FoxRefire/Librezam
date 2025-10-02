@@ -110,7 +110,7 @@ async function writeResult(result){
         surfaceContainer.style.backgroundImage = `url('${result.art}')`
     }
 
-    let elms = ["title", "artist", "year", "apple", "deezer", "spotify", "youtube"]
+    let elms = ["title", "artist", "album", "apple", "deezer", "spotify", "youtube"]
     elms.forEach(out => {
         let outElm = document.querySelector(`.result.${out}`)
         if(!outElm.classList.contains("stream")) {

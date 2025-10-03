@@ -92,6 +92,9 @@ function recordStream(stream, ms){
 }
 
 function recordStreamCORS(mediaSrc, currentTime, ms){
+    if(mediaSrc.includes("v16-webapp-prime.tiktok.com")){
+        mediaSrc = mediaSrc.replace("v16-webapp-prime.tiktok.com", "v19-webapp-prime.tiktok.com")
+    }
     return chrome.runtime.sendMessage({
         action:"CORSRecord",
         mediaSrc,

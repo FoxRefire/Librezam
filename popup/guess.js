@@ -83,13 +83,13 @@ async function getNextRecorded() {
 
 async function sendMessagePromises(request){
     let promises = []
-    let tab = await chrome.tabs.query({active:true, currentWindow:true})
-    let tabId = tab[0].id
+    let tab = await chrome.tabs.query({active:true, currentWindow:true})[0]
+    let tabId = tab.id
     let isRecordAnotherTab = await getStorage("isRecordAnotherTab")
     if(!tab.audible && isRecordAnotherTab){
-        let anotherTab = await chrome.tabs.query({audible:true, currentWindow:true})
+        let anotherTab = await chrome.tabs.query({audible:true, currentWindow:true})[0]
         if(anotherTab.length){
-            tabId = anotherTab[0].id
+            tabId = anotherTab.id
         }
     }
     let frames = await chrome.webNavigation.getAllFrames({tabId:tabId})
@@ -122,7 +122,7 @@ async function writeResult(result){
 }
 
 async function updateStreamingProviders(result) {
-    const selectedProviders = await getStorage("selectedStreamingProviders") || ["apple", "deezer", "spotify", "youtube"]
+    const selectedProviders = await getStorage("selectedStreamingProviders")
     
     // Provider icons mapping
     const providerIcons = {
@@ -153,7 +153,7 @@ async function updateStreamingProviders(result) {
             providerElement.target = '_blank'
             
             const img = document.createElement('img')
-            img.src = providerIcons[providerId] || '/images/youtube.png'
+            img.src = providerIcons[providerId]
             img.width = 32
             img.className = 'circle responsive-img'
             

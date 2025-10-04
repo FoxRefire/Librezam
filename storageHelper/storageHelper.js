@@ -10,7 +10,11 @@ export const Defaults = {
     acrSecret: "",
     acrMode: "both",
     tencentMode: "both",
-    selectedStreamingProviders: ["apple", "deezer", "spotify", "youtube"]
+    selectedStreamingProviders: ["apple", "deezer", "spotify", "youtube"],
+    enableExperimentalFix: false,
+    noDoubleHosts: ["soundcloud.com"],
+    noAppendHosts: ["osu.ppy.sh"],
+    corsHosts: ["radio.garden"]
 }
 
 export async function getStorage(key) {

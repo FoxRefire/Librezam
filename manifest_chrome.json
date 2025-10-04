@@ -12,7 +12,7 @@
     },
     "content_scripts": [
         {
-          "js": ["content/content.js"],
+          "js": ["content/appendWorkaround.js", "content/content.js"],
           "matches": ["<all_urls>"],
           "all_frames": true
         }
@@ -24,7 +24,7 @@
     "permissions": ["tabs", "webNavigation", "storage", "notifications", "offscreen"],
     "host_permissions": ["<all_urls>"],
     "web_accessible_resources": [{
-        "resources": ["/content/workaround.js", "/content/appendAudioBuffer.js"],
+        "resources": ["/content/*.js", "/storageHelper/*.js"],
         "matches": ["<all_urls>"]
     }],
     "commands": {

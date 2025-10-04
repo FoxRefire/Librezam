@@ -18,8 +18,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 })
 let audioPromisesMap = []
 autoGuess()
-injectScript("/content/workaround.js")
-//injectScript("/content/appendAudioBuffer.js") //disabled because it has critical issue
 
 
 function mainRecorder(times) {
@@ -30,7 +28,7 @@ function mainRecorder(times) {
         let audioPromises = []
         elements.forEach(elem => {
             let audioPromise
-            if(!elem.currentSrc || new URL(elem.currentSrc).origin == document.location.origin) {
+            if(!elem.classList.contains("librezamCORS") && (!elem.currentSrc || new URL(elem.currentSrc).origin == document.location.origin)) {
                 let stream = createStream(elem)
                 audioPromise = recordStream(stream, time).then(data => Array.from(data))
             } else {
@@ -117,13 +115,4 @@ function autoGuess() {
             })
         }
     }, 750)
-}
-
-function injectScript(src) {
-    if(document instanceof HTMLDocument) {
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = chrome.runtime.getURL(src);
-        (document.head || document.documentElement).appendChild(script);
-    }
 }

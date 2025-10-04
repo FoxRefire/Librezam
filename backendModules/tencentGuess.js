@@ -14,55 +14,24 @@ export async function tencentGuess(audio) {
 }
 
 async function convertToPCM(audio) {
-    // Create AudioContext
-    const audioContext = new AudioContext();
+    const audioContext = new AudioContext({
+        sampleRate: 8000
+    });
 
-    // Convert to ArrayBuffer
-    const arrayBuffer = (audio instanceof ArrayBuffer) ? audio : new Uint8Array(audio).buffer;
+    const audioBuffer = await audioContext.decodeAudioData(new Uint8Array(audio).buffer);
+    const numChannels = audioBuffer.numberOfChannels;
+    const length = audioBuffer.length;
 
-    // Decode it
-    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    const pcmData = new Int16Array(length);
 
-    // Original sampleRates
-    const inputSampleRate = audioBuffer.sampleRate;
-    const inputChannels = audioBuffer.numberOfChannels;
-    const inputLength = audioBuffer.length;
-
-    // ---- Monauralize it ----
-    const monoData = new Float32Array(inputLength);
-    for (let i = 0; i < inputLength; i++) {
+    for (let i = 0; i < length; i++) {
         let sum = 0;
-        for (let ch = 0; ch < inputChannels; ch++) {
+        for (let ch = 0; ch < numChannels; ch++) {
             sum += audioBuffer.getChannelData(ch)[i];
         }
-        monoData[i] = sum / inputChannels;
-    }
+        let mixed = sum / numChannels;
 
-    // ---- Resample to 16khz ----
-    const targetSampleRate = 8000;
-    const duration = audioBuffer.duration;
-    const outputLength = Math.round(duration * targetSampleRate);
-    const offlineCtx = new OfflineAudioContext(1, outputLength, targetSampleRate);
-
-    // Create Mono AudioBuffer
-    const monoBuffer = offlineCtx.createBuffer(1, inputLength, inputSampleRate);
-    monoBuffer.copyToChannel(monoData, 0);
-
-    // Create BufferSource
-    const source = offlineCtx.createBufferSource();
-    source.buffer = monoBuffer;
-    source.connect(offlineCtx.destination);
-    source.start(0);
-
-    // Render it
-    const resampledBuffer = await offlineCtx.startRendering();
-
-    // ---- Convert to int16(s16le) ----
-    const channelData = resampledBuffer.getChannelData(0);
-    const pcmData = new Int16Array(channelData.length);
-    for (let i = 0; i < channelData.length; i++) {
-        const s = Math.max(-1, Math.min(1, channelData[i]));
-        pcmData[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+        pcmData[i] = Math.max(-32768, Math.min(32767, mixed * 32767));
     }
 
     return new Uint8Array(pcmData.buffer);

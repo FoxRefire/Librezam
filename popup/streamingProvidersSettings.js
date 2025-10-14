@@ -49,10 +49,10 @@ function renderSelectedProviders() {
         const provider = STREAMING_PROVIDERS[providerId]
         const providerElement = createProviderElement(providerId, provider, true, index)
         selectedList.appendChild(providerElement)
-        
-        // Add drag listeners to the newly created element
-        addDragListeners(providerElement, index)
     })
+    
+    // Add drag listeners after all elements are rendered
+    setupDragAndDrop()
 }
 
 function renderAvailableProviders() {
@@ -86,7 +86,7 @@ function setupEventListeners() {
     // Add provider to selected
     document.getElementById('availableList').addEventListener('click', (e) => {
         const providerItem = e.target.closest('.provider-item')
-        if (providerItem && selectedProviders.length < 4) {
+        if (providerItem && selectedProviders.length < 5) {
             addProvider(providerItem.dataset.providerId)
         }
     })
@@ -111,7 +111,6 @@ function setupEventListeners() {
 
 // Add drag event listeners to each provider item
 function addDragListeners(element, index) {
-    const selectedList = document.getElementById('selectedList')
     element.draggable = true
     element.dataset.index = index
     
@@ -119,7 +118,6 @@ function addDragListeners(element, index) {
         draggedElement = element
         draggedIndex = parseInt(element.dataset.index)
         e.dataTransfer.effectAllowed = 'move'
-        e.dataTransfer.setData('text/html', element.outerHTML)
         element.classList.add('dragging')
         element.style.opacity = '0.5'
     })
@@ -138,16 +136,6 @@ function addDragListeners(element, index) {
     element.addEventListener('dragover', (e) => {
         e.preventDefault()
         e.dataTransfer.dropEffect = 'move'
-        
-        // Add visual feedback
-        const afterElement = getDragAfterElement(selectedList, e.clientY)
-        const dragging = document.querySelector('.dragging')
-        
-        if (afterElement == null) {
-            selectedList.appendChild(dragging)
-        } else {
-            selectedList.insertBefore(dragging, afterElement)
-        }
     })
     
     element.addEventListener('dragenter', (e) => {
@@ -166,6 +154,7 @@ function addDragListeners(element, index) {
         element.classList.remove('drag-over')
         
         if (draggedElement && draggedElement !== element) {
+            const selectedList = document.getElementById('selectedList')
             const newIndex = Array.from(selectedList.children).indexOf(element)
             reorderProviders(draggedIndex, newIndex)
         }
@@ -189,12 +178,23 @@ function getDragAfterElement(container, y) {
 }
 
 function setupDragAndDrop() {
-    // This function is now simplified since addDragListeners is called directly
-    // when rendering selected providers
+    const selectedList = document.getElementById('selectedList')
+    const providerItems = selectedList.querySelectorAll('.provider-item')
+    
+    // Remove existing listeners to avoid duplicates
+    providerItems.forEach(item => {
+        const newItem = item.cloneNode(true)
+        item.parentNode.replaceChild(newItem, item)
+    })
+    
+    // Add drag listeners to all provider items
+    selectedList.querySelectorAll('.provider-item').forEach((element, index) => {
+        addDragListeners(element, index)
+    })
 }
 
 function addProvider(providerId) {
-    if (selectedProviders.length >= 4) return
+    if (selectedProviders.length >= 5) return
     
     selectedProviders.push(providerId)
     availableProviders = availableProviders.filter(id => id !== providerId)
@@ -213,6 +213,12 @@ function removeProvider(providerId) {
 }
 
 function reorderProviders(fromIndex, toIndex) {
+    // Ensure indices are valid
+    if (fromIndex < 0 || fromIndex >= selectedProviders.length || 
+        toIndex < 0 || toIndex >= selectedProviders.length) {
+        return
+    }
+    
     const [movedProvider] = selectedProviders.splice(fromIndex, 1)
     selectedProviders.splice(toIndex, 0, movedProvider)
     
@@ -222,7 +228,7 @@ function reorderProviders(fromIndex, toIndex) {
 
 function updateCounter() {
     const counter = document.querySelector('#selectedProviders h6')
-    counter.textContent = `Selected Providers (${selectedProviders.length}/4)`
+    counter.textContent = `Selected Providers (${selectedProviders.length}/5)`
 }
 
 async function saveSettings() {

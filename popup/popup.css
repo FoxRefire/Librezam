@@ -641,7 +641,15 @@ body a[class="btn filled icon-left modal-trigger"] {
     margin: 20px 0;
 }
 
-.selected-list, .available-list {
+.selected-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: flex-start;
+}
+
+.available-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -659,6 +667,8 @@ body a[class="btn filled icon-left modal-trigger"] {
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
     user-select: none;
+    width: fit-content;
+    max-width: 100%;
 }
 
 .provider-item.selected {

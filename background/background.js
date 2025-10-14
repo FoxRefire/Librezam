@@ -16,7 +16,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true
 })
 
-chrome.commands.onCommand.addListener(async (command) => {
+chrome.commands?.onCommand.addListener(async (command) => {
     if(command == "tab-recognize"){
         await chrome.action.openPopup()
     }

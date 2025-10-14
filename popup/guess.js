@@ -48,7 +48,8 @@ async function getResult(audios, backend) {
             showStatus(`Querying with ${backend}...`)
             let result = await Recognize(audio, backend)
             await writeResult(result)
-            saveHistory(result)
+            await saveHistory(result)
+            await writeHistory() // Update history display immediately
             showStatus("")
             return true
         } catch(e) {

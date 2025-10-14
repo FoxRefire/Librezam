@@ -110,7 +110,7 @@ function setupHistoryControls() {
     document.addEventListener("click", async (e) => {
         if (e.target.closest(".detail-btn")) {
             const index = parseInt(e.target.closest(".detail-btn").dataset.index)
-            await showHistoryDetail(currentHistories[index])
+            await writeResult(currentHistories[index])
         } else if (e.target.closest(".delete-btn")) {
             const index = parseInt(e.target.closest(".delete-btn").dataset.index)
             await deleteHistoryItem(index)
@@ -169,27 +169,6 @@ function updateSortIndicators() {
     } else {
         activeIcon.textContent = 'keyboard_arrow_down'
     }
-}
-
-async function showHistoryDetail(history) {
-    // Hide history table and show result
-    document.getElementById("historyTable").style.display = "none"
-    document.getElementById("historyControls").style.display = "none"
-    
-    // Show back button
-    const backButton = document.createElement("button")
-    backButton.className = "btn waves-effect waves-light"
-    backButton.innerHTML = '<i class="material-icons left">arrow_back</i>Back to History'
-    backButton.style.marginBottom = "10px"
-    backButton.addEventListener("click", () => {
-        document.getElementById("historyTable").style.display = "table"
-        document.getElementById("historyControls").style.display = "block"
-        backButton.remove()
-    })
-    document.getElementById("surfaceContainer").insertBefore(backButton, document.getElementById("circler"))
-    
-    // Display the result
-    await writeResult(history)
 }
 
 async function deleteHistoryItem(index) {

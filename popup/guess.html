@@ -74,16 +74,9 @@
                 Date <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">keyboard_arrow_down</i>
             </button>
         </div>
-        <table id="historyTable" style="text-align: center;">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="historyTBody"></tbody>
-        </table>
+        <div id="historyCards" class="history-cards-container">
+            <!-- History cards will be dynamically added here -->
+        </div>
         <script src="/libs/materialize/materialize.min.js"></script>
         <script src="./guess.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>

@@ -70,25 +70,39 @@ async function writeHistory(){
 }
 
 function renderHistoryTable(histories = currentHistories) {
-    const tbody = document.getElementById("historyTBody")
-    tbody.innerHTML = ""
+    const container = document.getElementById("historyCards")
+    container.innerHTML = ""
     const escapeStr = t => new Option(t).innerHTML
 
     histories.forEach((history, index) => {
-        tbody.insertAdjacentHTML("beforeend",`
-            <tr>
-                <td>${escapeStr(history.title)}</td>
-                <td>${escapeStr(history.artist)}</td>
-                <td>
-                    <button class="btn-small waves-effect waves-light detail-btn" data-index="${index}">
+        const card = document.createElement("div")
+        card.className = "history-card"
+        card.dataset.index = index
+        
+        // Format date
+        const dateStr = history.timestamp ? new Date(history.timestamp).toLocaleDateString() : ""
+        
+        card.innerHTML = `
+            <div class="history-card-header">
+                <div class="history-card-cover" style="background-image: url('${history.art || ''}')"></div>
+                <div class="history-card-main-info">
+                    <div class="history-card-title">${escapeStr(history.title)}</div>
+                    <div class="history-card-artist">${escapeStr(history.artist)}</div>
+                    ${history.album ? `<div class="history-card-album">${escapeStr(history.album)}</div>` : ''}
+                    ${dateStr ? `<div class="history-card-date">${dateStr}</div>` : ''}
+                </div>
+                <div class="history-card-actions">
+                    <button class="history-card-btn detail-btn" data-index="${index}">
                         <i class="material-icons">visibility</i>
                     </button>
-                    <button class="btn-small waves-effect waves-light red delete-btn" data-index="${index}">
+                    <button class="history-card-btn delete-btn" data-index="${index}">
                         <i class="material-icons">delete</i>
                     </button>
-                </td>
-            </tr>
-        `)
+                </div>
+            </div>
+        `
+        
+        container.appendChild(card)
     })
 }
 

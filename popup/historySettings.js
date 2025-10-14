@@ -8,9 +8,10 @@ clearConfirmed.addEventListener("click", () => {
 // Export CSV
 exportHistories.addEventListener("click", async () => {
     let histories = await getStorage("histories") || []
-    let csvContents = "Title,Artist\n"
+    let csvContents = "Title,Artist,Album,Timestamp\n"
     histories.forEach(history => {
-        csvContents += `${history.title},${history.artist}\n`
+        const timestamp = history.timestamp ? new Date(history.timestamp).toISOString() : ""
+        csvContents += `"${history.title}","${history.artist}","${history.album || ""}","${timestamp}"\n`
     })
     let a = document.createElement('a')
     a.href = URL.createObjectURL(new Blob([csvContents], {type: "text/plain"}))

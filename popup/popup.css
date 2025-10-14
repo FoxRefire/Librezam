@@ -37,19 +37,27 @@
 body {
     width: 350px;
     height: 500px;
-    overflow-y: auto;
     background-image: url("/images/background-2.jpg"); /*default*/
     background-size: 100%;
     background-attachment: fixed;
+    overflow-y: auto;
+}
+
+body.main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* header element positioning -------------------------------*/
 
 /* header container */
 #surfaceContainer {
-    height:56px;
+    min-height:56px;
+    height: auto;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 /* menu button */
 #menuButton {
@@ -143,23 +151,165 @@ hr {
 }
 
 
-/* history table --------------------------------------------*/
+/* history cards --------------------------------------------*/
 
-/* spacing */
-#historyTable * {
-    padding-inline:12px;
+.history-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 8px;
+    max-height: 350px;
+    overflow-y: auto;
+    flex: 1;
+    margin-top: 8px;
 }
-/* border adjust */
-#historyTable tr {
-    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%);
+
+.history-card {
+    background-color: rgba(15, 100, 150, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 40%, transparent 60%);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
 }
-/* title clarity */
-#historyTable th {
-    text-decoration: underline;
+
+.history-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 112, 216, 0.2);
+    border-color: color-mix(in srgb, var(--brand-color) 60%, transparent 40%);
+}
+
+.history-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.history-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.history-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-card-artist {
+    font-size: 14px;
+    color: color-mix(in srgb, var(--md-sys-color-on-surface) 80%, transparent 20%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-card-album {
+    font-size: 12px;
+    color: color-mix(in srgb, var(--md-sys-color-on-surface) 60%, transparent 40%);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-card-date {
+    font-size: 11px;
+    color: color-mix(in srgb, var(--md-sys-color-on-surface) 50%, transparent 50%);
+    margin-top: 4px;
+}
+
+.history-card-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 12px;
+}
+
+.history-card-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--md-sys-color-on-surface);
+}
+
+.history-card-btn:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.history-card-btn.detail-btn:hover {
+    background-color: color-mix(in srgb, var(--brand-color) 20%, transparent 80%);
+}
+
+.history-card-btn.delete-btn:hover {
+    background-color: color-mix(in srgb, #f44336 20%, transparent 80%);
+}
+
+.history-card-btn .material-icons {
+    font-size: 18px;
+}
+
+.history-card-cover {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    background-size: cover;
+    background-position: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.history-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.history-card-main-info {
+    flex: 1;
+    min-width: 0;
+}
+
+/* History section layout */
+hr + div {
+    margin-bottom: 8px;
+}
+
+#historyControls {
+    margin-bottom: 8px !important;
+    flex-shrink: 0;
+    backdrop-filter: blur(5px);
+    padding: 8px;
+    border-radius: 8px;
+    margin: 8px;
 }
 
 
 /* result table ---------------------------------------------*/
+
+/* Fixed positioning for recognition result */
+#surfaceContainer {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%);
+}
 
 /* spacing */
 #resultTable * {
@@ -215,6 +365,22 @@ hr {
 /* header styling */
 nav, .nav-wrapper {
     background-color:rgba(0,0,0,0.05) !important;
+}
+
+/* Fixed header for settings pages */
+nav.navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%) !important;
+}
+
+/* Add padding to body content to account for fixed header */
+body:has(nav.navbar) {
+    padding-top: 64px !important;
 }
 nav .brand-logo, nav .back_button {
     color: var(--brand-color) !important;

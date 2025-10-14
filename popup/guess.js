@@ -48,7 +48,8 @@ async function getResult(audios, backend) {
             showStatus(`Querying with ${backend}...`)
             let result = await Recognize(audio, backend)
             await writeResult(result)
-            saveHistory(result)
+            await saveHistory(result)
+            await writeHistory() // Update history display immediately
             showStatus("")
             return true
         } catch(e) {
@@ -58,18 +59,137 @@ async function getResult(audios, backend) {
     return false
 }
 
+let currentHistories = []
+let currentSort = { field: 'date', ascending: false } // Default: date descending
+
 async function writeHistory(){
-    let histories = await getStorage("histories")
+    currentHistories = await getStorage("histories") || []
+    // Sort by date descending by default
+    currentHistories.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+    renderHistoryTable()
+    setupHistoryControls()
+}
+
+function renderHistoryTable(histories = currentHistories) {
+    const container = document.getElementById("historyCards")
+    container.innerHTML = ""
     const escapeStr = t => new Option(t).innerHTML
 
-    histories.forEach(history => {
-        document.getElementById("historyTBody").insertAdjacentHTML("afterbegin",`
-            <tr>
-                <td>${escapeStr(history.title)}</td>
-                <td>${escapeStr(history.artist)}</td>
-            </tr>
-        `)
+    histories.forEach((history, index) => {
+        const card = document.createElement("div")
+        card.className = "history-card"
+        card.dataset.index = index
+        
+        // Format date
+        const dateStr = history.timestamp ? new Date(history.timestamp).toLocaleDateString() : ""
+        
+        card.innerHTML = `
+            <div class="history-card-header">
+                <div class="history-card-cover" style="background-image: url('${history.art || ''}')"></div>
+                <div class="history-card-main-info">
+                    <div class="history-card-title">${escapeStr(history.title)}</div>
+                    <div class="history-card-artist">${escapeStr(history.artist)}</div>
+                    ${history.album ? `<div class="history-card-album">${escapeStr(history.album)}</div>` : ''}
+                    ${dateStr ? `<div class="history-card-date">${dateStr}</div>` : ''}
+                </div>
+                <div class="history-card-actions">
+                    <button class="history-card-btn detail-btn" data-index="${index}">
+                        <i class="material-icons">visibility</i>
+                    </button>
+                    <button class="history-card-btn delete-btn" data-index="${index}">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </div>
+            </div>
+        `
+        
+        container.appendChild(card)
     })
+}
+
+function setupHistoryControls() {
+    // Sort controls
+    document.getElementById("sortByTitle").addEventListener("click", () => {
+        toggleSort('title')
+    })
+    
+    document.getElementById("sortByArtist").addEventListener("click", () => {
+        toggleSort('artist')
+    })
+    
+    document.getElementById("sortByDate").addEventListener("click", () => {
+        toggleSort('date')
+    })
+
+    // Detail and delete buttons
+    document.addEventListener("click", async (e) => {
+        if (e.target.closest(".detail-btn")) {
+            const index = parseInt(e.target.closest(".detail-btn").dataset.index)
+            await writeResult(currentHistories[index])
+        } else if (e.target.closest(".delete-btn")) {
+            const index = parseInt(e.target.closest(".delete-btn").dataset.index)
+            await deleteHistoryItem(index)
+        }
+    })
+}
+
+function toggleSort(field) {
+    // If clicking the same field, toggle ascending/descending
+    if (currentSort.field === field) {
+        currentSort.ascending = !currentSort.ascending
+    } else {
+        // If clicking a different field, start with ascending
+        currentSort.field = field
+        currentSort.ascending = true
+    }
+    
+    // Sort the histories
+    currentHistories.sort((a, b) => {
+        let comparison = 0
+        
+        switch (field) {
+            case 'title':
+                comparison = a.title.localeCompare(b.title)
+                break
+            case 'artist':
+                comparison = a.artist.localeCompare(b.artist)
+                break
+            case 'date':
+                comparison = (a.timestamp || 0) - (b.timestamp || 0)
+                break
+        }
+        
+        return currentSort.ascending ? comparison : -comparison
+    })
+    
+    // Update sort indicators
+    updateSortIndicators()
+    
+    // Re-render table
+    renderHistoryTable()
+}
+
+function updateSortIndicators() {
+    // Reset all icons to unfold_more
+    document.querySelectorAll('.sort-icon').forEach(icon => {
+        icon.textContent = 'unfold_more'
+    })
+    
+    // Set the active sort icon
+    const activeButton = document.getElementById(`sortBy${currentSort.field.charAt(0).toUpperCase() + currentSort.field.slice(1)}`)
+    const activeIcon = activeButton.querySelector('.sort-icon')
+    
+    if (currentSort.ascending) {
+        activeIcon.textContent = 'keyboard_arrow_up'
+    } else {
+        activeIcon.textContent = 'keyboard_arrow_down'
+    }
+}
+
+async function deleteHistoryItem(index) {
+    currentHistories.splice(index, 1)
+    await setStorage("histories", currentHistories)
+    renderHistoryTable()
 }
 
 async function recordAudiosInTab(times){
@@ -166,12 +286,13 @@ async function updateStreamingProviders(result) {
 
 async function saveHistory(result){
     let newItem = {
-        title: result.title,
-        artist: result.artist
+        ...result,
+        timestamp: Date.now() // Add timestamp for sorting
     }
 
     let histories = await getStorage("histories")
-    histories = histories.filter(item => JSON.stringify(item) != JSON.stringify(newItem))
+    // Remove duplicates based on title and artist
+    histories = histories.filter(item => !(item.title === newItem.title && item.artist === newItem.artist))
     histories.push(newItem)
 
     await setStorage("histories", histories)

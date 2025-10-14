@@ -5,7 +5,7 @@
         <link href="popup.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-    <body>
+    <body class="main">
         <div id="surfaceContainer" class="center">
             <!-- Dropdown trigger -->
             <a class='dropdown-trigger right' href='#' data-target='dropdownMenu'>
@@ -63,15 +63,20 @@
         </div>
 
         <hr>
-        <table id="historyTable" style="text-align: center;">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Artist</th>
-            </tr>
-          </thead>
-          <tbody id="historyTBody"></tbody>
-        </table>
+        <div id="historyControls" style="margin-bottom: 10px;">
+            <button id="sortByTitle" class="btn-small waves-effect waves-light">
+                Title <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">unfold_more</i>
+            </button>
+            <button id="sortByArtist" class="btn-small waves-effect waves-light">
+                Artist <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">unfold_more</i>
+            </button>
+            <button id="sortByDate" class="btn-small waves-effect waves-light">
+                Date <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">keyboard_arrow_down</i>
+            </button>
+        </div>
+        <div id="historyCards" class="history-cards-container">
+            <!-- History cards will be dynamically added here -->
+        </div>
         <script src="/libs/materialize/materialize.min.js"></script>
         <script src="./guess.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>

@@ -37,10 +37,12 @@
 body {
     width: 350px;
     height: 500px;
-    overflow-y: auto;
     background-image: url("/images/background-2.jpg"); /*default*/
     background-size: 100%;
     background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* header element positioning -------------------------------*/
@@ -152,9 +154,10 @@ hr {
     flex-direction: column;
     gap: 12px;
     padding: 0 8px;
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
     flex: 1;
+    margin-top: 8px;
 }
 
 .history-card {
@@ -286,10 +289,23 @@ hr + div {
 #historyControls {
     margin-bottom: 8px !important;
     flex-shrink: 0;
+    backdrop-filter: blur(5px);
+    padding: 8px;
+    border-radius: 8px;
+    margin: 8px;
 }
 
 
 /* result table ---------------------------------------------*/
+
+/* Fixed positioning for recognition result */
+#surfaceContainer {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%);
+}
 
 /* spacing */
 #resultTable * {

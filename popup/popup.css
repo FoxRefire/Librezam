@@ -366,6 +366,22 @@ hr + div {
 nav, .nav-wrapper {
     background-color:rgba(0,0,0,0.05) !important;
 }
+
+/* Fixed header for settings pages */
+nav.navbar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%) !important;
+}
+
+/* Add padding to body content to account for fixed header */
+body:has(nav.navbar) {
+    padding-top: 64px !important;
+}
 nav .brand-logo, nav .back_button {
     color: var(--brand-color) !important;
 }

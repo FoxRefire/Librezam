@@ -36,7 +36,9 @@
 
 body {
     width: 350px;
-    height: 500px;
+    min-height: 300px;
+    max-height: 600px;
+    height: auto;
     overflow-y: auto;
     background-image: url("/images/background-2.jpg"); /*default*/
     background-size: 100%;
@@ -47,9 +49,11 @@ body {
 
 /* header container */
 #surfaceContainer {
-    height:56px;
+    min-height:56px;
+    height: auto;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 /* menu button */
 #menuButton {
@@ -150,8 +154,9 @@ hr {
     flex-direction: column;
     gap: 12px;
     padding: 0 8px;
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: auto;
+    flex: 1;
 }
 
 .history-card {
@@ -273,6 +278,16 @@ hr {
 .history-card-main-info {
     flex: 1;
     min-width: 0;
+}
+
+/* History section layout */
+hr + div {
+    margin-bottom: 8px;
+}
+
+#historyControls {
+    margin-bottom: 8px !important;
+    flex-shrink: 0;
 }
 
 

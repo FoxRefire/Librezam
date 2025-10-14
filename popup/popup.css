@@ -40,6 +40,10 @@ body {
     background-image: url("/images/background-2.jpg"); /*default*/
     background-size: 100%;
     background-attachment: fixed;
+    overflow-y: auto;
+}
+
+body.main {
     display: flex;
     flex-direction: column;
     overflow: hidden;

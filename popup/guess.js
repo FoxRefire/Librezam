@@ -59,9 +59,12 @@ async function getResult(audios, backend) {
 }
 
 let currentHistories = []
+let currentSort = { field: 'date', ascending: false } // Default: date descending
 
 async function writeHistory(){
     currentHistories = await getStorage("histories") || []
+    // Sort by date descending by default
+    currentHistories.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
     renderHistoryTable()
     setupHistoryControls()
 }
@@ -92,18 +95,15 @@ function renderHistoryTable(histories = currentHistories) {
 function setupHistoryControls() {
     // Sort controls
     document.getElementById("sortByTitle").addEventListener("click", () => {
-        currentHistories.sort((a, b) => a.title.localeCompare(b.title))
-        renderHistoryTable()
+        toggleSort('title')
     })
     
     document.getElementById("sortByArtist").addEventListener("click", () => {
-        currentHistories.sort((a, b) => a.artist.localeCompare(b.artist))
-        renderHistoryTable()
+        toggleSort('artist')
     })
     
     document.getElementById("sortByDate").addEventListener("click", () => {
-        currentHistories.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
-        renderHistoryTable()
+        toggleSort('date')
     })
 
     // Detail and delete buttons
@@ -116,6 +116,59 @@ function setupHistoryControls() {
             await deleteHistoryItem(index)
         }
     })
+}
+
+function toggleSort(field) {
+    // If clicking the same field, toggle ascending/descending
+    if (currentSort.field === field) {
+        currentSort.ascending = !currentSort.ascending
+    } else {
+        // If clicking a different field, start with ascending
+        currentSort.field = field
+        currentSort.ascending = true
+    }
+    
+    // Sort the histories
+    currentHistories.sort((a, b) => {
+        let comparison = 0
+        
+        switch (field) {
+            case 'title':
+                comparison = a.title.localeCompare(b.title)
+                break
+            case 'artist':
+                comparison = a.artist.localeCompare(b.artist)
+                break
+            case 'date':
+                comparison = (a.timestamp || 0) - (b.timestamp || 0)
+                break
+        }
+        
+        return currentSort.ascending ? comparison : -comparison
+    })
+    
+    // Update sort indicators
+    updateSortIndicators()
+    
+    // Re-render table
+    renderHistoryTable()
+}
+
+function updateSortIndicators() {
+    // Reset all icons to unfold_more
+    document.querySelectorAll('.sort-icon').forEach(icon => {
+        icon.textContent = 'unfold_more'
+    })
+    
+    // Set the active sort icon
+    const activeButton = document.getElementById(`sortBy${currentSort.field.charAt(0).toUpperCase() + currentSort.field.slice(1)}`)
+    const activeIcon = activeButton.querySelector('.sort-icon')
+    
+    if (currentSort.ascending) {
+        activeIcon.textContent = 'keyboard_arrow_up'
+    } else {
+        activeIcon.textContent = 'keyboard_arrow_down'
+    }
 }
 
 async function showHistoryDetail(history) {

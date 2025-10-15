@@ -108,6 +108,14 @@ function renderHistoryTable(histories = currentHistories) {
 }
 
 function setupHistoryControls() {
+    // Remove existing event listeners to prevent duplicates
+    const sortButtons = ['sortByTitle', 'sortByArtist', 'sortByDate']
+    sortButtons.forEach(id => {
+        const button = document.getElementById(id)
+        const newButton = button.cloneNode(true)
+        button.parentNode.replaceChild(newButton, button)
+    })
+
     // Sort controls
     document.getElementById("sortByTitle").addEventListener("click", () => {
         toggleSort('title')
@@ -121,16 +129,19 @@ function setupHistoryControls() {
         toggleSort('date')
     })
 
-    // Detail and delete buttons
-    document.addEventListener("click", async (e) => {
-        if (e.target.closest(".detail-btn")) {
-            const index = parseInt(e.target.closest(".detail-btn").dataset.index)
-            await writeResult(currentHistories[index])
-        } else if (e.target.closest(".delete-btn")) {
-            const index = parseInt(e.target.closest(".delete-btn").dataset.index)
-            await deleteHistoryItem(index)
-        }
-    })
+    // Detail and delete buttons - use event delegation to avoid duplicates
+    if (!document.hasHistoryControlsListener) {
+        document.addEventListener("click", async (e) => {
+            if (e.target.closest(".detail-btn")) {
+                const index = parseInt(e.target.closest(".detail-btn").dataset.index)
+                await writeResult(currentHistories[index])
+            } else if (e.target.closest(".delete-btn")) {
+                const index = parseInt(e.target.closest(".delete-btn").dataset.index)
+                await deleteHistoryItem(index)
+            }
+        })
+        document.hasHistoryControlsListener = true
+    }
 }
 
 function toggleSort(field) {

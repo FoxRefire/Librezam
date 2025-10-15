@@ -778,3 +778,12 @@ body a[class="btn filled icon-left modal-trigger"] {
 #resetProviders .material-icons {
     font-size: 18px;
 }
+
+/* Disabled input styling */
+input[type="text"]:disabled {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: color-mix(in srgb, var(--md-sys-color-on-surface) 40%, transparent 60%) !important;
+    border-color: color-mix(in srgb, var(--md-sys-color-outline-variant) 20%, transparent 80%) !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+}

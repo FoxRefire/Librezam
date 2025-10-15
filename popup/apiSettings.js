@@ -5,6 +5,21 @@ auddToken.addEventListener("change", async () => {
 })
 
 
+// ACRCloud default credential checkbox
+acrIsUseDefaultCredential.checked = await getStorage("acrIsUseDefaultCredential") || false
+acrIsUseDefaultCredential.addEventListener("change", async () => {
+    await setStorage("acrIsUseDefaultCredential", acrIsUseDefaultCredential.checked)
+    updateAcrTextboxStates()
+})
+
+// Function to update textbox states based on checkbox
+function updateAcrTextboxStates() {
+    const isDisabled = acrIsUseDefaultCredential.checked
+    acrHost.disabled = isDisabled
+    acrKey.disabled = isDisabled
+    acrSecret.disabled = isDisabled
+}
+
 acrHost.value = await getStorage("acrHost")
 acrHost.addEventListener("change", async () => {
     await setStorage("acrHost", acrHost.value)
@@ -17,6 +32,9 @@ acrSecret.value = await getStorage("acrSecret")
 acrSecret.addEventListener("change", async () => {
     await setStorage("acrSecret", acrSecret.value)
 })
+
+// Initialize textbox states
+updateAcrTextboxStates()
 let currentAcrMode = await getStorage("acrMode")
 document.querySelectorAll("#acrMode input").forEach(radio => {
     if (radio.value === currentAcrMode) {

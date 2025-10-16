@@ -22,22 +22,11 @@ autoGuess()
 
 function mainRecorder(times) {
     let elements = findMediaElements()
-    audioPromisesMap = []
-
-    times.forEach(time => {
-        let audioPromises = []
-        elements.forEach(elem => {
-            let audioPromise
-            if(!elem.classList.contains("librezamCORS") && (!elem.currentSrc || new URL(elem.currentSrc).origin == document.location.origin)) {
-                let stream = createStream(elem)
-                audioPromise = recordStream(stream, time).then(data => Array.from(data))
-            } else {
-                audioPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, time)
-            }
-            audioPromises.push(audioPromise)
-        })
-        audioPromisesMap.push(audioPromises)
-    })
+    audioPromisesMap = times.map(time => 
+        elements.map(elem => 
+            recordElem(elem, time)
+        )
+    )
 }
 
 function getNextRecorded() {
@@ -45,6 +34,12 @@ function getNextRecorded() {
         return -1
     }
     return Promise.allSettled(audioPromisesMap.shift()).then(arr => arr.map(r => r.value))
+}
+
+function checkIfCORS(elem) {
+    if(!elem.currentSrc) return false
+    if(elem.classList.contains("librezamCORS")) return true
+    if(new URL(elem.currentSrc).origin != document.location.origin) return true
 }
 
 // Ensure Shadow-root is explored recursively (Fix for some websites such as reddit)
@@ -78,7 +73,11 @@ function createStream(elem){
     return mediaStream
 }
 
-function recordStream(stream, ms){
+function recordElem(elem, ms){
+    if(checkIfCORS(elem)) {
+        return recordElemCORS(elem.currentSrc, elem.currentTime, ms)
+    }
+    let stream = createStream(elem)
     return new Promise(resolve => {
         let data = []
         let recorder = new MediaRecorder(stream)
@@ -89,7 +88,7 @@ function recordStream(stream, ms){
     })
 }
 
-function recordStreamCORS(mediaSrc, currentTime, ms){
+function recordElemCORS(mediaSrc, currentTime, ms){
     if(mediaSrc.includes("v16-webapp-prime.tiktok.com")){
         mediaSrc = mediaSrc.replace("v16-webapp-prime.tiktok.com", "v19-webapp-prime.tiktok.com")
     }

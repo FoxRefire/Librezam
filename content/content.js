@@ -22,16 +22,11 @@ autoGuess()
 
 function mainRecorder(times) {
     let elements = findMediaElements()
-    audioPromisesMap = []
-
-    times.forEach(time => {
-        let audioPromises = []
-        elements.forEach(elem => {
-            let audioPromise = recordStream(elem, time).then(data => Array.from(data))
-            audioPromises.push(audioPromise)
-        })
-        audioPromisesMap.push(audioPromises)
-    })
+    audioPromisesMap = times.map(time => 
+        elements.map(elem => 
+            recordElem(elem, time).then(data => Array.from(data))
+        )
+    )
 }
 
 function getNextRecorded() {
@@ -78,9 +73,9 @@ function createStream(elem){
     return mediaStream
 }
 
-function recordStream(elem, ms){
+function recordElem(elem, ms){
     if(!checkIfCORS(elem)) {
-        return recordStreamCORS(elem.currentSrc, elem.currentTime, ms)
+        return recordElemCORS(elem.currentSrc, elem.currentTime, ms)
     }
     let stream = createStream(elem)
     return new Promise(resolve => {
@@ -93,7 +88,7 @@ function recordStream(elem, ms){
     })
 }
 
-function recordStreamCORS(mediaSrc, currentTime, ms){
+function recordElemCORS(mediaSrc, currentTime, ms){
     if(mediaSrc.includes("v16-webapp-prime.tiktok.com")){
         mediaSrc = mediaSrc.replace("v16-webapp-prime.tiktok.com", "v19-webapp-prime.tiktok.com")
     }

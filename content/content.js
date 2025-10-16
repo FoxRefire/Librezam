@@ -74,7 +74,7 @@ function createStream(elem){
 }
 
 function recordElem(elem, ms){
-    if(!checkIfCORS(elem)) {
+    if(checkIfCORS(elem)) {
         return recordElemCORS(elem.currentSrc, elem.currentTime, ms)
     }
     let stream = createStream(elem)

@@ -27,13 +27,7 @@ function mainRecorder(times) {
     times.forEach(time => {
         let audioPromises = []
         elements.forEach(elem => {
-            let audioPromise
-            if(!checkIfCORS(elem)) {
-                let stream = createStream(elem)
-                audioPromise = recordStream(stream, time).then(data => Array.from(data))
-            } else {
-                audioPromise = recordStreamCORS(elem.currentSrc, elem.currentTime, time)
-            }
+            let audioPromise = recordStream(elem, time).then(data => Array.from(data))
             audioPromises.push(audioPromise)
         })
         audioPromisesMap.push(audioPromises)
@@ -84,7 +78,11 @@ function createStream(elem){
     return mediaStream
 }
 
-function recordStream(stream, ms){
+function recordStream(elem, ms){
+    if(!checkIfCORS(elem)) {
+        return recordStreamCORS(elem.currentSrc, elem.currentTime, ms)
+    }
+    let stream = createStream(elem)
     return new Promise(resolve => {
         let data = []
         let recorder = new MediaRecorder(stream)

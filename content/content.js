@@ -24,7 +24,7 @@ function mainRecorder(times) {
     let elements = findMediaElements()
     audioPromisesMap = times.map(time => 
         elements.map(elem => 
-            recordElem(elem, time).then(data => Array.from(data))
+            recordElem(elem, time)
         )
     )
 }

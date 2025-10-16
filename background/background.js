@@ -38,8 +38,7 @@ async function CORSRecord(mediaSrc, currentTime, ms){
     elem.currentTime = currentTime
 
     await elem.play()
-    let stream = createStream(elem)
-    return await recordStream(stream, ms).then(data => Array.from(data))
+    return await recordElem(elem, ms)
 }
 
 async function AutoGuess(audios) {
@@ -76,7 +75,8 @@ function createStream(elem){
     return new MediaStream(stream.getAudioTracks())
 }
 
-function recordStream(stream, ms){
+function recordElem(elem, ms){
+    let stream = createStream(elem)
     return new Promise(resolve => {
         let data = []
         let recorder = new MediaRecorder(stream)
@@ -97,7 +97,7 @@ async function showNotification(result) {
             iconUrl: "images/icon.png",
             title: "Song recognized!",
             message: `${result.artist} - ${result.title}(${result.year})`,
-                                          priority: 2
+            priority: 2
         })
     }
 }

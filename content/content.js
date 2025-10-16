@@ -28,7 +28,7 @@ function mainRecorder(times) {
         let audioPromises = []
         elements.forEach(elem => {
             let audioPromise
-            if(!elem.classList.contains("librezamCORS") && (!elem.currentSrc || new URL(elem.currentSrc).origin == document.location.origin)) {
+            if(!checkIfCORS(elem)) {
                 let stream = createStream(elem)
                 audioPromise = recordStream(stream, time).then(data => Array.from(data))
             } else {
@@ -45,6 +45,12 @@ function getNextRecorded() {
         return -1
     }
     return Promise.allSettled(audioPromisesMap.shift()).then(arr => arr.map(r => r.value))
+}
+
+function checkIfCORS(elem) {
+    if(!elem.currentSrc) return false
+    if(elem.classList.contains("librezamCORS")) return true
+    if(new URL(elem.currentSrc).origin != document.location.origin) return true
 }
 
 // Ensure Shadow-root is explored recursively (Fix for some websites such as reddit)

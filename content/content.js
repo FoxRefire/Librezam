@@ -17,7 +17,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true
 })
 let audioPromisesMap = []
-autoGuess()
 
 
 function mainRecorder(times) {
@@ -98,20 +97,4 @@ function recordElemCORS(mediaSrc, currentTime, ms){
         currentTime,
         ms
     })
-}
-
-function autoGuess() {
-    let lastRun = 0
-    setInterval(() => {
-        let now = Date.now()
-        if(window.isAutoMode && now - lastRun >= 25000) {
-            lastRun = now
-            mainRecorder(3200).then(aud => {
-                chrome.runtime.sendMessage({
-                    action:"AutoGuess",
-                    aud: aud
-                })
-            })
-        }
-    }, 750)
 }

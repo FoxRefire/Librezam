@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
 
         if(request.action == "AutoGuess"){
-            AutoGuess(request.aud).then(d => sendResponse(d))
+            AutoGuess(request.audios).then(d => sendResponse(d))
         }
     }
     return true
@@ -45,7 +45,7 @@ async function AutoGuess(audios) {
     audios = audios.map(arr => new Uint8Array(arr)).filter(a=> a.length)
     audios.forEach(async audio => {
         try {
-            let result = await Recognize(audio)
+            let result = await Recognize(audio, "shazam")
             await showNotification(result)
             await saveHistory(result)
         } catch(e) {
@@ -88,15 +88,14 @@ function recordElem(elem, ms){
 }
 
 async function showNotification(result) {
-    let previousResult = await getStorage("histories")?.at(-1)
-    let currentResult = Object.fromEntries(Object.entries(result).filter(([key]) => ["title", "artist", "year"].includes(key)))
+    let prevResult = await getStorage("histories").then(h => h.at(-1))
 
-    if(JSON.stringify(previousResult) != JSON.stringify(currentResult)) {
+    if(!(prevResult.title === result.title && prevResult.artist === result.artist)) {
         await chrome.notifications.create({
             type: "basic",
-            iconUrl: "images/icon.png",
+            iconUrl: result.art,
             title: "Song recognized!",
-            message: `${result.artist} - ${result.title}(${result.year})`,
+            message: `${result.artist} - ${result.title}(${result.album})`,
             priority: 2
         })
     }
@@ -104,12 +103,13 @@ async function showNotification(result) {
 
 async function saveHistory(result){
     let newItem = {
-        title: result.title,
-        artist: result.artist
+        ...result,
+        timestamp: Date.now() // Add timestamp for sorting
     }
 
-    let histories = await getStorage("histories") || []
-    histories = histories.filter(item => JSON.stringify(item) != JSON.stringify(newItem))
+    let histories = await getStorage("histories")
+    // Remove duplicates based on title and artist
+    histories = histories.filter(item => !(item.title === newItem.title && item.artist === newItem.artist))
     histories.push(newItem)
 
     await setStorage("histories", histories)

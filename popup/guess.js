@@ -215,7 +215,6 @@ async function getNextRecorded() {
 async function sendMessagePromises(request){
     let promises = []
     let tab = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0])
-    console.log(tab)
     let tabId = tab.id
     let isRecordAnotherTab = await getStorage("isRecordAnotherTab")
     if(!tab.audible && isRecordAnotherTab){

@@ -2,13 +2,14 @@ import { Recognize } from "/backendModules/Recognize.js"
 import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 
 init()
-if(window.location.search.includes("mic=true")) {
-    startMicRecognition()
-} else {
-    startTabRecognition()
-}
 
 function init() {
+    if(window.location.search.includes("mic=true")) {
+        startMicRecognition()
+    } else {
+        startTabRecognition()
+    }
+
     // Initialize dropdown menu
     M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
     
@@ -212,8 +213,10 @@ async function getNextRecorded() {
     return [].concat(...responses).map(arr => new Uint8Array(arr))
 }
 
-async function sendMessagePromises(request){
-    let promises = []
+async function getTabId() {
+    if(getTabId.tabId) {
+        return getTabId.tabId
+    }
     let tab = await chrome.tabs.query({active:true, currentWindow:true}).then(t => t[0])
     let tabId = tab.id
     let isRecordAnotherTab = await getStorage("isRecordAnotherTab")
@@ -223,6 +226,14 @@ async function sendMessagePromises(request){
             tabId = anotherTab.id
         }
     }
+    getTabId.tabId = tabId
+    return tabId
+}
+
+async function sendMessagePromises(request) {
+    let promises = []
+    let tabId = await getTabId()
+
     let frames = await chrome.webNavigation.getAllFrames({tabId:tabId})
     frames.forEach(f => {
         let promise = chrome.tabs.sendMessage(tabId, request, {frameId:f.frameId})

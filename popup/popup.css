@@ -469,9 +469,6 @@ body a[class="btn filled icon-left modal-trigger"] {
     border:2px solid limegreen;
 }
 
-#exportHistories {
-    margin-inline-start: 3%;
-}
 
 /* ----------------------------------------------------------
    Fallback rules (Settings)

@@ -348,6 +348,58 @@
   "recognizeFromMicrophoneCommand": {
     "message": "マイクから認識",
     "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "言語",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "自動（ブラウザのデフォルト）",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "英語",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "日本語",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "ドイツ語",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "フランス語",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "韓国語",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "ロシア語",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "簡体中国語",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "繁体中国語",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "スペイン語",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "イタリア語",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "言語の変更は拡張機能を再読み込みした後に有効になります。",
+    "description": "Message shown when language is changed"
   }
 }
 

@@ -348,6 +348,58 @@
   "recognizeFromMicrophoneCommand": {
     "message": "从麦克风识别",
     "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "语言",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "自动（浏览器默认）",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "英语",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "日语",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "德语",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "法语",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "韩语",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "俄语",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "简体中文",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "繁体中文",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "西班牙语",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "意大利语",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "语言更改将在重新加载扩展后生效。",
+    "description": "Message shown when language is changed"
   }
 }
 

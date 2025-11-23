@@ -348,6 +348,58 @@
   "recognizeFromMicrophoneCommand": {
     "message": "從麥克風識別",
     "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "語言",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "自動（瀏覽器預設）",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "英語",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "日語",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "德語",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "法語",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "韓語",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "俄語",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "簡體中文",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "繁體中文",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "西班牙語",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "義大利語",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "語言變更將在重新載入擴充功能後生效。",
+    "description": "Message shown when language is changed"
   }
 }
 

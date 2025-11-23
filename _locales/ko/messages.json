@@ -348,6 +348,58 @@
   "recognizeFromMicrophoneCommand": {
     "message": "마이크에서 인식",
     "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "언어",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "자동 (브라우저 기본값)",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "영어",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "일본어",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "독일어",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "프랑스어",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "한국어",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "러시아어",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "간체 중국어",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "번체 중국어",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "스페인어",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "이탈리아어",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "언어 변경은 확장 프로그램을 다시 로드한 후 적용됩니다.",
+    "description": "Message shown when language is changed"
   }
 }
 

@@ -348,6 +348,58 @@
   "recognizeFromMicrophoneCommand": {
     "message": "Riconosci dal microfono",
     "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "Lingua",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "Automatico (predefinito del browser)",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "Inglese",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "Giapponese",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "Tedesco",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "Francese",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "Coreano",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "Russo",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "Cinese semplificato",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "Cinese tradizionale",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "Spagnolo",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "Italiano",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "La modifica della lingua avrà effetto dopo il ricaricamento dell'estensione.",
+    "description": "Message shown when language is changed"
   }
 }
 

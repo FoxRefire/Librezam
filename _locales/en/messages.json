@@ -348,6 +348,58 @@
   "recognizeFromMicrophoneCommand": {
     "message": "Recognize from microphone",
     "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "Language",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "Auto (Browser default)",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "English",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "Japanese",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "German",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "French",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "Korean",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "Russian",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "Simplified Chinese",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "Traditional Chinese",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "Spanish",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "Italian",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "Language change will take effect after reloading the extension.",
+    "description": "Message shown when language is changed"
   }
 }
 

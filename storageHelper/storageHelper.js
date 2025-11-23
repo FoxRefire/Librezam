@@ -16,7 +16,8 @@ export const Defaults = {
     noDoubleHosts: ["soundcloud.com"],
     noAppendHosts: ["osu.ppy.sh"],
     corsHosts: ["radio.garden"],
-    sk: "da36b574-e869-41f5-8512-bc261615b84e"
+    sk: "da36b574-e869-41f5-8512-bc261615b84e",
+    language: "auto"
 }
 
 export async function getStorage(key) {

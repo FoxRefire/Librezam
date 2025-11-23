@@ -348,6 +348,58 @@
   "recognizeFromMicrophoneCommand": {
     "message": "Распознать с микрофона",
     "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "Язык",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "Автоматически (по умолчанию браузера)",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "Английский",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "Японский",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "Немецкий",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "Французский",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "Корейский",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "Русский",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "Упрощенный китайский",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "Традиционный китайский",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "Испанский",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "Итальянский",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "Изменение языка вступит в силу после перезагрузки расширения.",
+    "description": "Message shown when language is changed"
   }
 }
 

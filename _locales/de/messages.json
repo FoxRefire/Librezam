@@ -348,6 +348,58 @@
   "recognizeFromMicrophoneCommand": {
     "message": "Vom Mikrofon erkennen",
     "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "Sprache",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "Automatisch (Browser-Standard)",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "Englisch",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "Japanisch",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "Deutsch",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "Französisch",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "Koreanisch",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "Russisch",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "Vereinfachtes Chinesisch",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "Traditionelles Chinesisch",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "Spanisch",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "Italienisch",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "Die Sprachänderung wird nach dem Neuladen der Erweiterung wirksam.",
+    "description": "Message shown when language is changed"
   }
 }
 

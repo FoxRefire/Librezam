@@ -1,0 +1,353 @@
+{
+  "extensionName": {
+    "message": "Librezam",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "使用 Shazam API 的开源歌曲识别扩展",
+    "description": "Extension description"
+  },
+  "settings": {
+    "message": "设置",
+    "description": "Settings menu title"
+  },
+  "backends": {
+    "message": "后端",
+    "description": "Backends settings title"
+  },
+  "backendsOrder": {
+    "message": "后端顺序",
+    "description": "Backends order menu item"
+  },
+  "apiConfiguration": {
+    "message": "API 配置",
+    "description": "API configuration menu item"
+  },
+  "streamingProviders": {
+    "message": "流媒体提供商",
+    "description": "Streaming providers menu item"
+  },
+  "miscellaneousSettings": {
+    "message": "其他设置",
+    "description": "Miscellaneous settings menu item"
+  },
+  "workaroundsSettings": {
+    "message": "变通设置",
+    "description": "Workarounds settings menu item"
+  },
+  "historyManagementAndExport": {
+    "message": "历史记录管理和导出",
+    "description": "History management menu item"
+  },
+  "autoRecognition": {
+    "message": "自动识别",
+    "description": "Auto recognition toggle label"
+  },
+  "recognizeFromMicrophone": {
+    "message": "从麦克风识别",
+    "description": "Recognize from microphone menu item"
+  },
+  "title": {
+    "message": "标题",
+    "description": "Title label"
+  },
+  "artist": {
+    "message": "艺术家",
+    "description": "Artist label"
+  },
+  "album": {
+    "message": "专辑",
+    "description": "Album label"
+  },
+  "date": {
+    "message": "日期",
+    "description": "Date label"
+  },
+  "listening": {
+    "message": "正在聆听...",
+    "description": "Listening status message"
+  },
+  "queryingWith": {
+    "message": "正在使用 $1 查询...",
+    "description": "Querying status message",
+    "placeholders": {
+      "backend": {
+        "content": "$1",
+        "example": "Shazam"
+      }
+    }
+  },
+  "noAudioElementsDetected": {
+    "message": "未检测到音频元素...",
+    "description": "Error message when no audio elements detected"
+  },
+  "songNotRecognized": {
+    "message": "歌曲未被识别...",
+    "description": "Error message when song not recognized"
+  },
+  "noAudioRecordedFromMicrophone": {
+    "message": "未从麦克风录制音频...",
+    "description": "Error message when no audio recorded from microphone"
+  },
+  "songNotRecognizedFromMicrophone": {
+    "message": "未从麦克风识别歌曲...",
+    "description": "Error message when song not recognized from microphone"
+  },
+  "failedToAccessMicrophone": {
+    "message": "无法访问麦克风或录制音频",
+    "description": "Error message when microphone access fails"
+  },
+  "recognitionRules": {
+    "message": "识别规则",
+    "description": "Recognition rules section title"
+  },
+  "recognitionRulesDescription": {
+    "message": "定义录制长度（毫秒）以及识别失败时要尝试的后端顺序。",
+    "description": "Recognition rules description"
+  },
+  "recognitionRulesMobileHint": {
+    "message": "移动设备：长按芯片进入重新排序模式，然后点击其他芯片进行重新排序。",
+    "description": "Recognition rules mobile hint"
+  },
+  "addRule": {
+    "message": "添加规则",
+    "description": "Add rule button"
+  },
+  "resetToDefault": {
+    "message": "重置为默认值",
+    "description": "Reset to default button"
+  },
+  "settingsResetToDefault": {
+    "message": "设置已重置为默认值",
+    "description": "Notification message when settings are reset"
+  },
+  "rule": {
+    "message": "规则",
+    "description": "Rule card title"
+  },
+  "deleteRule": {
+    "message": "删除规则",
+    "description": "Delete rule button tooltip"
+  },
+  "clickToEditDuration": {
+    "message": "点击编辑时长",
+    "description": "Duration display tooltip"
+  },
+  "backendsClickToEnable": {
+    "message": "后端：点击启用/禁用；拖拽重新排序（仅限已启用的）",
+    "description": "Backends list label"
+  },
+  "atLeastOneFallbackRuleMustExist": {
+    "message": "必须至少存在一个后备规则",
+    "description": "Error message when trying to delete last rule"
+  },
+  "atLeastOneBackendMustBeEnabled": {
+    "message": "必须至少启用一个后端",
+    "description": "Error message when trying to disable last backend"
+  },
+  "tapOtherChipsToReorder": {
+    "message": "点击其他芯片重新排序，再次点击完成",
+    "description": "Reorder mode instruction"
+  },
+  "adjustedToUniqueDuration": {
+    "message": "已调整为唯一时长：$1",
+    "description": "Toast message when duration adjusted",
+    "placeholders": {
+      "duration": {
+        "content": "$1",
+        "example": "3.5s"
+      }
+    }
+  },
+  "durationMustBeBetween": {
+    "message": "时长必须在 1500 毫秒到 13000 毫秒之间",
+    "description": "Error message for invalid duration"
+  },
+  "fallbackRulesResetToDefault": {
+    "message": "后备规则已重置为默认值",
+    "description": "Toast message when rules reset"
+  },
+  "apiSettings": {
+    "message": "API 设置",
+    "description": "API settings title"
+  },
+  "audd": {
+    "message": "Audd",
+    "description": "Audd API section title"
+  },
+  "apiToken": {
+    "message": "API 令牌",
+    "description": "API token label"
+  },
+  "acrCloud": {
+    "message": "ACRCloud",
+    "description": "ACRCloud section title"
+  },
+  "both": {
+    "message": "两者",
+    "description": "Both mode option"
+  },
+  "original": {
+    "message": "原始",
+    "description": "Original mode option"
+  },
+  "humming": {
+    "message": "哼唱",
+    "description": "Humming mode option"
+  },
+  "useDefaultCredentials": {
+    "message": "使用默认凭据",
+    "description": "Use default credentials checkbox"
+  },
+  "host": {
+    "message": "主机",
+    "description": "Host label"
+  },
+  "accessKey": {
+    "message": "访问密钥",
+    "description": "Access key label"
+  },
+  "accessSecret": {
+    "message": "访问密钥",
+    "description": "Access secret label"
+  },
+  "tencent": {
+    "message": "腾讯",
+    "description": "Tencent section title"
+  },
+  "history": {
+    "message": "历史记录",
+    "description": "History title"
+  },
+  "exportAsCSV": {
+    "message": "导出为 CSV",
+    "description": "Export as CSV button"
+  },
+  "exportAllSettingsHistories": {
+    "message": "导出所有设置和历史记录（JSON）",
+    "description": "Export all data button"
+  },
+  "importAllSettingsHistories": {
+    "message": "导入所有设置和历史记录（JSON）",
+    "description": "Import all data button"
+  },
+  "clearHistories": {
+    "message": "清除历史记录",
+    "description": "Clear histories button"
+  },
+  "confirm": {
+    "message": "确认",
+    "description": "Confirm dialog title"
+  },
+  "areYouSureToClearHistories": {
+    "message": "您确定要清除历史记录吗？",
+    "description": "Confirm clear histories message"
+  },
+  "no": {
+    "message": "否",
+    "description": "No button"
+  },
+  "yes": {
+    "message": "是",
+    "description": "Yes button"
+  },
+  "miscellaneous": {
+    "message": "其他",
+    "description": "Miscellaneous settings title"
+  },
+  "options": {
+    "message": "选项",
+    "description": "Options section title"
+  },
+  "showCoverartOnRecognized": {
+    "message": "识别时显示封面",
+    "description": "Show coverart checkbox"
+  },
+  "recordAnotherTabAudio": {
+    "message": "录制另一个标签页的音频",
+    "description": "Record another tab audio checkbox"
+  },
+  "theme": {
+    "message": "主题",
+    "description": "Theme section title"
+  },
+  "providers": {
+    "message": "提供商",
+    "description": "Providers settings title"
+  },
+  "selectStreamingProviders": {
+    "message": "选择流媒体提供商（最多 5 个）",
+    "description": "Select streaming providers title"
+  },
+  "chooseUpTo5StreamingProviders": {
+    "message": "选择最多 5 个流媒体提供商，在识别歌曲时显示。您可以拖放来重新排序。",
+    "description": "Select streaming providers description"
+  },
+  "selectedProviders": {
+    "message": "已选提供商（$1/5）",
+    "description": "Selected providers label",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "availableProviders": {
+    "message": "可用提供商",
+    "description": "Available providers label"
+  },
+  "workarounds": {
+    "message": "变通方法",
+    "description": "Workarounds settings title"
+  },
+  "enableExperimentalFix": {
+    "message": "启用实验性修复",
+    "description": "Enable experimental fix checkbox"
+  },
+  "enableExperimentalFixDescription": {
+    "message": "在某些网站上，例如一些游戏网站，AudioBufferSourceNode 用于音频播放。要使 Librezam 在这些网站上工作，必须启用此选项。但是，此功能是实验性的且非常不稳定，可能会导致严重的错误，例如音频延迟或重复。",
+    "description": "Enable experimental fix description"
+  },
+  "hosts": {
+    "message": "主机",
+    "description": "Hosts section title"
+  },
+  "hostsToPreventAudioDuplication": {
+    "message": "防止音频重复的主机",
+    "description": "Hosts to prevent audio duplication label"
+  },
+  "hostsToPreventAudioDuplicationDescription": {
+    "message": "如果在 Librezam 上尝试识别歌曲时音量加倍，请添加该网站的主机名。如果问题是由实验性修复引起的，在此处添加主机将无效。",
+    "description": "Hosts to prevent audio duplication description"
+  },
+  "hostsToPreventAppendHeadlessAudio": {
+    "message": "防止附加无头音频的主机",
+    "description": "Hosts to prevent append headless audio label"
+  },
+  "hostsToPreventAppendHeadlessAudioDescription": {
+    "message": "如果仅在安装 Librezam 时遇到某些网站的问题，请在此处添加主机。",
+    "description": "Hosts to prevent append headless audio description"
+  },
+  "hostsToBeTreatedAsCORSSource": {
+    "message": "要视为 CORS 源的主机",
+    "description": "Hosts to be treated as CORS source label"
+  },
+  "hostsToBeTreatedAsCORSSourceDescription": {
+    "message": "如果遇到在尝试识别歌曲时音频被静音且未检测到元素的网站，请在此处添加主机。",
+    "description": "Hosts to be treated as CORS source description"
+  },
+  "pleaseAllowMicrophoneAccess": {
+    "message": "请从对话框允许麦克风访问",
+    "description": "Microphone access request message"
+  },
+  "recognizeFromTabAudio": {
+    "message": "从标签页音频识别",
+    "description": "Command description for tab recognition"
+  },
+  "recognizeFromMicrophoneCommand": {
+    "message": "从麦克风识别",
+    "description": "Command description for microphone recognition"
+  }
+}
+

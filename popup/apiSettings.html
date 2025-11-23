@@ -8,58 +8,59 @@
     <body>
         <nav class="nav navbar">
             <div class="nav-wrapper">
-                <a class="brand-logo center">API Settings</a>
+                <a class="brand-logo center" data-i18n="apiSettings">API Settings</a>
                 <a href="/popup/settingsMenu.html"><i class="material-icons back_button">arrow_back</i></a>
             </div>
         </nav>
 
-        <h5>Audd</h5>
-        <h6>API Token</h6>
+        <h5 data-i18n="audd">Audd</h5>
+        <h6 data-i18n="apiToken">API Token</h6>
         <input id=auddToken type="text"/>
 
-        <h5>ACRCloud</h5>
+        <h5 data-i18n="acrCloud">ACRCloud</h5>
         <form id="acrMode">
             <label>
                 <input class="with-gap" name="acrMode" value="both" type="radio" />
-                <span>Both</span>
+                <span data-i18n="both">Both</span>
             </label>
             <label>
                 <input class="with-gap" name="acrMode" value="original" type="radio" />
-                <span>Original</span>
+                <span data-i18n="original">Original</span>
             </label>
             <label>
                 <input class="with-gap" name="acrMode" value="humming" type="radio"  />
-                <span>Humming</span>
+                <span data-i18n="humming">Humming</span>
             </label>
         </form>
         <label>
             <input id="acrIsUseDefaultCredential" type="checkbox" class="filled-in" />
-            <span>Use default credentials</span>
+            <span data-i18n="useDefaultCredentials">Use default credentials</span>
         </label>
-        <h6>Host</h6>
+        <h6 data-i18n="host">Host</h6>
         <input id=acrHost type="text"/>
-        <h6>Access Key</h6>
+        <h6 data-i18n="accessKey">Access Key</h6>
         <input id=acrKey type="text"/>
-        <h6>Access Secret</h6>
+        <h6 data-i18n="accessSecret">Access Secret</h6>
         <input id=acrSecret type="text"/>
 
-        <h5>Tencent</h5>
+        <h5 data-i18n="tencent">Tencent</h5>
         <form id="tencentMode">
             <label>
                 <input class="with-gap" name="tencentMode" value="both" type="radio" />
-                <span>Both</span>
+                <span data-i18n="both">Both</span>
             </label>
             <label>
                 <input class="with-gap" name="tencentMode" value="original" type="radio" />
-                <span>Original</span>
+                <span data-i18n="original">Original</span>
             </label>
             <label>
                 <input class="with-gap" name="tencentMode" value="humming" type="radio"  />
-                <span>Humming</span>
+                <span data-i18n="humming">Humming</span>
             </label>
         </form>
 
         <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./i18n.js" type="module"></script>
         <script src="./apiSettings.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>
     </body>

@@ -1,0 +1,353 @@
+{
+  "extensionName": {
+    "message": "Librezam",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Shazam APIを使用したオープンソースの楽曲認識拡張機能",
+    "description": "Extension description"
+  },
+  "settings": {
+    "message": "設定",
+    "description": "Settings menu title"
+  },
+  "backends": {
+    "message": "バックエンド",
+    "description": "Backends settings title"
+  },
+  "backendsOrder": {
+    "message": "バックエンドの順序",
+    "description": "Backends order menu item"
+  },
+  "apiConfiguration": {
+    "message": "API設定",
+    "description": "API configuration menu item"
+  },
+  "streamingProviders": {
+    "message": "ストリーミングプロバイダー",
+    "description": "Streaming providers menu item"
+  },
+  "miscellaneousSettings": {
+    "message": "その他の設定",
+    "description": "Miscellaneous settings menu item"
+  },
+  "workaroundsSettings": {
+    "message": "回避設定",
+    "description": "Workarounds settings menu item"
+  },
+  "historyManagementAndExport": {
+    "message": "履歴管理とエクスポート",
+    "description": "History management menu item"
+  },
+  "autoRecognition": {
+    "message": "自動認識",
+    "description": "Auto recognition toggle label"
+  },
+  "recognizeFromMicrophone": {
+    "message": "マイクから認識",
+    "description": "Recognize from microphone menu item"
+  },
+  "title": {
+    "message": "タイトル",
+    "description": "Title label"
+  },
+  "artist": {
+    "message": "アーティスト",
+    "description": "Artist label"
+  },
+  "album": {
+    "message": "アルバム",
+    "description": "Album label"
+  },
+  "date": {
+    "message": "日付",
+    "description": "Date label"
+  },
+  "listening": {
+    "message": "聞いています...",
+    "description": "Listening status message"
+  },
+  "queryingWith": {
+    "message": "$1で認識中...",
+    "description": "Querying status message",
+    "placeholders": {
+      "backend": {
+        "content": "$1",
+        "example": "Shazam"
+      }
+    }
+  },
+  "noAudioElementsDetected": {
+    "message": "音声要素が検出されませんでした...",
+    "description": "Error message when no audio elements detected"
+  },
+  "songNotRecognized": {
+    "message": "楽曲が認識されませんでした...",
+    "description": "Error message when song not recognized"
+  },
+  "noAudioRecordedFromMicrophone": {
+    "message": "マイクから音声が録音されませんでした...",
+    "description": "Error message when no audio recorded from microphone"
+  },
+  "songNotRecognizedFromMicrophone": {
+    "message": "マイクから楽曲が認識されませんでした...",
+    "description": "Error message when song not recognized from microphone"
+  },
+  "failedToAccessMicrophone": {
+    "message": "マイクへのアクセスまたは音声の録音に失敗しました",
+    "description": "Error message when microphone access fails"
+  },
+  "recognitionRules": {
+    "message": "認識ルール",
+    "description": "Recognition rules section title"
+  },
+  "recognitionRulesDescription": {
+    "message": "録音時間（ミリ秒）と、認識に失敗した場合に試行するバックエンドの順序を定義します。",
+    "description": "Recognition rules description"
+  },
+  "recognitionRulesMobileHint": {
+    "message": "モバイル: チップを長押しして並べ替えモードに入り、他のチップをタップして並べ替えます。",
+    "description": "Recognition rules mobile hint"
+  },
+  "addRule": {
+    "message": "ルールを追加",
+    "description": "Add rule button"
+  },
+  "resetToDefault": {
+    "message": "デフォルトにリセット",
+    "description": "Reset to default button"
+  },
+  "settingsResetToDefault": {
+    "message": "設定がデフォルトにリセットされました",
+    "description": "Notification message when settings are reset"
+  },
+  "rule": {
+    "message": "ルール",
+    "description": "Rule card title"
+  },
+  "deleteRule": {
+    "message": "ルールを削除",
+    "description": "Delete rule button tooltip"
+  },
+  "clickToEditDuration": {
+    "message": "クリックして時間を編集",
+    "description": "Duration display tooltip"
+  },
+  "backendsClickToEnable": {
+    "message": "バックエンド: クリックして有効/無効化; ドラッグして並べ替え（有効なもののみ）",
+    "description": "Backends list label"
+  },
+  "atLeastOneFallbackRuleMustExist": {
+    "message": "少なくとも1つのフォールバックルールが存在する必要があります",
+    "description": "Error message when trying to delete last rule"
+  },
+  "atLeastOneBackendMustBeEnabled": {
+    "message": "少なくとも1つのバックエンドを有効にする必要があります",
+    "description": "Error message when trying to disable last backend"
+  },
+  "tapOtherChipsToReorder": {
+    "message": "他のチップをタップして並べ替え、もう一度タップして終了",
+    "description": "Reorder mode instruction"
+  },
+  "adjustedToUniqueDuration": {
+    "message": "一意の時間に調整されました: $1",
+    "description": "Toast message when duration adjusted",
+    "placeholders": {
+      "duration": {
+        "content": "$1",
+        "example": "3.5s"
+      }
+    }
+  },
+  "durationMustBeBetween": {
+    "message": "時間は1500msから13000msの間である必要があります",
+    "description": "Error message for invalid duration"
+  },
+  "fallbackRulesResetToDefault": {
+    "message": "フォールバックルールがデフォルトにリセットされました",
+    "description": "Toast message when rules reset"
+  },
+  "apiSettings": {
+    "message": "API設定",
+    "description": "API settings title"
+  },
+  "audd": {
+    "message": "Audd",
+    "description": "Audd API section title"
+  },
+  "apiToken": {
+    "message": "APIトークン",
+    "description": "API token label"
+  },
+  "acrCloud": {
+    "message": "ACRCloud",
+    "description": "ACRCloud section title"
+  },
+  "both": {
+    "message": "両方",
+    "description": "Both mode option"
+  },
+  "original": {
+    "message": "オリジナル",
+    "description": "Original mode option"
+  },
+  "humming": {
+    "message": "ハミング",
+    "description": "Humming mode option"
+  },
+  "useDefaultCredentials": {
+    "message": "デフォルトの認証情報を使用",
+    "description": "Use default credentials checkbox"
+  },
+  "host": {
+    "message": "ホスト",
+    "description": "Host label"
+  },
+  "accessKey": {
+    "message": "アクセスキー",
+    "description": "Access key label"
+  },
+  "accessSecret": {
+    "message": "アクセスシークレット",
+    "description": "Access secret label"
+  },
+  "tencent": {
+    "message": "Tencent",
+    "description": "Tencent section title"
+  },
+  "history": {
+    "message": "履歴",
+    "description": "History title"
+  },
+  "exportAsCSV": {
+    "message": "CSVとしてエクスポート",
+    "description": "Export as CSV button"
+  },
+  "exportAllSettingsHistories": {
+    "message": "すべての設定と履歴をエクスポート（JSON）",
+    "description": "Export all data button"
+  },
+  "importAllSettingsHistories": {
+    "message": "すべての設定と履歴をインポート（JSON）",
+    "description": "Import all data button"
+  },
+  "clearHistories": {
+    "message": "履歴をクリア",
+    "description": "Clear histories button"
+  },
+  "confirm": {
+    "message": "確認",
+    "description": "Confirm dialog title"
+  },
+  "areYouSureToClearHistories": {
+    "message": "履歴をクリアしてもよろしいですか？",
+    "description": "Confirm clear histories message"
+  },
+  "no": {
+    "message": "いいえ",
+    "description": "No button"
+  },
+  "yes": {
+    "message": "はい",
+    "description": "Yes button"
+  },
+  "miscellaneous": {
+    "message": "その他",
+    "description": "Miscellaneous settings title"
+  },
+  "options": {
+    "message": "オプション",
+    "description": "Options section title"
+  },
+  "showCoverartOnRecognized": {
+    "message": "認識時にカバーアートを表示",
+    "description": "Show coverart checkbox"
+  },
+  "recordAnotherTabAudio": {
+    "message": "別のタブの音声を録音",
+    "description": "Record another tab audio checkbox"
+  },
+  "theme": {
+    "message": "テーマ",
+    "description": "Theme section title"
+  },
+  "providers": {
+    "message": "プロバイダー",
+    "description": "Providers settings title"
+  },
+  "selectStreamingProviders": {
+    "message": "ストリーミングプロバイダーを選択（最大5つ）",
+    "description": "Select streaming providers title"
+  },
+  "chooseUpTo5StreamingProviders": {
+    "message": "楽曲が認識されたときに表示するストリーミングプロバイダーを最大5つまで選択できます。ドラッグアンドドロップで並べ替えることができます。",
+    "description": "Select streaming providers description"
+  },
+  "selectedProviders": {
+    "message": "選択されたプロバイダー（$1/5）",
+    "description": "Selected providers label",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "availableProviders": {
+    "message": "利用可能なプロバイダー",
+    "description": "Available providers label"
+  },
+  "workarounds": {
+    "message": "回避設定",
+    "description": "Workarounds settings title"
+  },
+  "enableExperimentalFix": {
+    "message": "実験的な修正を有効化",
+    "description": "Enable experimental fix checkbox"
+  },
+  "enableExperimentalFixDescription": {
+    "message": "一部のウェブサイト（一部のゲームサイトなど）では、AudioBufferSourceNodeが音声再生に使用されています。Librezamがこれらのサイトで機能するようにするには、このオプションを有効にする必要があります。ただし、この機能は実験的で非常に不安定であり、音声の遅延や重複などの重大なバグを引き起こす可能性があります。",
+    "description": "Enable experimental fix description"
+  },
+  "hosts": {
+    "message": "ホスト",
+    "description": "Hosts section title"
+  },
+  "hostsToPreventAudioDuplication": {
+    "message": "音声の重複を防ぐホスト",
+    "description": "Hosts to prevent audio duplication label"
+  },
+  "hostsToPreventAudioDuplicationDescription": {
+    "message": "Librezamで楽曲を認識しようとしたときに音量が2倍になる場合は、そのサイトのホスト名を追加してください。実験的な修正によって問題が発生している場合、ここにホストを追加しても効果はありません。",
+    "description": "Hosts to prevent audio duplication description"
+  },
+  "hostsToPreventAppendHeadlessAudio": {
+    "message": "ヘッドレス音声の追加を防ぐホスト",
+    "description": "Hosts to prevent append headless audio label"
+  },
+  "hostsToPreventAppendHeadlessAudioDescription": {
+    "message": "Librezamのみがインストールされている状態で特定のウェブサイトに問題が発生する場合は、ここにホストを追加してください。",
+    "description": "Hosts to prevent append headless audio description"
+  },
+  "hostsToBeTreatedAsCORSSource": {
+    "message": "CORSソースとして扱うホスト",
+    "description": "Hosts to be treated as CORS source label"
+  },
+  "hostsToBeTreatedAsCORSSourceDescription": {
+    "message": "楽曲を認識しようとしたときに音声がミュートされ、要素が検出されないサイトが発生する場合は、ここにホストを追加してください。",
+    "description": "Hosts to be treated as CORS source description"
+  },
+  "pleaseAllowMicrophoneAccess": {
+    "message": "ダイアログボックスからマイクへのアクセスを許可してください",
+    "description": "Microphone access request message"
+  },
+  "recognizeFromTabAudio": {
+    "message": "タブの音声から認識",
+    "description": "Command description for tab recognition"
+  },
+  "recognizeFromMicrophoneCommand": {
+    "message": "マイクから認識",
+    "description": "Command description for microphone recognition"
+  }
+}
+

@@ -1,0 +1,353 @@
+{
+  "extensionName": {
+    "message": "Librezam",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Расширение с открытым исходным кодом для распознавания музыки с использованием API Shazam",
+    "description": "Extension description"
+  },
+  "settings": {
+    "message": "Настройки",
+    "description": "Settings menu title"
+  },
+  "backends": {
+    "message": "Бэкенды",
+    "description": "Backends settings title"
+  },
+  "backendsOrder": {
+    "message": "Порядок бэкендов",
+    "description": "Backends order menu item"
+  },
+  "apiConfiguration": {
+    "message": "Конфигурация API",
+    "description": "API configuration menu item"
+  },
+  "streamingProviders": {
+    "message": "Провайдеры потоковой передачи",
+    "description": "Streaming providers menu item"
+  },
+  "miscellaneousSettings": {
+    "message": "Разные настройки",
+    "description": "Miscellaneous settings menu item"
+  },
+  "workaroundsSettings": {
+    "message": "Настройки обходных путей",
+    "description": "Workarounds settings menu item"
+  },
+  "historyManagementAndExport": {
+    "message": "Управление историей и экспорт",
+    "description": "History management menu item"
+  },
+  "autoRecognition": {
+    "message": "Автоматическое распознавание",
+    "description": "Auto recognition toggle label"
+  },
+  "recognizeFromMicrophone": {
+    "message": "Распознать с микрофона",
+    "description": "Recognize from microphone menu item"
+  },
+  "title": {
+    "message": "Название",
+    "description": "Title label"
+  },
+  "artist": {
+    "message": "Исполнитель",
+    "description": "Artist label"
+  },
+  "album": {
+    "message": "Альбом",
+    "description": "Album label"
+  },
+  "date": {
+    "message": "Дата",
+    "description": "Date label"
+  },
+  "listening": {
+    "message": "Прослушивание...",
+    "description": "Listening status message"
+  },
+  "queryingWith": {
+    "message": "Запрос с $1...",
+    "description": "Querying status message",
+    "placeholders": {
+      "backend": {
+        "content": "$1",
+        "example": "Shazam"
+      }
+    }
+  },
+  "noAudioElementsDetected": {
+    "message": "Аудиоэлементы не обнаружены...",
+    "description": "Error message when no audio elements detected"
+  },
+  "songNotRecognized": {
+    "message": "Песня не распознана...",
+    "description": "Error message when song not recognized"
+  },
+  "noAudioRecordedFromMicrophone": {
+    "message": "Аудио с микрофона не записано...",
+    "description": "Error message when no audio recorded from microphone"
+  },
+  "songNotRecognizedFromMicrophone": {
+    "message": "Песня не распознана с микрофона...",
+    "description": "Error message when song not recognized from microphone"
+  },
+  "failedToAccessMicrophone": {
+    "message": "Не удалось получить доступ к микрофону или записать аудио",
+    "description": "Error message when microphone access fails"
+  },
+  "recognitionRules": {
+    "message": "Правила распознавания",
+    "description": "Recognition rules section title"
+  },
+  "recognitionRulesDescription": {
+    "message": "Определите длительность записи (мс) и порядок бэкендов для попытки при сбое распознавания.",
+    "description": "Recognition rules description"
+  },
+  "recognitionRulesMobileHint": {
+    "message": "Мобильный: Долгое нажатие на чип для входа в режим переупорядочивания, затем нажмите на другие чипы для переупорядочивания.",
+    "description": "Recognition rules mobile hint"
+  },
+  "addRule": {
+    "message": "Добавить правило",
+    "description": "Add rule button"
+  },
+  "resetToDefault": {
+    "message": "Сбросить по умолчанию",
+    "description": "Reset to default button"
+  },
+  "settingsResetToDefault": {
+    "message": "Настройки сброшены по умолчанию",
+    "description": "Notification message when settings are reset"
+  },
+  "rule": {
+    "message": "Правило",
+    "description": "Rule card title"
+  },
+  "deleteRule": {
+    "message": "Удалить правило",
+    "description": "Delete rule button tooltip"
+  },
+  "clickToEditDuration": {
+    "message": "Нажмите, чтобы изменить длительность",
+    "description": "Duration display tooltip"
+  },
+  "backendsClickToEnable": {
+    "message": "Бэкенды: нажмите, чтобы включить/выключить; перетащите для переупорядочивания (только включенные)",
+    "description": "Backends list label"
+  },
+  "atLeastOneFallbackRuleMustExist": {
+    "message": "Должно существовать хотя бы одно правило резервного копирования",
+    "description": "Error message when trying to delete last rule"
+  },
+  "atLeastOneBackendMustBeEnabled": {
+    "message": "Должен быть включен хотя бы один бэкенд",
+    "description": "Error message when trying to disable last backend"
+  },
+  "tapOtherChipsToReorder": {
+    "message": "Нажмите на другие чипы для переупорядочивания, нажмите снова для завершения",
+    "description": "Reorder mode instruction"
+  },
+  "adjustedToUniqueDuration": {
+    "message": "Скорректировано до уникальной длительности: $1",
+    "description": "Toast message when duration adjusted",
+    "placeholders": {
+      "duration": {
+        "content": "$1",
+        "example": "3.5s"
+      }
+    }
+  },
+  "durationMustBeBetween": {
+    "message": "Длительность должна быть между 1500 мс и 13000 мс",
+    "description": "Error message for invalid duration"
+  },
+  "fallbackRulesResetToDefault": {
+    "message": "Правила резервного копирования сброшены по умолчанию",
+    "description": "Toast message when rules reset"
+  },
+  "apiSettings": {
+    "message": "Настройки API",
+    "description": "API settings title"
+  },
+  "audd": {
+    "message": "Audd",
+    "description": "Audd API section title"
+  },
+  "apiToken": {
+    "message": "Токен API",
+    "description": "API token label"
+  },
+  "acrCloud": {
+    "message": "ACRCloud",
+    "description": "ACRCloud section title"
+  },
+  "both": {
+    "message": "Оба",
+    "description": "Both mode option"
+  },
+  "original": {
+    "message": "Оригинал",
+    "description": "Original mode option"
+  },
+  "humming": {
+    "message": "Напевание",
+    "description": "Humming mode option"
+  },
+  "useDefaultCredentials": {
+    "message": "Использовать учетные данные по умолчанию",
+    "description": "Use default credentials checkbox"
+  },
+  "host": {
+    "message": "Хост",
+    "description": "Host label"
+  },
+  "accessKey": {
+    "message": "Ключ доступа",
+    "description": "Access key label"
+  },
+  "accessSecret": {
+    "message": "Секрет доступа",
+    "description": "Access secret label"
+  },
+  "tencent": {
+    "message": "Tencent",
+    "description": "Tencent section title"
+  },
+  "history": {
+    "message": "История",
+    "description": "History title"
+  },
+  "exportAsCSV": {
+    "message": "Экспортировать как CSV",
+    "description": "Export as CSV button"
+  },
+  "exportAllSettingsHistories": {
+    "message": "Экспортировать все настройки и историю (JSON)",
+    "description": "Export all data button"
+  },
+  "importAllSettingsHistories": {
+    "message": "Импортировать все настройки и историю (JSON)",
+    "description": "Import all data button"
+  },
+  "clearHistories": {
+    "message": "Очистить историю",
+    "description": "Clear histories button"
+  },
+  "confirm": {
+    "message": "Подтвердить",
+    "description": "Confirm dialog title"
+  },
+  "areYouSureToClearHistories": {
+    "message": "Вы уверены, что хотите очистить историю?",
+    "description": "Confirm clear histories message"
+  },
+  "no": {
+    "message": "Нет",
+    "description": "No button"
+  },
+  "yes": {
+    "message": "Да",
+    "description": "Yes button"
+  },
+  "miscellaneous": {
+    "message": "Разное",
+    "description": "Miscellaneous settings title"
+  },
+  "options": {
+    "message": "Параметры",
+    "description": "Options section title"
+  },
+  "showCoverartOnRecognized": {
+    "message": "Показывать обложку при распознавании",
+    "description": "Show coverart checkbox"
+  },
+  "recordAnotherTabAudio": {
+    "message": "Записывать аудио другой вкладки",
+    "description": "Record another tab audio checkbox"
+  },
+  "theme": {
+    "message": "Тема",
+    "description": "Theme section title"
+  },
+  "providers": {
+    "message": "Провайдеры",
+    "description": "Providers settings title"
+  },
+  "selectStreamingProviders": {
+    "message": "Выбрать провайдеров потоковой передачи (Макс. 5)",
+    "description": "Select streaming providers title"
+  },
+  "chooseUpTo5StreamingProviders": {
+    "message": "Выберите до 5 провайдеров потоковой передачи для отображения при распознавании песни. Вы можете перетаскивать их для изменения порядка.",
+    "description": "Select streaming providers description"
+  },
+  "selectedProviders": {
+    "message": "Выбранные провайдеры ($1/5)",
+    "description": "Selected providers label",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "availableProviders": {
+    "message": "Доступные провайдеры",
+    "description": "Available providers label"
+  },
+  "workarounds": {
+    "message": "Обходные пути",
+    "description": "Workarounds settings title"
+  },
+  "enableExperimentalFix": {
+    "message": "Включить экспериментальное исправление",
+    "description": "Enable experimental fix checkbox"
+  },
+  "enableExperimentalFixDescription": {
+    "message": "На некоторых веб-сайтах, таких как некоторые игровые сайты, AudioBufferSourceNode используется для воспроизведения аудио. Чтобы Librezam работал на этих сайтах, эта опция должна быть включена. Однако эта функция является экспериментальной и очень нестабильной и может вызывать критические ошибки, такие как задержка аудио или дублирование.",
+    "description": "Enable experimental fix description"
+  },
+  "hosts": {
+    "message": "Хосты",
+    "description": "Hosts section title"
+  },
+  "hostsToPreventAudioDuplication": {
+    "message": "Хосты для предотвращения дублирования аудио",
+    "description": "Hosts to prevent audio duplication label"
+  },
+  "hostsToPreventAudioDuplicationDescription": {
+    "message": "Если громкость удваивается при попытке распознать песню в Librezam, добавьте имя хоста этого сайта. Добавление хоста здесь не будет иметь эффекта, если проблема вызвана экспериментальным исправлением.",
+    "description": "Hosts to prevent audio duplication description"
+  },
+  "hostsToPreventAppendHeadlessAudio": {
+    "message": "Хосты для предотвращения добавления headless-аудио",
+    "description": "Hosts to prevent append headless audio label"
+  },
+  "hostsToPreventAppendHeadlessAudioDescription": {
+    "message": "Если вы столкнулись с проблемами на определенных веб-сайтах, когда установлен только Librezam, добавьте хост здесь.",
+    "description": "Hosts to prevent append headless audio description"
+  },
+  "hostsToBeTreatedAsCORSSource": {
+    "message": "Хосты, которые следует рассматривать как источник CORS",
+    "description": "Hosts to be treated as CORS source label"
+  },
+  "hostsToBeTreatedAsCORSSourceDescription": {
+    "message": "Если вы столкнулись с сайтами, где аудио отключено и элементы не обнаруживаются при попытке распознать песни, добавьте хост здесь.",
+    "description": "Hosts to be treated as CORS source description"
+  },
+  "pleaseAllowMicrophoneAccess": {
+    "message": "Пожалуйста, разрешите доступ к микрофону из диалогового окна",
+    "description": "Microphone access request message"
+  },
+  "recognizeFromTabAudio": {
+    "message": "Распознать из аудио вкладки",
+    "description": "Command description for tab recognition"
+  },
+  "recognizeFromMicrophoneCommand": {
+    "message": "Распознать с микрофона",
+    "description": "Command description for microphone recognition"
+  }
+}
+

@@ -1,13 +1,14 @@
 {
-    "name": "Librezam",
-    "description": "Opensource song recognition extension using shazam API",
+    "name": "__MSG_extensionName__",
+    "description": "__MSG_extensionDescription__",
     "version": "5.2",
     "manifest_version": 3,
+    "default_locale": "en",
     "icons": {
         "128": "images/icon.png"
     },
     "action": {
-        "default_title": "Librezam",
+        "default_title": "__MSG_extensionName__",
         "default_popup": "/popup/guess.html"
     },
     "content_scripts": [
@@ -32,13 +33,13 @@
             "suggested_key": {
                 "default": "Ctrl+E"
             },
-            "description": "Recognize from tab audio"
+            "description": "__MSG_recognizeFromTabAudio__"
         },
         "mic-recognize": {
             "suggested_key": {
                 "default": "Ctrl+Alt+E"
             },
-            "description": "Recognize from microphone"
+            "description": "__MSG_recognizeFromMicrophoneCommand__"
         }
     }
 }

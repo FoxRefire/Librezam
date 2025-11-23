@@ -9,27 +9,28 @@
         <!-- NavBar -->
         <nav class="nav navbar">
             <div class="nav-wrapper">
-                <a class="brand-logo center">History</a>
+                <a class="brand-logo center" data-i18n="history">History</a>
                 <a href="/popup/settingsMenu.html"><i class="material-icons back_button">arrow_back</i></a>
             </div>
         </nav><br>
 
-        <p><button tabindex="0" id="exportHistories" class="btn filled icon-left"><i class="material-icons">save_as</i>Export as CSV</button></p>
-        <p><button tabindex="0" id="exportAllData" class="btn filled icon-left"><i class="material-icons">backup</i>Export All Settings & Histories (JSON)</button></p>
-        <p><button tabindex="0" id="importAllData" class="btn filled icon-left"><i class="material-icons">restore</i>Import All Settings & Histories (JSON)</button></p>
-        <p><button tabindex="0" popovertarget="modalConfirmClear" class="btn filled icon-left modal-trigger"><i class="material-icons">delete_forever</i>Clear Histories</button></p>
+        <p><button tabindex="0" id="exportHistories" class="btn filled icon-left"><i class="material-icons">save_as</i><span data-i18n="exportAsCSV">Export as CSV</span></button></p>
+        <p><button tabindex="0" id="exportAllData" class="btn filled icon-left"><i class="material-icons">backup</i><span data-i18n="exportAllSettingsHistories">Export All Settings & Histories (JSON)</span></button></p>
+        <p><button tabindex="0" id="importAllData" class="btn filled icon-left"><i class="material-icons">restore</i><span data-i18n="importAllSettingsHistories">Import All Settings & Histories (JSON)</span></button></p>
+        <p><button tabindex="0" popovertarget="modalConfirmClear" class="btn filled icon-left modal-trigger"><i class="material-icons">delete_forever</i><span data-i18n="clearHistories">Clear Histories</span></button></p>
         <div id="modalConfirmClear" class="modal" popover>
             <div class="modal-content">
-                <h4>Confirm</h4>
-                <p>Are you sure to clear histories?</p>
+                <h4 data-i18n="confirm">Confirm</h4>
+                <p data-i18n="areYouSureToClearHistories">Are you sure to clear histories?</p>
             </div>
             <div class="modal-footer">
-                <button tabindex="0" popovertarget="modalConfirmClear" class="waves-effect btn-flat">No</button>
-                <button tabindex="0" id="clearConfirmed" popovertarget="modalConfirmClear" class="waves-effect btn-flat">Yes</button>
+                <button tabindex="0" popovertarget="modalConfirmClear" class="waves-effect btn-flat" data-i18n="no">No</button>
+                <button tabindex="0" id="clearConfirmed" popovertarget="modalConfirmClear" class="waves-effect btn-flat" data-i18n="yes">Yes</button>
             </div>
         </div>
 
         <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./i18n.js" type="module"></script>
         <script src="./historySettings.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>
     </body>

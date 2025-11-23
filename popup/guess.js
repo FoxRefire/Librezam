@@ -1,5 +1,6 @@
 import { Recognize } from "/backendModules/Recognize.js"
 import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
+import { t } from "./i18n.js"
 
 init()
 
@@ -25,28 +26,28 @@ async function startTabRecognition() {
 
     await recordAudiosInTab(times)
 
-    for(let backends of backendsMap) {
-        showStatus("Listening...")
-        let audios = await getNextRecorded().then(r => r.filter(a=> a.length))
-        if(!audios.length) {
-            showError("No audio elements detected...")
-            return
-        }
-
-        for(let backend of backends) {
-            let isFound = await getResult(audios, backend)
-            if(isFound) {
+        for(let backends of backendsMap) {
+            showStatus(t("listening"))
+            let audios = await getNextRecorded().then(r => r.filter(a=> a.length))
+            if(!audios.length) {
+                showError(t("noAudioElementsDetected"))
                 return
             }
+
+            for(let backend of backends) {
+                let isFound = await getResult(audios, backend)
+                if(isFound) {
+                    return
+                }
+            }
         }
-    }
-    showError("Song was not recognized...")
+        showError(t("songNotRecognized"))
 }
 
 async function getResult(audios, backend) {
     for(let audio of audios) {
         try{
-            showStatus(`Querying with ${backend}...`)
+            showStatus(t("queryingWith", [backend]))
             let result = await Recognize(audio, backend)
             await writeResult(result)
             await saveHistory(result)
@@ -362,10 +363,10 @@ async function startMicRecognition() {
         
         // Try recognition with fallback
         for(let backends of backendsMap) {
-            showStatus(`Listening...`)
+            showStatus(t("listening"))
             let audio = await micAudios.shift()
             if(!audio) {
-                showError("No audio recorded from microphone...")
+                showError(t("noAudioRecordedFromMicrophone"))
                 return
             }
 
@@ -376,10 +377,10 @@ async function startMicRecognition() {
                 }
             }
         }
-        showError("Song was not recognized from microphone...")
+        showError(t("songNotRecognizedFromMicrophone"))
     } catch(e) {
         console.error("Microphone recognition error:", e)
-        showError("Failed to access microphone or record audio")
+        showError(t("failedToAccessMicrophone"))
     }
 }
 

@@ -9,24 +9,24 @@
         <!-- NavBar -->
         <nav class="nav navbar">
             <div class="nav-wrapper">
-                <a class="brand-logo center">Providers</a>
+                <a class="brand-logo center" data-i18n="providers">Providers</a>
                 <a href="/popup/settingsMenu.html"><i class="material-icons back_button">arrow_back</i></a>
             </div>
         </nav>
 
         <div class="container">
-            <h5>Select Streaming Providers (Max 5)</h5>
-            <p>Choose up to 5 streaming providers to display when a song is recognized. You can drag and drop to reorder them.</p>
+            <h5 data-i18n="selectStreamingProviders">Select Streaming Providers (Max 5)</h5>
+            <p data-i18n="chooseUpTo5StreamingProviders">Choose up to 5 streaming providers to display when a song is recognized. You can drag and drop to reorder them.</p>
             
             <div id="selectedProviders" class="selected-providers">
-                <h6>Selected Providers (0/5)</h6>
+                <h6 data-i18n="selectedProviders" data-i18n-args='["0"]'>Selected Providers (0/5)</h6>
                 <div id="selectedList" class="selected-list">
                     <!-- Selected providers will be added here -->
                 </div>
             </div>
 
             <div id="availableProviders" class="available-providers">
-                <h6>Available Providers</h6>
+                <h6 data-i18n="availableProviders">Available Providers</h6>
                 <div id="availableList" class="available-list">
                     <!-- Available providers will be added here -->
                 </div>
@@ -35,12 +35,13 @@
             <div class="reset-section">
                 <button id="resetProviders" class="btn waves-effect waves-light">
                     <i class="material-icons left">refresh</i>
-                    Reset to Default
+                    <span data-i18n="resetToDefault">Reset to Default</span>
                 </button>
             </div>
         </div>
 
         <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./i18n.js" type="module"></script>
         <script src="./streamingProvidersSettings.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>
     </body>

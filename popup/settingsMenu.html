@@ -9,22 +9,23 @@
         <!-- NavBar -->
         <nav class="nav navbar">
             <div class="nav-wrapper">
-                <a class="brand-logo center">Settings</a>
+                <a class="brand-logo center" data-i18n="settings">Settings</a>
                 <a href="/popup/guess.html"><i class="material-icons back_button">arrow_back</i></a>
             </div>
         </nav>
 
         <div class="collection">
-            <a href="./backendsSettings.html" class="collection-item"><span class="badge">&gt;</span>Backends Order</a>
-            <a href="./apiSettings.html" class="collection-item"><span class="badge">&gt;</span>API Configuration</a>
-            <a href="./streamingProvidersSettings.html" class="collection-item"><span class="badge">&gt;</span>Streaming Providers</a>
-            <a href="./miscSettings.html" class="collection-item"><span class="badge">&gt;</span>Miscellaneous Settings</a>
-            <a href="./workaroundSettings.html" class="collection-item"><span class="badge">&gt;</span>Workarounds Settings</a>
-            <a href="./historySettings.html" class="collection-item"><span class="badge">&gt;</span>History Management And Export</a>
+            <a href="./backendsSettings.html" class="collection-item"><span class="badge">&gt;</span><span data-i18n="backendsOrder">Backends Order</span></a>
+            <a href="./apiSettings.html" class="collection-item"><span class="badge">&gt;</span><span data-i18n="apiConfiguration">API Configuration</span></a>
+            <a href="./streamingProvidersSettings.html" class="collection-item"><span class="badge">&gt;</span><span data-i18n="streamingProviders">Streaming Providers</span></a>
+            <a href="./miscSettings.html" class="collection-item"><span class="badge">&gt;</span><span data-i18n="miscellaneousSettings">Miscellaneous Settings</span></a>
+            <a href="./workaroundSettings.html" class="collection-item"><span class="badge">&gt;</span><span data-i18n="workaroundsSettings">Workarounds Settings</span></a>
+            <a href="./historySettings.html" class="collection-item"><span class="badge">&gt;</span><span data-i18n="historyManagementAndExport">History Management And Export</span></a>
           </div>
           
 
         <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./i18n.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>
     </body>
 </html>

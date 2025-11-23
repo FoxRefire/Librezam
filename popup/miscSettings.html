@@ -9,29 +9,29 @@
         <!-- NavBar -->
         <nav class="nav navbar">
             <div class="nav-wrapper">
-                <a class="brand-logo center">Miscellaneous</a>
+                <a class="brand-logo center" data-i18n="miscellaneous">Miscellaneous</a>
                 <a href="/popup/settingsMenu.html"><i class="material-icons back_button">arrow_back</i></a>
             </div>
         </nav>
 
         <form action="#">
-            <h5>Options</h5>
+            <h5 data-i18n="options">Options</h5>
             <p>
                 <label>
                     <input id="isShowCoverart" type="checkbox" class="filled-in"/>
-                    <span>Show coverart on recognized</span>
+                    <span data-i18n="showCoverartOnRecognized">Show coverart on recognized</span>
                 </label>
             </p>
             <p>
                 <label>
                     <input id="isRecordAnotherTab" type="checkbox" class="filled-in"/>
-                    <span>Record another tab audio</span>
+                    <span data-i18n="recordAnotherTabAudio">Record another tab audio</span>
                 </label>
             </p>
         </form>
 
         <div class="bg-selection">
-            <h5>Theme</h5>
+            <h5 data-i18n="theme">Theme</h5>
             <div class="bg-opt-container">
                 <div class="bg-opt" style="background-image: none;"></div>
                 <div class="bg-opt" style="background-image: url('/images/background-2.jpg');"></div>
@@ -41,6 +41,7 @@
         </div>
 
         <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./i18n.js" type="module"></script>
         <script src="./miscSettings.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>
     </body>

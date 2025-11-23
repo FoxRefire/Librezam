@@ -1,0 +1,353 @@
+{
+  "extensionName": {
+    "message": "Librezam",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Opensource song recognition extension using shazam API",
+    "description": "Extension description"
+  },
+  "settings": {
+    "message": "Settings",
+    "description": "Settings menu title"
+  },
+  "backends": {
+    "message": "Backends",
+    "description": "Backends settings title"
+  },
+  "backendsOrder": {
+    "message": "Backends Order",
+    "description": "Backends order menu item"
+  },
+  "apiConfiguration": {
+    "message": "API Configuration",
+    "description": "API configuration menu item"
+  },
+  "streamingProviders": {
+    "message": "Streaming Providers",
+    "description": "Streaming providers menu item"
+  },
+  "miscellaneousSettings": {
+    "message": "Miscellaneous Settings",
+    "description": "Miscellaneous settings menu item"
+  },
+  "workaroundsSettings": {
+    "message": "Workarounds Settings",
+    "description": "Workarounds settings menu item"
+  },
+  "historyManagementAndExport": {
+    "message": "History Management And Export",
+    "description": "History management menu item"
+  },
+  "autoRecognition": {
+    "message": "Auto recognition",
+    "description": "Auto recognition toggle label"
+  },
+  "recognizeFromMicrophone": {
+    "message": "Recognize from Microphone",
+    "description": "Recognize from microphone menu item"
+  },
+  "title": {
+    "message": "Title",
+    "description": "Title label"
+  },
+  "artist": {
+    "message": "Artist",
+    "description": "Artist label"
+  },
+  "album": {
+    "message": "Album",
+    "description": "Album label"
+  },
+  "date": {
+    "message": "Date",
+    "description": "Date label"
+  },
+  "listening": {
+    "message": "Listening...",
+    "description": "Listening status message"
+  },
+  "queryingWith": {
+    "message": "Querying with $1...",
+    "description": "Querying status message",
+    "placeholders": {
+      "backend": {
+        "content": "$1",
+        "example": "Shazam"
+      }
+    }
+  },
+  "noAudioElementsDetected": {
+    "message": "No audio elements detected...",
+    "description": "Error message when no audio elements detected"
+  },
+  "songNotRecognized": {
+    "message": "Song was not recognized...",
+    "description": "Error message when song not recognized"
+  },
+  "noAudioRecordedFromMicrophone": {
+    "message": "No audio recorded from microphone...",
+    "description": "Error message when no audio recorded from microphone"
+  },
+  "songNotRecognizedFromMicrophone": {
+    "message": "Song was not recognized from microphone...",
+    "description": "Error message when song not recognized from microphone"
+  },
+  "failedToAccessMicrophone": {
+    "message": "Failed to access microphone or record audio",
+    "description": "Error message when microphone access fails"
+  },
+  "recognitionRules": {
+    "message": "Recognition Rules",
+    "description": "Recognition rules section title"
+  },
+  "recognitionRulesDescription": {
+    "message": "Define recording lengths (ms) and the backend order to try when recognition fails.",
+    "description": "Recognition rules description"
+  },
+  "recognitionRulesMobileHint": {
+    "message": "Mobile: Long press on a chip to enter reorder mode, then tap other chips to reorder.",
+    "description": "Recognition rules mobile hint"
+  },
+  "addRule": {
+    "message": "Add Rule",
+    "description": "Add rule button"
+  },
+  "resetToDefault": {
+    "message": "Reset to Default",
+    "description": "Reset to default button"
+  },
+  "settingsResetToDefault": {
+    "message": "Settings reset to default",
+    "description": "Notification message when settings are reset"
+  },
+  "rule": {
+    "message": "Rule",
+    "description": "Rule card title"
+  },
+  "deleteRule": {
+    "message": "Delete rule",
+    "description": "Delete rule button tooltip"
+  },
+  "clickToEditDuration": {
+    "message": "Click to edit duration",
+    "description": "Duration display tooltip"
+  },
+  "backendsClickToEnable": {
+    "message": "Backends: click to enable/disable; drag to reorder (enabled only)",
+    "description": "Backends list label"
+  },
+  "atLeastOneFallbackRuleMustExist": {
+    "message": "At least one fallback rule must exist",
+    "description": "Error message when trying to delete last rule"
+  },
+  "atLeastOneBackendMustBeEnabled": {
+    "message": "At least one backend must be enabled",
+    "description": "Error message when trying to disable last backend"
+  },
+  "tapOtherChipsToReorder": {
+    "message": "Tap other chips to reorder, tap again to finish",
+    "description": "Reorder mode instruction"
+  },
+  "adjustedToUniqueDuration": {
+    "message": "Adjusted to unique duration: $1",
+    "description": "Toast message when duration adjusted",
+    "placeholders": {
+      "duration": {
+        "content": "$1",
+        "example": "3.5s"
+      }
+    }
+  },
+  "durationMustBeBetween": {
+    "message": "Duration must be between 1500ms and 13000ms",
+    "description": "Error message for invalid duration"
+  },
+  "fallbackRulesResetToDefault": {
+    "message": "Fallback rules reset to default",
+    "description": "Toast message when rules reset"
+  },
+  "apiSettings": {
+    "message": "API Settings",
+    "description": "API settings title"
+  },
+  "audd": {
+    "message": "Audd",
+    "description": "Audd API section title"
+  },
+  "apiToken": {
+    "message": "API Token",
+    "description": "API token label"
+  },
+  "acrCloud": {
+    "message": "ACRCloud",
+    "description": "ACRCloud section title"
+  },
+  "both": {
+    "message": "Both",
+    "description": "Both mode option"
+  },
+  "original": {
+    "message": "Original",
+    "description": "Original mode option"
+  },
+  "humming": {
+    "message": "Humming",
+    "description": "Humming mode option"
+  },
+  "useDefaultCredentials": {
+    "message": "Use default credentials",
+    "description": "Use default credentials checkbox"
+  },
+  "host": {
+    "message": "Host",
+    "description": "Host label"
+  },
+  "accessKey": {
+    "message": "Access Key",
+    "description": "Access key label"
+  },
+  "accessSecret": {
+    "message": "Access Secret",
+    "description": "Access secret label"
+  },
+  "tencent": {
+    "message": "Tencent",
+    "description": "Tencent section title"
+  },
+  "history": {
+    "message": "History",
+    "description": "History title"
+  },
+  "exportAsCSV": {
+    "message": "Export as CSV",
+    "description": "Export as CSV button"
+  },
+  "exportAllSettingsHistories": {
+    "message": "Export All Settings & Histories (JSON)",
+    "description": "Export all data button"
+  },
+  "importAllSettingsHistories": {
+    "message": "Import All Settings & Histories (JSON)",
+    "description": "Import all data button"
+  },
+  "clearHistories": {
+    "message": "Clear Histories",
+    "description": "Clear histories button"
+  },
+  "confirm": {
+    "message": "Confirm",
+    "description": "Confirm dialog title"
+  },
+  "areYouSureToClearHistories": {
+    "message": "Are you sure to clear histories?",
+    "description": "Confirm clear histories message"
+  },
+  "no": {
+    "message": "No",
+    "description": "No button"
+  },
+  "yes": {
+    "message": "Yes",
+    "description": "Yes button"
+  },
+  "miscellaneous": {
+    "message": "Miscellaneous",
+    "description": "Miscellaneous settings title"
+  },
+  "options": {
+    "message": "Options",
+    "description": "Options section title"
+  },
+  "showCoverartOnRecognized": {
+    "message": "Show coverart on recognized",
+    "description": "Show coverart checkbox"
+  },
+  "recordAnotherTabAudio": {
+    "message": "Record another tab audio",
+    "description": "Record another tab audio checkbox"
+  },
+  "theme": {
+    "message": "Theme",
+    "description": "Theme section title"
+  },
+  "providers": {
+    "message": "Providers",
+    "description": "Providers settings title"
+  },
+  "selectStreamingProviders": {
+    "message": "Select Streaming Providers (Max 5)",
+    "description": "Select streaming providers title"
+  },
+  "chooseUpTo5StreamingProviders": {
+    "message": "Choose up to 5 streaming providers to display when a song is recognized. You can drag and drop to reorder them.",
+    "description": "Select streaming providers description"
+  },
+  "selectedProviders": {
+    "message": "Selected Providers ($1/5)",
+    "description": "Selected providers label",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "availableProviders": {
+    "message": "Available Providers",
+    "description": "Available providers label"
+  },
+  "workarounds": {
+    "message": "Workarounds",
+    "description": "Workarounds settings title"
+  },
+  "enableExperimentalFix": {
+    "message": "Enable experimental fix",
+    "description": "Enable experimental fix checkbox"
+  },
+  "enableExperimentalFixDescription": {
+    "message": "On certain websites, such as some gaming sites, AudioBufferSourceNode is used for audio playback. To allow Librezam to function on these sites, this option must be enabled. However, this feature is experimental and very unstable, and may cause critical bugs such as audio delay or duplication.",
+    "description": "Enable experimental fix description"
+  },
+  "hosts": {
+    "message": "Hosts",
+    "description": "Hosts section title"
+  },
+  "hostsToPreventAudioDuplication": {
+    "message": "Hosts to prevent audio duplication",
+    "description": "Hosts to prevent audio duplication label"
+  },
+  "hostsToPreventAudioDuplicationDescription": {
+    "message": "If the volume doubles when attempting to recognise a song on Librezam, please add that site's hostname. Adding host here will have no effect when the issue is caused by the experimental fix.",
+    "description": "Hosts to prevent audio duplication description"
+  },
+  "hostsToPreventAppendHeadlessAudio": {
+    "message": "Hosts to prevent append headless audio",
+    "description": "Hosts to prevent append headless audio label"
+  },
+  "hostsToPreventAppendHeadlessAudioDescription": {
+    "message": "If you encounter issues with certain websites whilst just Librezam is installed, add the host here.",
+    "description": "Hosts to prevent append headless audio description"
+  },
+  "hostsToBeTreatedAsCORSSource": {
+    "message": "Hosts to be treated as a CORS source",
+    "description": "Hosts to be treated as CORS source label"
+  },
+  "hostsToBeTreatedAsCORSSourceDescription": {
+    "message": "If you encounter sites where audio is muted and elements are not detected when attempting to recognise songs, add the host here.",
+    "description": "Hosts to be treated as CORS source description"
+  },
+  "pleaseAllowMicrophoneAccess": {
+    "message": "Please allow microphone access from the dialogue box",
+    "description": "Microphone access request message"
+  },
+  "recognizeFromTabAudio": {
+    "message": "Recognize from tab audio",
+    "description": "Command description for tab recognition"
+  },
+  "recognizeFromMicrophoneCommand": {
+    "message": "Recognize from microphone",
+    "description": "Command description for microphone recognition"
+  }
+}
+

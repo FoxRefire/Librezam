@@ -1,4 +1,5 @@
 import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper.js"
+import { t } from "./i18n.js"
 
 // Available streaming providers with their display names and icons
 const STREAMING_PROVIDERS = {
@@ -228,7 +229,7 @@ function reorderProviders(fromIndex, toIndex) {
 
 function updateCounter() {
     const counter = document.querySelector('#selectedProviders h6')
-    counter.textContent = `Selected Providers (${selectedProviders.length}/5)`
+    counter.textContent = t('selectedProviders', [String(selectedProviders.length)])
 }
 
 async function saveSettings() {
@@ -244,7 +245,7 @@ function resetToDefault() {
     saveSettings()
     
     // Show confirmation message
-    showNotification("Settings reset to default", "success")
+    showNotification(t("settingsResetToDefault"), "success")
 }
 
 function showNotification(message, type = "info") {

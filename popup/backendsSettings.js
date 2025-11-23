@@ -1,4 +1,5 @@
 import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper.js"
+import { t } from "./i18n.js"
 (function initFallbackRulesUI() {
     const BACKENDS = [
         { key: 'shazam', label: 'Shazam' },
@@ -77,18 +78,20 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         // Header
         const title = document.createElement('span');
         title.className = 'card-title';
-        title.textContent = 'Rule';
+        title.setAttribute('data-i18n', 'rule');
+        title.textContent = t('rule');
 
         const deleteBtn = document.createElement('button');
         deleteBtn.className = 'btn-flat right';
         deleteBtn.innerHTML = '<i class="material-icons">delete</i>';
-        deleteBtn.title = 'Delete rule';
+        deleteBtn.setAttribute('data-i18n-title', 'deleteRule');
+        deleteBtn.title = t('deleteRule');
         deleteBtn.addEventListener('click', () => {
             // prevent deleting the last rule
             const allRuleCards = container.querySelectorAll('.fallback-rule-card');
             if (allRuleCards.length <= 1) {
                 if (window.M && M.toast) {
-                    M.toast({ html: 'At least one fallback rule must exist' });
+                    M.toast({ html: t('atLeastOneFallbackRuleMustExist') });
                 }
                 return;
             }
@@ -122,7 +125,8 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         valueDisplay.style.borderRadius = '4px';
         valueDisplay.style.padding = '4px 8px';
         valueDisplay.style.transition = 'border-color 0.2s ease';
-        valueDisplay.title = 'Click to edit duration';
+        valueDisplay.setAttribute('data-i18n-title', 'clickToEditDuration');
+        valueDisplay.title = t('clickToEditDuration');
         
         // Slider container
         const sliderContainer = document.createElement('div');
@@ -170,7 +174,8 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
 
         // Single interactive list: click to enable/disable, drag to reorder (enabled only)
         const listLabel = document.createElement('div');
-        listLabel.textContent = 'Backends: click to enable/disable; drag to reorder (enabled only)';
+        listLabel.setAttribute('data-i18n', 'backendsClickToEnable');
+        listLabel.textContent = t('backendsClickToEnable');
         listLabel.style.margin = '8px 0 4px';
 
         const list = document.createElement('div');
@@ -235,7 +240,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
             
             // Show reorder instructions
             if (window.M && M.toast) {
-                M.toast({ html: 'Tap other chips to reorder, tap again to finish' });
+                M.toast({ html: t('tapOtherChipsToReorder') });
             }
         }
 
@@ -300,7 +305,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
                     const enabledChipsNow = Array.from(list.querySelectorAll('.chip[data-included="true"]'));
                     if (enabledChipsNow.length <= 1) {
                         if (window.M && M.toast) {
-                            M.toast({ html: 'At least one backend must be enabled' });
+                            M.toast({ html: t('atLeastOneBackendMustBeEnabled') });
                         }
                         return;
                     }
@@ -452,7 +457,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
             if (unique !== Number(durationInput.value)) {
                 updateDuration(unique);
                 if (window.M && M.toast) {
-                    M.toast({ html: 'Adjusted to unique duration: ' + formatDuration(unique) });
+                    M.toast({ html: t('adjustedToUniqueDuration', [formatDuration(unique)]) });
                 }
             }
             saveRulesFromDom();
@@ -531,7 +536,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
                 // Reset to original value if input is invalid
                 valueDisplay.textContent = originalValue;
                 if (window.M && M.toast) {
-                    M.toast({ html: 'Duration must be between 1500ms and 13000ms' });
+                    M.toast({ html: t('durationMustBeBetween') });
                 }
             } else {
                 // Round to nearest 100ms step
@@ -585,7 +590,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
         await setStorage("fallbackRules", defaultFallbackRules)
         renderRules(defaultFallbackRules);
         if (window.M && M.toast) {
-            M.toast({ html: 'Fallback rules reset to default' });
+            M.toast({ html: t('fallbackRulesResetToDefault') });
         }
     });
 

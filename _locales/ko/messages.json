@@ -1,0 +1,353 @@
+{
+  "extensionName": {
+    "message": "Librezam",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Shazam API를 사용하는 오픈소스 음악 인식 확장 프로그램",
+    "description": "Extension description"
+  },
+  "settings": {
+    "message": "설정",
+    "description": "Settings menu title"
+  },
+  "backends": {
+    "message": "백엔드",
+    "description": "Backends settings title"
+  },
+  "backendsOrder": {
+    "message": "백엔드 순서",
+    "description": "Backends order menu item"
+  },
+  "apiConfiguration": {
+    "message": "API 구성",
+    "description": "API configuration menu item"
+  },
+  "streamingProviders": {
+    "message": "스트리밍 제공업체",
+    "description": "Streaming providers menu item"
+  },
+  "miscellaneousSettings": {
+    "message": "기타 설정",
+    "description": "Miscellaneous settings menu item"
+  },
+  "workaroundsSettings": {
+    "message": "우회 설정",
+    "description": "Workarounds settings menu item"
+  },
+  "historyManagementAndExport": {
+    "message": "기록 관리 및 내보내기",
+    "description": "History management menu item"
+  },
+  "autoRecognition": {
+    "message": "자동 인식",
+    "description": "Auto recognition toggle label"
+  },
+  "recognizeFromMicrophone": {
+    "message": "마이크에서 인식",
+    "description": "Recognize from microphone menu item"
+  },
+  "title": {
+    "message": "제목",
+    "description": "Title label"
+  },
+  "artist": {
+    "message": "아티스트",
+    "description": "Artist label"
+  },
+  "album": {
+    "message": "앨범",
+    "description": "Album label"
+  },
+  "date": {
+    "message": "날짜",
+    "description": "Date label"
+  },
+  "listening": {
+    "message": "듣는 중...",
+    "description": "Listening status message"
+  },
+  "queryingWith": {
+    "message": "$1로 쿼리 중...",
+    "description": "Querying status message",
+    "placeholders": {
+      "backend": {
+        "content": "$1",
+        "example": "Shazam"
+      }
+    }
+  },
+  "noAudioElementsDetected": {
+    "message": "오디오 요소가 감지되지 않았습니다...",
+    "description": "Error message when no audio elements detected"
+  },
+  "songNotRecognized": {
+    "message": "노래가 인식되지 않았습니다...",
+    "description": "Error message when song not recognized"
+  },
+  "noAudioRecordedFromMicrophone": {
+    "message": "마이크에서 오디오가 녹음되지 않았습니다...",
+    "description": "Error message when no audio recorded from microphone"
+  },
+  "songNotRecognizedFromMicrophone": {
+    "message": "마이크에서 노래가 인식되지 않았습니다...",
+    "description": "Error message when song not recognized from microphone"
+  },
+  "failedToAccessMicrophone": {
+    "message": "마이크에 액세스하거나 오디오를 녹음하는 데 실패했습니다",
+    "description": "Error message when microphone access fails"
+  },
+  "recognitionRules": {
+    "message": "인식 규칙",
+    "description": "Recognition rules section title"
+  },
+  "recognitionRulesDescription": {
+    "message": "녹음 길이(ms)와 인식 실패 시 시도할 백엔드 순서를 정의합니다.",
+    "description": "Recognition rules description"
+  },
+  "recognitionRulesMobileHint": {
+    "message": "모바일: 칩을 길게 눌러 재정렬 모드로 들어간 다음 다른 칩을 탭하여 재정렬합니다.",
+    "description": "Recognition rules mobile hint"
+  },
+  "addRule": {
+    "message": "규칙 추가",
+    "description": "Add rule button"
+  },
+  "resetToDefault": {
+    "message": "기본값으로 재설정",
+    "description": "Reset to default button"
+  },
+  "settingsResetToDefault": {
+    "message": "설정이 기본값으로 재설정되었습니다",
+    "description": "Notification message when settings are reset"
+  },
+  "rule": {
+    "message": "규칙",
+    "description": "Rule card title"
+  },
+  "deleteRule": {
+    "message": "규칙 삭제",
+    "description": "Delete rule button tooltip"
+  },
+  "clickToEditDuration": {
+    "message": "지속 시간을 편집하려면 클릭",
+    "description": "Duration display tooltip"
+  },
+  "backendsClickToEnable": {
+    "message": "백엔드: 클릭하여 활성화/비활성화; 드래그하여 재정렬(활성화된 것만)",
+    "description": "Backends list label"
+  },
+  "atLeastOneFallbackRuleMustExist": {
+    "message": "최소 하나의 폴백 규칙이 있어야 합니다",
+    "description": "Error message when trying to delete last rule"
+  },
+  "atLeastOneBackendMustBeEnabled": {
+    "message": "최소 하나의 백엔드가 활성화되어 있어야 합니다",
+    "description": "Error message when trying to disable last backend"
+  },
+  "tapOtherChipsToReorder": {
+    "message": "다른 칩을 탭하여 재정렬하고, 다시 탭하여 완료",
+    "description": "Reorder mode instruction"
+  },
+  "adjustedToUniqueDuration": {
+    "message": "고유 지속 시간으로 조정됨: $1",
+    "description": "Toast message when duration adjusted",
+    "placeholders": {
+      "duration": {
+        "content": "$1",
+        "example": "3.5s"
+      }
+    }
+  },
+  "durationMustBeBetween": {
+    "message": "지속 시간은 1500ms와 13000ms 사이여야 합니다",
+    "description": "Error message for invalid duration"
+  },
+  "fallbackRulesResetToDefault": {
+    "message": "폴백 규칙이 기본값으로 재설정되었습니다",
+    "description": "Toast message when rules reset"
+  },
+  "apiSettings": {
+    "message": "API 설정",
+    "description": "API settings title"
+  },
+  "audd": {
+    "message": "Audd",
+    "description": "Audd API section title"
+  },
+  "apiToken": {
+    "message": "API 토큰",
+    "description": "API token label"
+  },
+  "acrCloud": {
+    "message": "ACRCloud",
+    "description": "ACRCloud section title"
+  },
+  "both": {
+    "message": "둘 다",
+    "description": "Both mode option"
+  },
+  "original": {
+    "message": "원본",
+    "description": "Original mode option"
+  },
+  "humming": {
+    "message": "허밍",
+    "description": "Humming mode option"
+  },
+  "useDefaultCredentials": {
+    "message": "기본 자격 증명 사용",
+    "description": "Use default credentials checkbox"
+  },
+  "host": {
+    "message": "호스트",
+    "description": "Host label"
+  },
+  "accessKey": {
+    "message": "액세스 키",
+    "description": "Access key label"
+  },
+  "accessSecret": {
+    "message": "액세스 시크릿",
+    "description": "Access secret label"
+  },
+  "tencent": {
+    "message": "Tencent",
+    "description": "Tencent section title"
+  },
+  "history": {
+    "message": "기록",
+    "description": "History title"
+  },
+  "exportAsCSV": {
+    "message": "CSV로 내보내기",
+    "description": "Export as CSV button"
+  },
+  "exportAllSettingsHistories": {
+    "message": "모든 설정 및 기록 내보내기 (JSON)",
+    "description": "Export all data button"
+  },
+  "importAllSettingsHistories": {
+    "message": "모든 설정 및 기록 가져오기 (JSON)",
+    "description": "Import all data button"
+  },
+  "clearHistories": {
+    "message": "기록 지우기",
+    "description": "Clear histories button"
+  },
+  "confirm": {
+    "message": "확인",
+    "description": "Confirm dialog title"
+  },
+  "areYouSureToClearHistories": {
+    "message": "기록을 지우시겠습니까?",
+    "description": "Confirm clear histories message"
+  },
+  "no": {
+    "message": "아니오",
+    "description": "No button"
+  },
+  "yes": {
+    "message": "예",
+    "description": "Yes button"
+  },
+  "miscellaneous": {
+    "message": "기타",
+    "description": "Miscellaneous settings title"
+  },
+  "options": {
+    "message": "옵션",
+    "description": "Options section title"
+  },
+  "showCoverartOnRecognized": {
+    "message": "인식 시 커버 아트 표시",
+    "description": "Show coverart checkbox"
+  },
+  "recordAnotherTabAudio": {
+    "message": "다른 탭 오디오 녹음",
+    "description": "Record another tab audio checkbox"
+  },
+  "theme": {
+    "message": "테마",
+    "description": "Theme section title"
+  },
+  "providers": {
+    "message": "제공업체",
+    "description": "Providers settings title"
+  },
+  "selectStreamingProviders": {
+    "message": "스트리밍 제공업체 선택 (최대 5개)",
+    "description": "Select streaming providers title"
+  },
+  "chooseUpTo5StreamingProviders": {
+    "message": "노래가 인식될 때 표시할 스트리밍 제공업체를 최대 5개까지 선택할 수 있습니다. 드래그 앤 드롭으로 순서를 변경할 수 있습니다.",
+    "description": "Select streaming providers description"
+  },
+  "selectedProviders": {
+    "message": "선택된 제공업체 ($1/5)",
+    "description": "Selected providers label",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "availableProviders": {
+    "message": "사용 가능한 제공업체",
+    "description": "Available providers label"
+  },
+  "workarounds": {
+    "message": "우회",
+    "description": "Workarounds settings title"
+  },
+  "enableExperimentalFix": {
+    "message": "실험적 수정 활성화",
+    "description": "Enable experimental fix checkbox"
+  },
+  "enableExperimentalFixDescription": {
+    "message": "일부 게임 사이트와 같은 특정 웹사이트에서는 AudioBufferSourceNode가 오디오 재생에 사용됩니다. Librezam이 이러한 사이트에서 작동하도록 하려면 이 옵션을 활성화해야 합니다. 그러나 이 기능은 실험적이며 매우 불안정하며 오디오 지연이나 중복과 같은 심각한 버그를 일으킬 수 있습니다.",
+    "description": "Enable experimental fix description"
+  },
+  "hosts": {
+    "message": "호스트",
+    "description": "Hosts section title"
+  },
+  "hostsToPreventAudioDuplication": {
+    "message": "오디오 중복 방지 호스트",
+    "description": "Hosts to prevent audio duplication label"
+  },
+  "hostsToPreventAudioDuplicationDescription": {
+    "message": "Librezam에서 노래를 인식하려고 할 때 볼륨이 두 배가 되는 경우 해당 사이트의 호스트 이름을 추가하세요. 실험적 수정으로 인해 문제가 발생한 경우 여기에 호스트를 추가해도 효과가 없습니다.",
+    "description": "Hosts to prevent audio duplication description"
+  },
+  "hostsToPreventAppendHeadlessAudio": {
+    "message": "헤드리스 오디오 추가 방지 호스트",
+    "description": "Hosts to prevent append headless audio label"
+  },
+  "hostsToPreventAppendHeadlessAudioDescription": {
+    "message": "Librezam만 설치된 상태에서 특정 웹사이트에 문제가 발생하는 경우 여기에 호스트를 추가하세요.",
+    "description": "Hosts to prevent append headless audio description"
+  },
+  "hostsToBeTreatedAsCORSSource": {
+    "message": "CORS 소스로 처리할 호스트",
+    "description": "Hosts to be treated as CORS source label"
+  },
+  "hostsToBeTreatedAsCORSSourceDescription": {
+    "message": "노래를 인식하려고 할 때 오디오가 음소거되고 요소가 감지되지 않는 사이트가 발생하는 경우 여기에 호스트를 추가하세요.",
+    "description": "Hosts to be treated as CORS source description"
+  },
+  "pleaseAllowMicrophoneAccess": {
+    "message": "대화 상자에서 마이크 액세스를 허용하세요",
+    "description": "Microphone access request message"
+  },
+  "recognizeFromTabAudio": {
+    "message": "탭 오디오에서 인식",
+    "description": "Command description for tab recognition"
+  },
+  "recognizeFromMicrophoneCommand": {
+    "message": "마이크에서 인식",
+    "description": "Command description for microphone recognition"
+  }
+}
+

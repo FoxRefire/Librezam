@@ -14,17 +14,17 @@
 
             <!-- Dropdown Structure -->
             <ul id='dropdownMenu' class='dropdown-content'>
-                <li><a href="/popup/settingsMenu.html"><i class="material-icons left">settings</i>Settings</a></li>
+                <li><a href="/popup/settingsMenu.html"><i class="material-icons left">settings</i><span data-i18n="settings">Settings</span></a></li>
                 <li class="divider" tabindex="-1"></li>
                 <li>
                     <label class="auto-mode-toggle">
                         <i class="material-icons left">flash_auto</i>
                         <input id="isAutoMode" class="filled-in" type="checkbox">
-                        <span>Auto recognition</span>
+                        <span data-i18n="autoRecognition">Auto recognition</span>
                     </label>
                 </li>
                 <li class="divider" tabindex="-1"></li>
-                <li><a href="#" id="micRecognition"><i class="material-icons left">mic</i>Recognize from Microphone</a></li>
+                <li><a href="#" id="micRecognition"><i class="material-icons left">mic</i><span data-i18n="recognizeFromMicrophone">Recognize from Microphone</span></a></li>
             </ul>
 
             <div id="circler" class="preloader-wrapper big active">
@@ -44,15 +44,15 @@
             <table id="resultTable" style="display:none; text-align: center;">
                 <tbody>
                   <tr>
-                    <td>Title</td>
+                    <td data-i18n="title">Title</td>
                     <td class="result title"></td>
                   </tr>
                   <tr>
-                    <td>Artist</td>
+                    <td data-i18n="artist">Artist</td>
                     <td class="result artist"></td>
                   </tr>
                   <tr>
-                    <td>Album</td>
+                    <td data-i18n="album">Album</td>
                     <td class="result album"></td>
                   </tr>
                 </tbody>
@@ -65,19 +65,20 @@
         <hr>
         <div id="historyControls" style="margin-bottom: 10px;">
             <button id="sortByTitle" class="btn-small waves-effect waves-light">
-                Title <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">unfold_more</i>
+                <span data-i18n="title">Title</span> <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">unfold_more</i>
             </button>
             <button id="sortByArtist" class="btn-small waves-effect waves-light">
-                Artist <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">unfold_more</i>
+                <span data-i18n="artist">Artist</span> <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">unfold_more</i>
             </button>
             <button id="sortByDate" class="btn-small waves-effect waves-light">
-                Date <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">keyboard_arrow_down</i>
+                <span data-i18n="date">Date</span> <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">keyboard_arrow_down</i>
             </button>
         </div>
         <div id="historyCards" class="history-cards-container">
             <!-- History cards will be dynamically added here -->
         </div>
         <script src="/libs/materialize/materialize.min.js"></script>
+        <script src="./i18n.js" type="module"></script>
         <script src="./guess.js" type="module"></script>
         <script src="./syncBackground.js" type="module"></script>
     </body>

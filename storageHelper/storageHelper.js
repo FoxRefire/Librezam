@@ -1,7 +1,7 @@
 export const Defaults = {
     isShowCoverart: false,
     isRecordAnotherTab: false,
-    bgImage: 'url("/images/background-2.jpg")',
+    bgImage: '',
     fallbackRules: {"3500":["shazam"],"7200":["shazam"],"12000":["shazam"]},
     histories: [],
     auddToken: "test",
@@ -22,7 +22,7 @@ export const Defaults = {
 
 export async function getStorage(key) {
     return await chrome.storage.local.get(key).then(o => o[key])
-        ?? Defaults[key] 
+        ?? Defaults[key]
         ?? undefined
 }
 

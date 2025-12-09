@@ -1,202 +1,396 @@
-:root {
-    --brand-color: rgb(26,112,216);
-    color-scheme: dark;
-    --md-sys-color-primary: var(--md-sys-color-primary-dark);
-    --md-sys-color-on-primary: var(--md-sys-color-on-primary-dark);
-    --md-sys-color-primary-container: var(--md-sys-color-primary-container-dark);
-    --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-dark);
-    --md-sys-color-secondary: var(--md-sys-color-secondary-dark);
-    --md-sys-color-on-secondary: var(--md-sys-color-on-secondary-dark);
-    --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-dark);
-    --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
-    --md-sys-color-tertiary: var(--md-sys-color-tertiary-dark);
-    --md-sys-color-on-tertiary: var(--md-sys-color-on-tertiary-dark);
-    --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-dark);
-    --md-sys-color-on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
-    --md-sys-color-error: var(--md-sys-color-error-dark);
-    --md-sys-color-on-error: var(--md-sys-color-on-error-dark);
-    --md-sys-color-error-container: var(--md-sys-color-error-container-dark);
-    --md-sys-color-on-error-container: var(--md-sys-color-on-error-container-dark);
-    --md-sys-color-outline: var(--md-sys-color-outline-dark);
-    --md-sys-color-background: var(--md-sys-color-background-dark);
-    --md-sys-color-on-background: var(--md-sys-color-on-background-dark);
-    --md-sys-color-surface: var(--md-sys-color-surface-dark);
-    --md-sys-color-on-surface: var(--md-sys-color-on-surface-dark);
-    --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-dark);
-    --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
-    --md-sys-color-inverse-surface: var(--md-sys-color-inverse-surface-dark);
-    --md-sys-color-inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
-    --md-sys-color-inverse-primary: var(--md-sys-color-inverse-primary-dark);
-    --md-sys-color-shadow: var(--md-sys-color-shadow-dark);
-    --md-sys-color-surface-tint: var(--md-sys-color-surface-tint-dark);
-    --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-dark);
-    --md-sys-color-scrim: var(--md-sys-color-scrim-dark)
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+:root {
+    --brand-color: #0088FF;
+    --background-color: #FFFFFF;
+    --surface-color: #F8F8F8;
+    --text-primary: #222222;
+    --text-secondary: #555555;
+    --card-background: #FFFFFF;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --menu-bg: #FFFFFF;
+    /* Updated gradient as requested by user */
+    --header-gradient: linear-gradient(135deg, #047AFF 0%, #006AFF 100%);
+}
 
 body {
     width: 350px;
-    height: 500px;
-    background-image: url("/images/background-2.jpg"); /*default*/
-    background-size: 100%;
-    background-attachment: fixed;
+    height: 520px;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    /* Mac-style font stack with Inter as primary */
+    /* font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; */
+    font-family: -apple-system, "Inter", BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
     overflow-y: auto;
+    /* Mac-style rendering/intensity */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-weight: 500; /* Slight intensity boost globally */
 }
 
 body.main {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    min-height: 100vh;
 }
 
-/* header element positioning -------------------------------*/
-
-/* header container */
+/* Header & Navigation */
 #surfaceContainer {
-    min-height:56px;
-    height: auto;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-/* menu button */
-#menuButton {
-    font-size: 45px !important;
-    color:var(--brand-color);
-    margin:10px 9px;
-    &:hover {
-        transform:scale(1.1);
-    }
+    background: var(--header-gradient);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 136, 255, 0.2);
 }
 
-/* dropdown menu styles */
-#dropdownMenu {
-    width:65% !important;
-    top:65px !important;
+#menuButton {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 28px !important;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    opacity: 0.9;
+    z-index: 1002; /* Ensure above backdrop */
 }
+
+#menuButton:hover {
+    opacity: 1;
+}
+
+/* Dropdown & Backdrop */
+#menuBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px); /* The "Fog" effect */
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#menuBackdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#dropdownMenu {
+    top: 60px !important; /* Slightly lower */
+    right: 15px !important;
+    left: auto !important;
+    width: 260px !important;
+    border-radius: 16px; /* Smooth corners */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    background-color: var(--menu-bg) !important;
+    overflow: hidden;
+    position: fixed !important;
+    z-index: 1001 !important;
+    transform-origin: top right;
+    transform: scale(0.8) translateY(-20px);
+    opacity: 0;
+    display: block !important;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Materialize uses display:block/none. We utilize a class to override if needed,
+   but since we hook into openStart, let's trust Materialize for display
+   BUT we want our animation overrides. */
 
 .dropdown-content {
-    background-color: rgba(15,100,150,0.95) !important;
-    backdrop-filter: blur(50px);
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
-    border-radius: 8px;
-    min-width: 200px !important;
+    background-color: var(--menu-bg) !important;
 }
 
-.dropdown-content li > a {
-    color: var(--md-sys-color-on-surface) !important;
-    padding: 12px 16px !important;
-    display: flex !important;
-    align-items: center !important;
-    &:hover {
-        background-color: rgba(15,100,150,0.3) !important;
-    }
+/* Animation state when active (Materialize adds display block, we handle opacity/transform) */
+/* Actually Materialize handles opacity. We want to override it to be smoother. */
+/* We will toggle a class .menu-visible on the dropdown via JS */
+
+#dropdownMenu.menu-visible {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.dropdown-content li {
+    min-height: 50px;
+}
+
+/* Common style for links and the label in the menu */
+.dropdown-content li > a,
+.dropdown-content li > label {
+    color: var(--text-primary) !important;
+    font-size: 16px;
+    padding: 16px 24px !important;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    /* transition: background-color 0.2s; */
+}
+
+
+.dropdown-content li > a:hover,
+.dropdown-content li:hover > label {
+    /* "Golden Brooch" Polish: Clean, distinct, premium blue gradient */
+    background: linear-gradient(90deg, rgba(225, 241, 255, 0.9) 0%, rgba(200, 230, 255, 0.6) 100%) !important;
+    box-shadow: 0 2px 8px rgba(0, 136, 255, 0.1);
+    transform: translateX(2px) scale(1.01);
+    border-radius: 8px; /* Smooth rounded corners for items */
+    margin: 2px 5px; /* Slight spacing so they float */
+    width: calc(100% - 10px) !important; /* Adjust width for margin */
+}
+
+
+.dropdown-content li > a > i,
+.dropdown-content li > label > i {
+    color: var(--brand-color) !important;
+    margin-right: 16px !important;
+    font-size: 22px;
+    transition: transform 0.2s;
+}
+
+.dropdown-content li:hover > a > i,
+.dropdown-content li:hover > label > i {
+    transform: scale(1.1);
+}
+
+.dropdown-content li > label > span {
+    color: var(--text-primary) !important;
+    font-size: 16px;
+}
+
+/* Checkbox specific overrides */
+[type="checkbox"].filled-in:checked + span:not(.lever):after {
+    border: 2px solid var(--brand-color);
+    background-color: var(--brand-color);
 }
 
 .dropdown-content li.divider {
-    background-color: color-mix(in srgb,var(--md-sys-color-outline-variant) 30%, transparent 70%) !important;
-    margin: 8px 0 !important;
+    background-color: #EEE !important;
+    margin: 4px 0 !important;
 }
 
-.auto-mode-toggle {
-    padding: 12px 16px !important;
-    display: flex !important;
-    align-items: center !important;
-    color: var(--md-sys-color-on-surface) !important;
-    cursor: pointer !important;
-    &:hover {
-        background-color: rgba(15,100,150,0.3) !important;
+/* Main Recognition UI */
+#circler {
+    margin-top: 10px; /* Moved UP significantly as requested */
+    width: 90px !important; /* Slightly larger */
+    height: 90px !important;
+    border-radius: 50%; /* Ensure perfectly circular */
+    /* Remove static shadow, let animation handle it or keep subtle one */
+}
+
+.spinner-blue-only {
+    border-color: #FFFFFF;
+    border-width: 4px;
+}
+
+/* Notification Text */
+#notification {
+    margin-top: 25px;
+    font-size: 14px; /* Reduced from 18px */
+    font-weight: 600;
+    text-align: center;
+    min-height: 24px;
+    color: #FFFFFF;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    animation: textPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes textPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    60% { transform: scale(1.2); } /* Much bigger pop */
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Ensure no dark backgrounds on menu items initially */
+.dropdown-content,
+.dropdown-content li,
+.dropdown-content li > a,
+.dropdown-content li > label {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* Streaming Links - Consolidated Container */
+#streamProviders {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    padding-bottom: 25px;
+}
+
+#streamProviders a img {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px; /* Slight radius looks cleaner */
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle backing */
+    padding: 4px;
+}
+
+#streamProviders a:hover img {
+    transform: translateY(-5px) scale(1.1);
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Result Table */
+#resultTable {
+    margin-top: 40px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#resultTable td {
+    padding: 12px 0;
+    font-size: 16px;
+    color: #FFFFFF !important; /* Force White */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+#resultTable td:first-child {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8) !important;
+    width: 70px;
+}
+
+#resultTable a {
+    color: #FFFFFF !important;
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+#resultTable a:hover {
+    border-bottom-color: #FFFFFF;
+}
+
+/* Removed Duplicate #streamProviders block that was here */
+
+/* Pulsing Animation - INTENSIFIED */
+@keyframes heartbeat {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
 }
 
-.auto-mode-toggle input[type="checkbox"] {
-    margin-right: 12px !important;
+.pulsing-icon {
+    width: 100%; /* Fill the circler container */
+    height: 100%;
+    animation: heartbeat 2s infinite;
+    border-radius: 50%;
+    background-color: #FFF; /* Make sure it has a body */
+    /* If the image itself is the icon, we might need a wrapper for the ring,
+       but let's try applying shadow to the img/icon itself which usually works if round.
+       If icon.png is transparent, box-shadow might be square.
+       Let's assume the user wants the "ripple" effect. */
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+}
+#historyControls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px 0;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #EEE;
+    border-top: 1px solid #EEE;
 }
 
-.auto-mode-toggle span {
-    color: var(--md-sys-color-on-surface) !important;
-    font-size: 14px !important;
-}
-/* notification */
-#notification {
-    font-size: 18px;
-    color: orange;
-}
-
-/* preloader animation */
-.preloader-wrapper.big {
-    width: 36px !important;
-    height: 36px !important;
-    margin:14px 14px 0px;
-}
-.preloader-wrapper {
-    display:flex; /*display correction*/
-    float:left;
+#historyControls button {
+    background: none;
+    box-shadow: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    transition: all 0.2s;
 }
 
-/* toggle automode */
-label:has(#isAutoMode) {
-    margin:10px
+#historyControls button:hover {
+    background-color: rgba(0, 136, 255, 0.1);
+    color: var(--brand-color);
 }
-
-
-/* seperator style (hr) -------------------------------------*/
-
-hr {
-    width:96%;
-    border-radius:96%;
-    margin-top:0px;
-    padding-top:0px;
-    color: color-mix(in srgb, var(--md-sys-color-outline-variant) 90%, transparent 10%);
-}
-
-
-/* history cards --------------------------------------------*/
 
 .history-cards-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 0 8px;
-    max-height: 390px;
-    overflow-y: auto;
-    flex: 1;
-    margin-top: 8px;
+    padding: 0 15px 15px 15px;
+    background-color: #FFFFFF;
 }
 
 .history-card {
-    background-color: rgba(15, 100, 150, 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 40%, transparent 60%);
+    background-color: #FFFFFF;
     border-radius: 12px;
     padding: 16px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    position: relative;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #F0F0F0;
 }
 
 .history-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(26, 112, 216, 0.2);
-    border-color: color-mix(in srgb, var(--brand-color) 60%, transparent 40%);
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 8px 25px rgba(0, 136, 255, 0.2);
+    border-color: rgba(0, 136, 255, 0.5);
+    background: linear-gradient(135deg, #ffffff 0%, #cae2f7ca 100%) !important;
 }
 
-.history-card-content {
+.history-card-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
+    align-items: center;
 }
 
-.history-card-info {
+.history-card-cover {
+    width: 56px;
+    height: 56px;
+    border-radius: 6px;
+    background-size: cover;
+    background-position: center;
+    margin-right: 16px;
+    background-color: #F8F8F8;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.history-card-main-info {
     flex: 1;
-    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .history-card-title {
     font-size: 16px;
-    font-weight: 600;
-    color: var(--md-sys-color-on-surface);
+    font-weight: 700;
+    color: var(--text-primary);
     margin-bottom: 4px;
     white-space: nowrap;
     overflow: hidden;
@@ -205,583 +399,84 @@ hr {
 
 .history-card-artist {
     font-size: 14px;
-    color: color-mix(in srgb, var(--md-sys-color-on-surface) 80%, transparent 20%);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.history-card-album {
-    font-size: 12px;
-    color: color-mix(in srgb, var(--md-sys-color-on-surface) 60%, transparent 40%);
-    margin-top: 2px;
+    color: var(--text-secondary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .history-card-date {
-    font-size: 11px;
-    color: color-mix(in srgb, var(--md-sys-color-on-surface) 50%, transparent 50%);
-    margin-top: 4px;
+    display: none;
 }
 
 .history-card-actions {
+    margin-left: 12px;
     display: flex;
     gap: 8px;
-    margin-left: 12px;
+    align-items: center;
 }
 
 .history-card-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    background: transparent;
     border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: #CCC;
+    padding: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--md-sys-color-on-surface);
+    border-radius: 50%;
+    transition: all 0.2s;
 }
 
 .history-card-btn:hover {
-    transform: scale(1.1);
-    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--brand-color);
+    background-color: #F0F8FF;
 }
 
-.history-card-btn.detail-btn:hover {
-    background-color: color-mix(in srgb, var(--brand-color) 20%, transparent 80%);
+.history-card-icon {
+    font-size: 20px;
 }
 
-.history-card-btn.delete-btn:hover {
-    background-color: color-mix(in srgb, #f44336 20%, transparent 80%);
+.history-card-album {
+    display: none;
 }
 
-.history-card-btn .material-icons {
-    font-size: 18px;
+hr {
+    border: none;
+    height: 1px;
+    background-color: #EEE;
+    margin: 15px 0;
 }
 
-.history-card-cover {
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
-    background-size: cover;
-    background-position: center;
-    margin-right: 12px;
-    flex-shrink: 0;
-}
-
-.history-card-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.history-card-main-info {
-    flex: 1;
-    min-width: 0;
-}
-
-/* History section layout */
-hr + div {
-    margin-bottom: 8px;
-}
-
-#historyControls {
-    margin-bottom: 1px !important;
-    flex-shrink: 0;
-    backdrop-filter: blur(5px);
-    padding: 3px;
-    border-radius: 8px;
-    margin: 1px;
-    text-align: center;
-}
-
-
-/* result table ---------------------------------------------*/
-
-/* Fixed positioning for recognition result */
-#surfaceContainer {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%);
-}
-
-/* spacing */
-#resultTable * {
-    padding-inline:12px;
-}
-/* border adjust */
-#resultTable tr {
-    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 5%, transparent 75%);
-}
-/* title clarity */
-#resultTable td:not(.result) {
-    font-weight: bold;
-    user-select:none
-}
-/* adjust spacing when #resultTable.active */
-#surfaceContainer:has(#resultTable:not([style="display:none; text-align: center;"])) {
-    height:auto;
-    padding-bottom:8px;
-    background-size:100% 100%;
-}
-
-
-/* streaming providers --------------------------------------*/
-
-#streamProviders a {
-    font-size:32px;
-    margin-inline:10px;
-    padding:12px 8px 4px 8px;
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
-    border-radius:5px;
-    background-color:rgba(15,100,150,0.0);
-    backdrop-filter: blur(50px);
-    &:hover {
-        border-width:2px;
-    }
-}
-
-
-/* settings layout ------------------------------------------*/
-
-/* popup spacing */
-:root:has(a.brand-logo) { /* give the Settings header a .class that is unique to the "Settings" Popup */
-    .input-field h5,
-    .input-field #recordLength,
-    .input-field input,
-    .input-field.col.s12,
-    .bg-selection,
-    form
-    {
-        margin-inline: 3% !important;
-    }
-}
-/* header styling */
-nav, .nav-wrapper {
-    background-color:rgba(0,0,0,0.05) !important;
-}
-
-/* Fixed header for settings pages */
+/* Settings Overrides for Light Theme */
 nav.navbar {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 1000 !important;
-    backdrop-filter: blur(10px) !important;
-    border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid #EEE !important;
 }
 
-/* Add padding to body content to account for fixed header */
-body:has(nav.navbar) {
-    padding-top: 64px !important;
-}
 nav .brand-logo, nav .back_button {
     color: var(--brand-color) !important;
 }
 
-nav .back_button {
-    margin-left:10px !important;
-    padding-inline:5px !important;
-    width:52px !important;
-    &:hover {
-        transform:scale(1.2) !important;
-    }
-}
-/* recording length input field */
-.input-field #recordLength {
-    font-size:32px !important;
-    margin-inline:3% !important;
-    width: 94% !important;
-    padding:12px 12px !important;
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%) !important;
-    border-radius:5px !important;
-    background-color:rgba(15,100,150,0.0) !important;
-    backdrop-filter: blur(25px) !important;
-    &:hover {
-        border-width:2px !important;
-    }
-}
-/* recognize backend input */
-.input-field.col.s12 {
-    & .select-wrapper {
-        margin-inline:-3% !important;
-        width:100% !important;
-        border-radius:10px;
-    }
-    & .select-dropdown.dropdown-trigger {
-        border-bottom: none !important;
-        border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%) !important;
-        border-radius: 5px !important;
-    }
-}
-
-/* clear history button */
-body a[class="btn filled icon-left modal-trigger"] {
-    margin: 12px 3% !important;
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%) !important;
-    border-radius:5px !important;
-    &:hover {
-        border-width:2px !important;
-        color: var(--brand-color) !important;
-    }
-}
-
-/* background selection options */
-.bg-selection {
-    margin-inline:3%;
-    padding-bottom:5px;
-    width: 94%;
-    height:auto;
-}
-.bg-opt-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
-.bg-opt {
-    width: 22%;
-    height:40px;
-    margin-top:2.5px;
-    margin-bottom:2.5px;
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
-    border-radius:5px;
-    background-color:rgba(15,100,150,0.0);
-    backdrop-filter: blur(25px);
-    box-sizing: border-box; /* Ensures padding/border is included in width */
-    overflow-y: auto;
-    background-size: 100%;
-    cursor: pointer;
-    &:hover {
-        transform:scale(1.1);
-    }
-}
-.bg-selected {
-    border:2px solid limegreen;
-}
-
-
-/* ----------------------------------------------------------
-   Fallback rules (Settings)
------------------------------------------------------------*/
-#fallbackRulesSection {
-    margin-inline: 3%;
-    margin-top: 8px;
-}
-#fallbackRulesSection > h5 {
-    margin-bottom: 6px;
-}
-#fallbackRulesSection p {
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-.fallback-rules-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
-.fallback-rule-card.card {
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 40%, transparent 60%);
-    border-radius: 8px;
-    background-color: rgba(15,100,150,0.05);
-    backdrop-filter: blur(18px);
-}
-.fallback-rule-card .card-content {
-    padding: 12px 14px;
-}
-.fallback-rule-card .card-title {
-    font-size: 1.1rem;
-    color: var(--md-sys-color-on-surface);
-}
-.fallback-rule-card .btn-flat.right {
-    color: color-mix(in srgb, var(--md-sys-color-on-surface) 80%, transparent 20%);
-}
-.fallback-rule-card .row {
-    margin-bottom: 8px;
-}
-.fallback-duration-input {
-    /* Hidden input - no styling needed */
-    display: none;
-}
-
-.duration-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 6px;
-    border-radius: 3px;
-    background: rgba(15,100,150,0.2);
-    outline: none;
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 30%, transparent 70%);
-}
-
-.duration-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--brand-color);
-    cursor: pointer;
-    border: 2px solid rgba(255,255,255,0.8);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-.duration-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.1);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-}
-
-.duration-slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--brand-color);
-    cursor: pointer;
-    border: 2px solid rgba(255,255,255,0.8);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-.duration-slider::-moz-range-thumb:hover {
-    transform: scale(1.1);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-}
-
-.duration-value-display {
-    transition: color 0.2s ease;
-}
-
-.duration-value-display:hover {
-    color: var(--brand-color) !important;
-}
-.fallback-backends-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-.chip {
-    color: gray !important;
-}
+.input-field #recordLength,
+body a[class="btn filled icon-left modal-trigger"],
+#addFallbackRule,
 .fallback-backends-list .chip {
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
-    font-weight: 500;
-    user-select: none;
-    transition: transform .08s ease, background-color .1s ease, border-color .1s ease;
-}
-.fallback-backends-list .chip[data-included="true"] {
-    border-color: color-mix(in srgb, var(--brand-color) 50%, transparent 50%);
-}
-.fallback-backends-list .chip:hover {
-    transform: translateY(-1px) scale(1.02);
-}
-.fallback-backends-list .chip.drag-over {
-    outline: 2px dashed var(--brand-color);
-    outline-offset: 2px;
+    border-color: #EEE !important;
+    background-color: #FAFAFA !important;
+    color: var(--text-primary) !important;
 }
 
-/* Touch reorder styles */
-.fallback-backends-list .chip.reordering {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(26, 112, 216, 0.4);
-    border-color: var(--brand-color);
-    background-color: rgba(26, 112, 216, 0.1);
-    z-index: 10;
-    position: relative;
+#resultTable td {
+    color: var(--text-primary) !important;
 }
 
-.fallback-backends-list .chip.is-dragging {
-    opacity: 0.7;
-    transform: scale(1.05);
-}
+/* CSS :has override removed to ensure blue header persists */
 
-/* Mobile touch feedback */
-@media (hover: none) and (pointer: coarse) {
-    .fallback-backends-list .chip {
-        touch-action: manipulation;
-    }
-    
-    .fallback-backends-list .chip:active {
-        transform: scale(0.95);
-    }
-    
-    .fallback-backends-list .chip.reordering:active {
-        transform: scale(1.05);
-    }
-}
+/* When result table is shown, we might simply want the white bg back on header if users prefer that,
+   but for now following "home screen" instruction, we keep the blue header potentially?
+   Actually, usually Shazam creates a "Result Card".
+   Let's keep the Blue Header for the LISTENING state, but purely Blue.
+   When result shows, maybe it stays blue?
+   Let's leave #surfaceContainer as Blue Gradient.
+*/
 
-#addFallbackRule {
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
-    border-radius: 6px;
-}
-#addFallbackRule:hover {
-    color: var(--brand-color);
-}
-#resetFallbackRules {
-    color: color-mix(in srgb, var(--md-sys-color-on-surface) 85%, transparent 15%);
-}
 
-/* Streaming Providers Settings Styles */
-.container {
-    padding: 20px;
-}
-
-.selected-providers, .available-providers {
-    margin: 20px 0;
-}
-
-.selected-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-    align-items: flex-start;
-}
-
-.available-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.provider-item {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    user-select: none;
-    width: fit-content;
-    max-width: 100%;
-}
-
-.provider-item.selected {
-    background-color: var(--brand-color);
-    border-color: var(--brand-color);
-}
-
-.provider-item.available {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.provider-item.available:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-1px);
-}
-
-.provider-item.selected {
-    cursor: grab;
-}
-
-.provider-item.selected:active {
-    cursor: grabbing;
-}
-
-.provider-icon {
-    margin-right: 8px;
-    border-radius: 50%;
-}
-
-.provider-name {
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.remove-btn {
-    margin-left: 8px;
-    font-size: 18px;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-}
-
-.remove-btn:hover {
-    opacity: 1;
-}
-
-.provider-item.dragging {
-    opacity: 0.5;
-    transform: scale(1.05);
-}
-
-.provider-item.drag-over {
-    border-color: var(--brand-color);
-    background-color: rgba(26, 112, 216, 0.1);
-}
-
-/* Mobile touch feedback for streaming providers */
-@media (hover: none) and (pointer: coarse) {
-    .provider-item {
-        touch-action: manipulation;
-    }
-    
-    .provider-item:active {
-        transform: scale(0.95);
-    }
-    
-    .provider-item.selected:active {
-        transform: scale(1.05);
-    }
-}
-
-/* Reset button styles */
-.reset-section {
-    margin-top: 30px;
-    text-align: center;
-    padding: 20px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-#resetProviders {
-    background-color: var(--brand-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-#resetProviders:hover {
-    background-color: color-mix(in srgb, var(--brand-color) 85%, black 15%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(26, 112, 216, 0.3);
-}
-
-#resetProviders:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(26, 112, 216, 0.2);
-}
-
-#resetProviders .material-icons {
-    font-size: 18px;
-}
-
-/* Disabled input styling */
-input[type="text"]:disabled {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    color: color-mix(in srgb, var(--md-sys-color-on-surface) 40%, transparent 60%) !important;
-    border-color: color-mix(in srgb, var(--md-sys-color-outline-variant) 20%, transparent 80%) !important;
-    cursor: not-allowed !important;
-    opacity: 0.6 !important;
-}

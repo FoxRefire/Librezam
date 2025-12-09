@@ -4,8 +4,13 @@
     "version": "5.3",
     "manifest_version": 3,
     "default_locale": "en",
+    "developer": {
+        "name": "dizzi1222",
+        "url": "https://github.com/dizzi1222/Librezam"
+    },
     "icons": {
-        "128": "images/icon.png"
+        "38": "images/icon-38.png",
+        "128": "images/icon-128.png"
     },
     "action": {
         "default_title": "__MSG_extensionName__",
@@ -44,7 +49,11 @@
     },
     "browser_specific_settings": {
         "gecko": {
-            "id": "Librezam@Librezam"
+            "id": "Librezam-blue@dizzi1222",
+            "update_url": "https://raw.githubusercontent.com/dizzi1222/Librezam/main/updates.json",
+            "data_collection_permissions": {
+                "required": ["none"]
+            }
         }
     }
 }

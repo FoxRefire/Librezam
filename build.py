@@ -22,7 +22,7 @@ def zip_directory(base_dir, browser, exclude_list):
 if __name__ == '__main__':
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
-    exclude_list = ['dist', 'manifest.json', 'manifest_chrome.json', 'manifest_firefox.json', 'manifest_ffdroid.json', 'build.py', '.git' ,'.gitignore']
+    exclude_list = ['dist', 'manifest.json', 'manifest_chrome.json', 'manifest_firefox.json', 'manifest_ffdroid.json', 'build.py', '.git' ,'.gitignore', 'Librezam-blue.xpi', 'Librezam.xpi', 'firefox.zip', 'chrome.zip']
 
     for browser in ["chrome", "firefox"]:
         zip_directory(base_dir, browser, exclude_list)

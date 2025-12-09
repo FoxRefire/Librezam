@@ -1,85 +1,114 @@
 <html>
-    <head>
-        <link href="/libs/material-icons/material-icons.css" rel="stylesheet">
-        <link rel="stylesheet" href="/libs/materialize/materialize.min.css"/>
-        <link href="popup.css" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body class="main">
-        <div id="surfaceContainer" class="center">
-            <!-- Dropdown trigger -->
-            <a class='dropdown-trigger right' href='#' data-target='dropdownMenu'>
-                <i id="menuButton" class="material-icons">more_vert</i>
-            </a>
+  <head>
+    <link href="/libs/material-icons/material-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/libs/materialize/materialize.min.css" />
+    <link href="popup.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="main">
+    <div id="surfaceContainer" class="center">
+      <!-- Dropdown trigger -->
+      <a class="dropdown-trigger right" href="#" data-target="dropdownMenu">
+        <i id="menuButton" class="material-icons">more_vert</i>
+      </a>
 
-            <!-- Dropdown Structure -->
-            <ul id='dropdownMenu' class='dropdown-content'>
-                <li><a href="/popup/settingsMenu.html"><i class="material-icons left">settings</i><span data-i18n="settings">Settings</span></a></li>
-                <li class="divider" tabindex="-1"></li>
-                <li>
-                    <label class="auto-mode-toggle">
-                        <i class="material-icons left">flash_auto</i>
-                        <input id="isAutoMode" class="filled-in" type="checkbox">
-                        <span data-i18n="autoRecognition">Auto recognition</span>
-                    </label>
-                </li>
-                <li class="divider" tabindex="-1"></li>
-                <li><a href="#" id="micRecognition"><i class="material-icons left">mic</i><span data-i18n="recognizeFromMicrophone">Recognize from Microphone</span></a></li>
-            </ul>
+      <div id="menuBackdrop"></div>
 
-            <div id="circler" class="preloader-wrapper big active">
-                <div class="spinner-layer spinner-blue-only">
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
-                  </div><div class="gap-patch">
-                    <div class="circle"></div>
-                  </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                  </div>
-                </div>
-            </div>
+      <!-- Dropdown Structure -->
+      <ul id="dropdownMenu" class="dropdown-content">
+        <li>
+          <a href="/popup/settingsMenu.html"
+            ><i class="material-icons left">settings</i
+            ><span data-i18n="settings">Settings</span></a
+          >
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <a href="https://www.shazam.com/myshazam" target="_blank"
+            ><i class="material-icons left">library_music</i
+            ><span>My Shazam</span></a
+          >
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <label class="auto-mode-toggle">
+            <i class="material-icons left">flash_auto</i>
+            <input id="isAutoMode" class="filled-in" type="checkbox" />
+            <span data-i18n="autoRecognition">Auto recognition</span>
+          </label>
+        </li>
+        <li class="divider" tabindex="-1"></li>
+        <li>
+          <a href="#" id="micRecognition"
+            ><i class="material-icons left">mic</i
+            ><span data-i18n="recognizeFromMicrophone"
+              >Recognize from Microphone</span
+            ></a
+          >
+        </li>
+      </ul>
 
-            <div id="notification"></div>
+      <div id="circler" class="center">
+        <img src="/images/icon.png" class="pulsing-icon" alt="Listening..." />
+      </div>
 
-            <table id="resultTable" style="display:none; text-align: center;">
-                <tbody>
-                  <tr>
-                    <td data-i18n="title">Title</td>
-                    <td class="result title"></td>
-                  </tr>
-                  <tr>
-                    <td data-i18n="artist">Artist</td>
-                    <td class="result artist"></td>
-                  </tr>
-                  <tr>
-                    <td data-i18n="album">Album</td>
-                    <td class="result album"></td>
-                  </tr>
-                </tbody>
-            </table><br>
-            <div id="streamProviders" style="display:none;">
-              <!-- Streaming providers will be dynamically added here -->
-            </div>
-        </div>
+      <div id="notification"></div>
 
-        <hr>
-        <div id="historyControls" style="margin-bottom: 10px;">
-            <button id="sortByTitle" class="btn-small waves-effect waves-light">
-                <span data-i18n="title">Title</span> <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">unfold_more</i>
-            </button>
-            <button id="sortByArtist" class="btn-small waves-effect waves-light">
-                <span data-i18n="artist">Artist</span> <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">unfold_more</i>
-            </button>
-            <button id="sortByDate" class="btn-small waves-effect waves-light">
-                <span data-i18n="date">Date</span> <i class="material-icons sort-icon" style="font-size: 16px; vertical-align: middle;">keyboard_arrow_down</i>
-            </button>
-        </div>
-        <div id="historyCards" class="history-cards-container">
-            <!-- History cards will be dynamically added here -->
-        </div>
-        <script src="/libs/materialize/materialize.min.js"></script>
-        <script src="./i18n.js" type="module"></script>
-        <script src="./guess.js" type="module"></script>
-        <script src="./syncBackground.js" type="module"></script>
-    </body>
+      <table id="resultTable" style="display: none; text-align: center">
+        <tbody>
+          <tr>
+            <td data-i18n="title">Title</td>
+            <td class="result title"></td>
+          </tr>
+          <tr>
+            <td data-i18n="artist">Artist</td>
+            <td class="result artist"></td>
+          </tr>
+          <tr>
+            <td data-i18n="album">Album</td>
+            <td class="result album"></td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <div id="streamProviders" style="display: none">
+        <!-- Streaming providers will be dynamically added here -->
+      </div>
+    </div>
+
+    <hr />
+    <div id="historyControls" style="margin-bottom: 10px">
+      <button id="sortByTitle" class="btn-small waves-effect waves-light">
+        <span data-i18n="title">Title</span>
+        <i
+          class="material-icons sort-icon"
+          style="font-size: 16px; vertical-align: middle"
+          >unfold_more</i
+        >
+      </button>
+      <button id="sortByArtist" class="btn-small waves-effect waves-light">
+        <span data-i18n="artist">Artist</span>
+        <i
+          class="material-icons sort-icon"
+          style="font-size: 16px; vertical-align: middle"
+          >unfold_more</i
+        >
+      </button>
+      <button id="sortByDate" class="btn-small waves-effect waves-light">
+        <span data-i18n="date">Date</span>
+        <i
+          class="material-icons sort-icon"
+          style="font-size: 16px; vertical-align: middle"
+          >keyboard_arrow_down</i
+        >
+      </button>
+    </div>
+    <div id="historyCards" class="history-cards-container">
+      <!-- History cards will be dynamically added here -->
+    </div>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="./i18n.js" type="module"></script>
+    <script src="./guess.js" type="module"></script>
+    <script src="./syncBackground.js" type="module"></script>
+  </body>
 </html>

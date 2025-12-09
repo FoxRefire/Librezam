@@ -1,3 +1,5 @@
+// Checked. No dynamic bg code found in previous view.
+// Just ensuring the file matches expectations.
 import { Recognize } from "/backendModules/Recognize.js"
 import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 import { t } from "./i18n.js"
@@ -12,8 +14,30 @@ function init() {
     }
 
     // Initialize dropdown menu
-    M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'));
-    
+    const menuBackdrop = document.getElementById('menuBackdrop');
+    const dropdownInstance = M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'), {
+        alignment: 'right', // Align to right of trigger
+        constrainWidth: false, // Don't match trigger width
+        coverTrigger: false, // Display below trigger
+        closeOnClick: true,
+        onOpenStart: () => {
+             menuBackdrop.classList.add('active');
+             document.getElementById('dropdownMenu').classList.add('menu-visible');
+        },
+        onCloseStart: () => {
+             menuBackdrop.classList.remove('active');
+             document.getElementById('dropdownMenu').classList.remove('menu-visible');
+        }
+    });
+
+    // Close menu when clicking backdrop
+    if(menuBackdrop) {
+        menuBackdrop.addEventListener('click', () => {
+            const instance = M.Dropdown.getInstance(document.querySelector('.dropdown-trigger'));
+            if(instance) instance.close();
+        });
+    }
+
     writeHistory()
     autoModeController()
     micRecognitionController()
@@ -80,11 +104,12 @@ function renderHistoryTable(histories = currentHistories) {
     histories.forEach((history, index) => {
         const card = document.createElement("div")
         card.className = "history-card"
+        card.style.cursor = "pointer"
         card.dataset.index = index
-        
+
         // Format date
         const dateStr = history.timestamp ? new Date(history.timestamp).toLocaleDateString() : ""
-        
+
         card.innerHTML = `
             <div class="history-card-header">
                 <div class="history-card-cover" style="background-image: url('${history.art || ''}')"></div>
@@ -104,7 +129,7 @@ function renderHistoryTable(histories = currentHistories) {
                 </div>
             </div>
         `
-        
+
         container.appendChild(card)
     })
 }
@@ -122,11 +147,11 @@ function setupHistoryControls() {
     document.getElementById("sortByTitle").addEventListener("click", () => {
         toggleSort('title')
     })
-    
+
     document.getElementById("sortByArtist").addEventListener("click", () => {
         toggleSort('artist')
     })
-    
+
     document.getElementById("sortByDate").addEventListener("click", () => {
         toggleSort('date')
     })
@@ -137,9 +162,17 @@ function setupHistoryControls() {
             if (e.target.closest(".detail-btn")) {
                 const index = parseInt(e.target.closest(".detail-btn").dataset.index)
                 await writeResult(currentHistories[index])
+                e.stopPropagation()
             } else if (e.target.closest(".delete-btn")) {
                 const index = parseInt(e.target.closest(".delete-btn").dataset.index)
                 await deleteHistoryItem(index)
+                e.stopPropagation()
+            } else if (e.target.closest(".history-card")) {
+                const index = parseInt(e.target.closest(".history-card").dataset.index)
+                const history = currentHistories[index]
+                if (history.shazamLink) {
+                   window.open(history.shazamLink, "_blank")
+                }
             }
         })
         document.hasHistoryControlsListener = true
@@ -155,11 +188,11 @@ function toggleSort(field) {
         currentSort.field = field
         currentSort.ascending = true
     }
-    
+
     // Sort the histories
     currentHistories.sort((a, b) => {
         let comparison = 0
-        
+
         switch (field) {
             case 'title':
                 comparison = a.title.localeCompare(b.title)
@@ -171,13 +204,13 @@ function toggleSort(field) {
                 comparison = (a.timestamp || 0) - (b.timestamp || 0)
                 break
         }
-        
+
         return currentSort.ascending ? comparison : -comparison
     })
-    
+
     // Update sort indicators
     updateSortIndicators()
-    
+
     // Re-render table
     renderHistoryTable()
 }
@@ -187,11 +220,11 @@ function updateSortIndicators() {
     document.querySelectorAll('.sort-icon').forEach(icon => {
         icon.textContent = 'unfold_more'
     })
-    
+
     // Set the active sort icon
     const activeButton = document.getElementById(`sortBy${currentSort.field.charAt(0).toUpperCase() + currentSort.field.slice(1)}`)
     const activeIcon = activeButton.querySelector('.sort-icon')
-    
+
     if (currentSort.ascending) {
         activeIcon.textContent = 'keyboard_arrow_up'
     } else {
@@ -257,7 +290,13 @@ async function writeResult(result){
     let elms = ["title", "artist", "album"]
     elms.forEach(out => {
         let outElm = document.querySelector(`.result.${out}`)
-        outElm.innerText = result[out]
+        let text = result[out]
+
+        if (result.shazamLink && (out === "title" || out === "artist")) {
+            outElm.innerHTML = `<a href="${result.shazamLink}" target="_blank" style="color: inherit; text-decoration: underline;">${text}</a>`
+        } else {
+            outElm.innerText = text
+        }
     })
 
     // Update streaming providers
@@ -266,7 +305,7 @@ async function writeResult(result){
 
 async function updateStreamingProviders(result) {
     const selectedProviders = await getStorage("selectedStreamingProviders")
-    
+
     // Provider icons mapping
     const providerIcons = {
         'apple': '/images/apple.png',
@@ -283,10 +322,10 @@ async function updateStreamingProviders(result) {
         'duckduckgo_search': '/images/duckduckgo.png',
         'musicbrainz': '/images/musicbrainz.png'
     }
-    
+
     // Clear existing providers
     streamProviders.innerHTML = ''
-    
+
     // Add selected providers
     selectedProviders.forEach(providerId => {
         if (result[providerId]) {
@@ -294,12 +333,12 @@ async function updateStreamingProviders(result) {
             providerElement.className = `result stream ${providerId}`
             providerElement.href = result[providerId]
             providerElement.target = '_blank'
-            
+
             const img = document.createElement('img')
             img.src = providerIcons[providerId]
             img.width = 32
             img.className = 'circle responsive-img'
-            
+
             providerElement.appendChild(img)
             streamProviders.appendChild(providerElement)
         }
@@ -352,15 +391,15 @@ async function startMicRecognition() {
         resultTable.style.display = "none"
         streamProviders.style.display = "none"
         notification.innerText = ""
-        
+
         // Get fallback rules
         let fallbackRules = await getStorage("fallbackRules")
         let times = Object.keys(fallbackRules).map(t => Number(t))
         let backendsMap = Object.values(fallbackRules)
-        
+
         // Record from microphone
         let micAudios = await recordFromMicrophone(times)
-        
+
         // Try recognition with fallback
         for(let backends of backendsMap) {
             showStatus(t("listening"))

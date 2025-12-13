@@ -20,6 +20,18 @@ function init() {
 }
 
 async function startTabRecognition() {
+    // Initialize UI for recognition
+    circler.style.opacity = "0"
+    circler.style.display = "block"
+    circler.style.transition = "opacity 0.3s ease"
+    setTimeout(() => {
+        circler.style.opacity = "1"
+    }, 50)
+    
+    resultTable.style.display = "none"
+    streamProviders.style.display = "none"
+    notification.classList.remove("show", "pulse", "recognizing")
+    
     let fallbackRules = await getStorage("fallbackRules")
     let times = Object.keys(fallbackRules).map(t => Number(t))
     let backendsMap = Object.values(fallbackRules)
@@ -244,9 +256,26 @@ async function sendMessagePromises(request) {
 }
 
 async function writeResult(result){
-    circler.style.display = "none"
+    // Smooth transition out for spinner
+    circler.style.opacity = "0"
+    circler.style.transition = "opacity 0.3s ease"
+    setTimeout(() => {
+        circler.style.display = "none"
+    }, 300)
+    
+    // Smooth fade in for results
+    resultTable.style.opacity = "0"
     resultTable.style.display = "block"
+    resultTable.style.transition = "opacity 0.5s ease"
+    streamProviders.style.opacity = "0"
     streamProviders.style.display = "block"
+    streamProviders.style.transition = "opacity 0.5s ease"
+    
+    // Trigger fade in
+    setTimeout(() => {
+        resultTable.style.opacity = "1"
+        streamProviders.style.opacity = "1"
+    }, 50)
 
     let isShowCoverart = await getStorage("isShowCoverart")
     if(isShowCoverart){
@@ -324,11 +353,38 @@ function showError(msg) {
     circler.style.display = "none"
     notification.innerText = msg
     notification.style.color = "orange"
+    notification.classList.remove("show", "pulse", "recognizing")
+    // Trigger reflow to restart animation
+    void notification.offsetWidth
+    notification.classList.add("show")
 }
 
 function showStatus(msg) {
-    notification.innerText = msg
-    notification.style.color = "white"
+    if (msg) {
+        // Check if message ends with "..." or similar pattern
+        const baseMessage = msg.replace(/\.+$/, '')
+        const hasDots = msg.endsWith('...') || msg.endsWith('…')
+        
+        if (hasDots) {
+            // Use CSS-animated dots for smoother animation
+            notification.innerHTML = baseMessage + '<span class="dots"><span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span>'
+        } else {
+            notification.innerText = msg
+        }
+        
+        notification.style.color = "white"
+        notification.classList.remove("show", "pulse", "recognizing")
+        // Trigger reflow to restart animation
+        void notification.offsetWidth
+        notification.classList.add("show", "pulse", "recognizing")
+    } else {
+        // Hide notification smoothly
+        notification.classList.remove("show", "pulse", "recognizing")
+        setTimeout(() => {
+            notification.innerText = ""
+            notification.innerHTML = ""
+        }, 300)
+    }
 }
 
 async function autoModeController() {
@@ -347,10 +403,22 @@ async function micRecognitionController() {
 
 async function startMicRecognition() {
     try {
-        // Reset UI
+        // Reset UI with smooth transitions
+        resultTable.style.opacity = "0"
+        streamProviders.style.opacity = "0"
+        setTimeout(() => {
+            resultTable.style.display = "none"
+            streamProviders.style.display = "none"
+        }, 300)
+        
+        circler.style.opacity = "0"
         circler.style.display = "block"
-        resultTable.style.display = "none"
-        streamProviders.style.display = "none"
+        circler.style.transition = "opacity 0.3s ease"
+        setTimeout(() => {
+            circler.style.opacity = "1"
+        }, 50)
+        
+        notification.classList.remove("show", "pulse", "recognizing")
         notification.innerText = ""
         
         // Get fallback rules

@@ -64,7 +64,7 @@ async function getResult(audios, backend) {
             await writeResult(result)
             await saveHistory(result)
             await writeHistory() // Update history display immediately
-            showStatus("")
+            notification.style.display = "none"
             return true
         } catch(e) {
             console.log(e)
@@ -149,6 +149,9 @@ function setupHistoryControls() {
             if (e.target.closest(".detail-btn")) {
                 const index = parseInt(e.target.closest(".detail-btn").dataset.index)
                 await writeResult(currentHistories[index])
+                if(notification.style.color === "orange") {
+                    notification.style.display = "none"
+                }
             } else if (e.target.closest(".delete-btn")) {
                 const index = parseInt(e.target.closest(".delete-btn").dataset.index)
                 await deleteHistoryItem(index)

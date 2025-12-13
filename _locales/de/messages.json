@@ -259,10 +259,6 @@
     "message": "Optionen",
     "description": "Options section title"
   },
-  "showCoverartOnRecognized": {
-    "message": "Cover-Art bei Erkennung anzeigen",
-    "description": "Show coverart checkbox"
-  },
   "recordAnotherTabAudio": {
     "message": "Audio eines anderen Tabs aufnehmen",
     "description": "Record another tab audio checkbox"

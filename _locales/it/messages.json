@@ -259,10 +259,6 @@
     "message": "Opzioni",
     "description": "Options section title"
   },
-  "showCoverartOnRecognized": {
-    "message": "Mostra copertina quando riconosciuto",
-    "description": "Show coverart checkbox"
-  },
   "recordAnotherTabAudio": {
     "message": "Registra audio di un'altra scheda",
     "description": "Record another tab audio checkbox"

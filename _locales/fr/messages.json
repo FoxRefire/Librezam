@@ -259,10 +259,6 @@
     "message": "Options",
     "description": "Options section title"
   },
-  "showCoverartOnRecognized": {
-    "message": "Afficher la pochette lors de la reconnaissance",
-    "description": "Show coverart checkbox"
-  },
   "recordAnotherTabAudio": {
     "message": "Enregistrer l'audio d'un autre onglet",
     "description": "Record another tab audio checkbox"

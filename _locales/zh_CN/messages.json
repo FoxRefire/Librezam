@@ -259,10 +259,6 @@
     "message": "选项",
     "description": "Options section title"
   },
-  "showCoverartOnRecognized": {
-    "message": "识别时显示封面",
-    "description": "Show coverart checkbox"
-  },
   "recordAnotherTabAudio": {
     "message": "录制另一个标签页的音频",
     "description": "Record another tab audio checkbox"

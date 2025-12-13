@@ -1,12 +1,6 @@
 import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 import { t, reloadTranslations, translatePage } from "./i18n.js"
 
-// Show coverart on recognized
-isShowCoverart.checked = await getStorage("isShowCoverart")
-isShowCoverart.addEventListener("change", () => {
-    setStorage("isShowCoverart", isShowCoverart.checked)
-})
-
 isRecordAnotherTab.checked = await getStorage("isRecordAnotherTab")
 isRecordAnotherTab.addEventListener("change", () => {
     setStorage("isRecordAnotherTab", isRecordAnotherTab.checked)

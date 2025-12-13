@@ -259,10 +259,6 @@
     "message": "オプション",
     "description": "Options section title"
   },
-  "showCoverartOnRecognized": {
-    "message": "認識時にカバーアートを表示",
-    "description": "Show coverart checkbox"
-  },
   "recordAnotherTabAudio": {
     "message": "別のタブの音声を録音",
     "description": "Record another tab audio checkbox"

@@ -259,10 +259,6 @@
     "message": "Параметры",
     "description": "Options section title"
   },
-  "showCoverartOnRecognized": {
-    "message": "Показывать обложку при распознавании",
-    "description": "Show coverart checkbox"
-  },
   "recordAnotherTabAudio": {
     "message": "Записывать аудио другой вкладки",
     "description": "Record another tab audio checkbox"

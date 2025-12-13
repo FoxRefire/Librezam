@@ -259,10 +259,6 @@
     "message": "옵션",
     "description": "Options section title"
   },
-  "showCoverartOnRecognized": {
-    "message": "인식 시 커버 아트 표시",
-    "description": "Show coverart checkbox"
-  },
   "recordAnotherTabAudio": {
     "message": "다른 탭 오디오 녹음",
     "description": "Record another tab audio checkbox"

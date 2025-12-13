@@ -280,10 +280,8 @@ async function writeResult(result){
         streamProviders.style.opacity = "1"
     }, 50)
 
-    let isShowCoverart = await getStorage("isShowCoverart")
-    if(isShowCoverart){
-        surfaceContainer.style.backgroundImage = `url('${result.art}')`
-    }
+    // Always show coverart
+    surfaceContainer.style.backgroundImage = `url('${result.art}')`
 
     // Update basic info
     let elms = ["title", "artist", "album"]

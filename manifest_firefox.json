@@ -44,7 +44,11 @@
     },
     "browser_specific_settings": {
         "gecko": {
-            "id": "Librezam@Librezam"
+            "id": "Librezam@Librezam",
+            "data_collection_permissions": {
+                "required": ["websiteContent"],
+                "optional": ["authenticationInfo"]
+            }
         }
     }
 }

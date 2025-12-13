@@ -64,6 +64,12 @@ body.main {
     font-size: 45px !important;
     color:var(--brand-color);
     margin:10px 9px;
+    position: relative;
+    z-index: 10;
+    text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.8),
+        0 0 6px rgba(0, 0, 0, 0.6);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
     &:hover {
         transform:scale(1.1);
     }
@@ -129,6 +135,11 @@ body.main {
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     transform: translateY(-10px) scale(0.95);
+    position: relative;
+    z-index: 2;
+    text-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.8),
+        0 0 4px rgba(0, 0, 0, 0.6);
 }
 
 #notification.show {
@@ -464,6 +475,32 @@ hr + div {
     z-index: 100;
     backdrop-filter: blur(10px);
     border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 30%, transparent 70%);
+    position: relative;
+}
+
+/* Overlay for better text visibility when cover art is set */
+#surfaceContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show overlay when cover art is set */
+#surfaceContainer:has(#resultTable:not([style*="display:none"]))::before {
+    opacity: 1;
 }
 
 /* spacing */
@@ -477,7 +514,15 @@ hr + div {
 /* title clarity */
 #resultTable td:not(.result) {
     font-weight: bold;
-    user-select:none
+    user-select:none;
+    position: relative;
+    z-index: 2;
+}
+
+/* Text visibility improvements for result table */
+#resultTable {
+    position: relative;
+    z-index: 2;
 }
 /* adjust spacing when #resultTable.active */
 #surfaceContainer:has(#resultTable:not([style="display:none; text-align: center;"])) {
@@ -489,16 +534,26 @@ hr + div {
 
 /* streaming providers --------------------------------------*/
 
+#streamProviders {
+    position: relative;
+    z-index: 2;
+}
+
 #streamProviders a {
     font-size:32px;
     margin-inline:10px;
     padding:12px 8px 4px 8px;
     border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
     border-radius:5px;
-    background-color:rgba(15,100,150,0.0);
+    background-color:rgba(15,100,150,0.3);
     backdrop-filter: blur(50px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 2;
     &:hover {
         border-width:2px;
+        background-color:rgba(15,100,150,0.5);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
     }
 }
 

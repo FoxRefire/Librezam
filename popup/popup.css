@@ -516,6 +516,7 @@ hr + div {
     font-weight: bold;
     user-select:none;
     position: relative;
+    white-space: nowrap;
     z-index: 2;
 }
 

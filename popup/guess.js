@@ -353,6 +353,7 @@ async function saveHistory(result){
 function showError(msg) {
     circler.style.display = "none"
     notification.innerText = msg
+    notification.style.display = "block"
     notification.style.color = "orange"
     notification.classList.remove("show", "pulse", "recognizing")
     // Trigger reflow to restart animation
@@ -373,6 +374,7 @@ function showStatus(msg) {
             notification.innerText = msg
         }
         
+        notification.style.display = "block"
         notification.style.color = "white"
         notification.classList.remove("show", "pulse", "recognizing")
         // Trigger reflow to restart animation

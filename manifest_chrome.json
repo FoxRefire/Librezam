@@ -37,7 +37,7 @@
         },
         "mic-recognize": {
             "suggested_key": {
-                "default": "Ctrl+Alt+E"
+                "default": "Ctrl+E"
             },
             "description": "__MSG_recognizeFromMicrophoneCommand__"
         }

@@ -32,7 +32,7 @@ function getNextRecorded() {
     if(!audioPromisesMap.length) {
         return -1
     }
-    return Promise.allSettled(audioPromisesMap.shift()).then(arr => arr.map(r => r.value))
+    return Promise.allSettled(audioPromisesMap.shift()).then(arr => arr.map(r => Array.from(r.value)))
 }
 
 function checkIfCORS(elem) {

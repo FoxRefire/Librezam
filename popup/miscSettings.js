@@ -6,6 +6,41 @@ isRecordAnotherTab.addEventListener("change", () => {
     setStorage("isRecordAnotherTab", isRecordAnotherTab.checked)
 })
 
+// Capture Method setting
+const captureMethodSelect = document.getElementById("captureMethodSelect")
+const captureMethodContainer = document.getElementById("captureMethodContainer")
+
+// Check if chrome.tabCapture exists (Chrome only feature)
+if (typeof chrome !== 'undefined' && chrome.tabCapture) {
+    captureMethodContainer.style.display = "block"
+    
+    const savedCaptureMethod = await getStorage("captureMethod")
+    captureMethodSelect.value = savedCaptureMethod
+    
+    captureMethodSelect.addEventListener("change", async (e) => {
+        const selectedMethod = e.target.value
+        await setStorage("captureMethod", selectedMethod)
+    })
+    
+    // Translation handling for capture method options
+    setTimeout(() => {
+        const methodOptions = {
+            "contentScript": "captureMethodContentScript",
+            "tabCapture": "captureMethodTabCapture"
+        }
+        
+        captureMethodSelect.querySelectorAll('option').forEach(option => {
+            const methodKey = methodOptions[option.value]
+            if (methodKey) {
+                const translated = t(methodKey)
+                if (translated && translated !== methodKey) {
+                    option.textContent = translated
+                }
+            }
+        })
+    }, 100)
+}
+
 // Language setting
 const languageSelect = document.getElementById("languageSelect")
 const savedLanguage = await getStorage("language") || "auto"
@@ -71,6 +106,21 @@ languageSelect.addEventListener("change", async (e) => {
             option.textContent = t(langKey)
         }
     })
+    
+    // Update capture method option labels if visible
+    if (captureMethodContainer.style.display !== "none") {
+        const methodOptions = {
+            "contentScript": "captureMethodContentScript",
+            "tabCapture": "captureMethodTabCapture"
+        }
+        
+        captureMethodSelect.querySelectorAll('option').forEach(option => {
+            const methodKey = methodOptions[option.value]
+            if (methodKey) {
+                option.textContent = t(methodKey)
+            }
+        })
+    }
     
     // Show success notification
     if (window.M && M.toast) {

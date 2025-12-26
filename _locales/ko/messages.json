@@ -396,6 +396,18 @@
   "languageChangeRequiresReload": {
     "message": "언어 변경은 확장 프로그램을 다시 로드한 후 적용됩니다.",
     "description": "Message shown when language is changed"
+  },
+  "captureMethod": {
+    "message": "녹음 방법",
+    "description": "Capture method label"
+  },
+  "captureMethodContentScript": {
+    "message": "콘텐츠 스크립트",
+    "description": "Content script capture method option"
+  },
+  "captureMethodTabCapture": {
+    "message": "chrome.tabCapture",
+    "description": "Tab capture method option"
   }
 }
 

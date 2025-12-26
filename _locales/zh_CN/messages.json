@@ -396,6 +396,18 @@
   "languageChangeRequiresReload": {
     "message": "语言更改将在重新加载扩展后生效。",
     "description": "Message shown when language is changed"
+  },
+  "captureMethod": {
+    "message": "录音方式",
+    "description": "Capture method label"
+  },
+  "captureMethodContentScript": {
+    "message": "内容脚本",
+    "description": "Content script capture method option"
+  },
+  "captureMethodTabCapture": {
+    "message": "chrome.tabCapture",
+    "description": "Tab capture method option"
   }
 }
 

@@ -396,6 +396,18 @@
   "languageChangeRequiresReload": {
     "message": "Le changement de langue prendra effet après le rechargement de l'extension.",
     "description": "Message shown when language is changed"
+  },
+  "captureMethod": {
+    "message": "Méthode d'enregistrement",
+    "description": "Capture method label"
+  },
+  "captureMethodContentScript": {
+    "message": "Script de contenu",
+    "description": "Content script capture method option"
+  },
+  "captureMethodTabCapture": {
+    "message": "chrome.tabCapture",
+    "description": "Tab capture method option"
   }
 }
 

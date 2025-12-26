@@ -22,6 +22,13 @@
                     <span data-i18n="recordAnotherTabAudio">Record another tab audio</span>
                 </label>
             </p>
+            <p id="captureMethodContainer" style="display: none;">
+                <label for="captureMethodSelect" data-i18n="captureMethod">Recording Method</label>
+                <select id="captureMethodSelect" class="browser-default">
+                    <option value="contentScript" data-i18n="captureMethodContentScript">Content Script</option>
+                    <option value="tabCapture" data-i18n="captureMethodTabCapture">chrome.tabCapture</option>
+                </select>
+            </p>
             <p>
                 <label for="languageSelect" data-i18n="language">Language</label>
                 <select id="languageSelect" class="browser-default">

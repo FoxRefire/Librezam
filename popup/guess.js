@@ -36,11 +36,41 @@ async function startTabRecognition() {
     let times = Object.keys(fallbackRules).map(t => Number(t))
     let backendsMap = Object.values(fallbackRules)
 
-    await recordAudiosInTab(times)
+    const captureMethod = await getStorage("captureMethod")
+    let tabCaptureAudios = null
+
+    if (captureMethod === "tabCapture" && typeof chrome !== 'undefined' && chrome.tabCapture) {
+        try {
+            tabCaptureAudios = await recordFromTabCapture(times)
+        } catch(e) {
+            console.error("Tab capture failed:", e)
+            // If error is about tab not playing audio, show noAudioElementsDetected
+            if (e.message && e.message.includes("not playing audio")) {
+                showError(t("noAudioElementsDetected"))
+            } else {
+                showError(t("songNotRecognized"))
+            }
+            return
+        }
+    } else {
+        await recordAudiosInTab(times)
+    }
 
         for(let backends of backendsMap) {
             showStatus(t("listening"))
-            let audios = await getNextRecorded().then(r => r.filter(a=> a.length))
+            let audios
+            
+            if (tabCaptureAudios) {
+                try {
+                    let audio = await tabCaptureAudios.shift()
+                    audios = audio ? [audio] : []
+                } catch(e) {
+                    audios = []
+                }
+            } else {
+                audios = await getNextRecorded().then(r => r.filter(a=> a.length))
+            }
+            
             if(!audios.length) {
                 showError(t("noAudioElementsDetected"))
                 return
@@ -54,6 +84,62 @@ async function startTabRecognition() {
             }
         }
         showError(t("songNotRecognized"))
+}
+
+async function recordFromTabCapture(times) {
+    return new Promise((resolve, reject) => {
+        // Check if tab is audible before capturing
+        chrome.tabs.query({active: true, currentWindow: true}, async (tabs) => {
+            const tab = tabs[0]
+            
+            // Check if tab is audible - if not, reject immediately
+            if (!tab || !tab.audible) {
+                return reject(new Error("Tab is not playing audio"))
+            }
+            
+            chrome.tabCapture.capture({ audio: true, video: false }, async (stream) => {
+                
+                if (chrome.runtime.lastError || !stream) {
+                    return reject(chrome.runtime.lastError || new Error("Stream capture failed"))
+                }
+                
+                // To prevent muting the tab, play the audio through a new AudioContext
+                const audioContext = new AudioContext()
+                const source = audioContext.createMediaStreamSource(stream)
+                source.connect(audioContext.destination)
+
+                const recorder = new MediaRecorder(stream)
+                const data = []
+
+                recorder.ondataavailable = e => {
+                    data.push(e.data)
+                }
+                recorder.start(10)
+
+                const maxTime = Math.max(...times)
+                setTimeout(() => {
+                    recorder.stop()
+                    stream.getTracks().forEach(track => track.stop())
+                    audioContext.close()
+                }, maxTime)
+
+                let audioPromises = []
+                for (let time of times) {
+                    let audioPromise = new Promise(resolveData => {
+                        setTimeout(() => {
+                            const blob = new Blob(data, { type: 'audio/webm' })
+                            blob.arrayBuffer().then(buffer => {
+                                const uint8Array = new Uint8Array(buffer)
+                                resolveData(uint8Array)
+                            })
+                        }, time)
+                    })
+                    audioPromises.push(audioPromise)
+                }
+                resolve(audioPromises)
+            })
+        })
+    })
 }
 
 async function getResult(audios, backend) {

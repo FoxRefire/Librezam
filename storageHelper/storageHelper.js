@@ -16,7 +16,8 @@ export const Defaults = {
     noAppendHosts: ["osu.ppy.sh"],
     corsHosts: ["radio.garden"],
     sk: "da36b574-e869-41f5-8512-bc261615b84e",
-    language: "auto"
+    language: "auto",
+    captureMethod: "contentScript"
 }
 
 export async function getStorage(key) {

@@ -396,6 +396,17 @@
   "languageChangeRequiresReload": {
     "message": "言語の変更は拡張機能を再読み込みした後に有効になります。",
     "description": "Message shown when language is changed"
+  },
+  "captureMethod": {
+    "message": "録音方法",
+    "description": "Capture method label"
+  },
+  "captureMethodContentScript": {
+    "message": "コンテンツスクリプト",
+    "description": "Content script capture method option"
+  },
+  "captureMethodTabCapture": {
+    "message": "chrome.tabCapture",
+    "description": "Tab capture method option"
   }
 }
-

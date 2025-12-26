@@ -396,6 +396,18 @@
   "languageChangeRequiresReload": {
     "message": "Изменение языка вступит в силу после перезагрузки расширения.",
     "description": "Message shown when language is changed"
+  },
+  "captureMethod": {
+    "message": "Метод записи",
+    "description": "Capture method label"
+  },
+  "captureMethodContentScript": {
+    "message": "Контентный скрипт",
+    "description": "Content script capture method option"
+  },
+  "captureMethodTabCapture": {
+    "message": "chrome.tabCapture",
+    "description": "Tab capture method option"
   }
 }
 

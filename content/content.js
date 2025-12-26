@@ -29,10 +29,13 @@ function mainRecorder(times) {
 }
 
 function getNextRecorded() {
-    if(!audioPromisesMap.length) {
-        return -1
+    if (audioPromisesMap.length === 0) {
+        return Promise.resolve(-1);
     }
-    return Promise.allSettled(audioPromisesMap.shift()).then(arr => arr.map(r => Array.from(r.value)))
+    const promises = audioPromisesMap.shift();
+    return Promise.allSettled(promises).then(results =>
+        results.map(result => Array.from(result.value))
+    );
 }
 
 function checkIfCORS(elem) {

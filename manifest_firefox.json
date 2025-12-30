@@ -22,7 +22,7 @@
         "scripts":["background/background.js"],
         "type": "module"
     },
-    "permissions": ["tabs", "webNavigation", "storage", "notifications", "unlimitedStorage"],
+    "permissions": ["webNavigation", "storage", "notifications", "unlimitedStorage"],
     "host_permissions": ["<all_urls>"],
     "web_accessible_resources": [{
         "resources": ["/content/*.js","/storageHelper/*.js"],

@@ -22,7 +22,7 @@
         "service_worker":"background/background.js",
         "type": "module"
     },
-    "permissions": ["tabs", "tabCapture", "webNavigation", "storage", "notifications", "offscreen", "unlimitedStorage"],
+    "permissions": ["tabCapture", "webNavigation", "storage", "notifications", "offscreen", "unlimitedStorage"],
     "host_permissions": ["<all_urls>"],
     "web_accessible_resources": [{
         "resources": ["/content/*.js", "/storageHelper/*.js"],

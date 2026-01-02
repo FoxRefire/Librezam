@@ -5,6 +5,8 @@
 </p>
 
 [![Firefox](https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png)](https://addons.mozilla.org/firefox/addon/librezam/)
+[![Chrome](https://developer.chrome.com/static/docs/webstore/branding/image/206x58-chrome-web-bcb82d15b2486.png)](https://chrome.google.com/webstore/detail/kolhjbddamlepljhchmgmlabaanmpegk)
+[![Edge](https://learn.microsoft.com/ja-jp/microsoft-edge/extensions/publish/add-ons-badge-images/microsoft-edge-add-ons-badge.png)](https://microsoftedge.microsoft.com/addons/detail/librezam/jcopjlccekeaebloopjihokfiadhjnbg)
 
 ## What is it?
 This is a browser extension that uses Shazam's internal API to recognize the music playing in the current tab.

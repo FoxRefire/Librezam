@@ -41,6 +41,7 @@ function addStreamLinks(result) {
         kkbox: `https://www.kkbox.com/tw/tc/search.php?word=${query}`,
         soundcloud: `https://soundcloud.com/search?q=${query}`,
         tidal: `https://tidal.com/search?q=${query}`,
+        beatport: `https://www.beatport.com/de/search?q=${query}`,
         qq_music: `https://y.qq.com/n/ryqq/search?w=${query}`,
         netease_music: `https://music.163.com/#/search/m/?s=${query}`,
         google_search: `https://www.google.com/search?q=${query}`,

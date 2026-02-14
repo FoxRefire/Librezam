@@ -393,6 +393,7 @@ async function updateStreamingProviders(result) {
         'kkbox': '/images/kkbox.png',
         'soundcloud': '/images/soundcloud.png',
         'tidal': '/images/tidal.png',
+        'beatport': '/images/beatport.png',
         'qq_music': '/images/qqmusic.png',
         'netease_music': '/images/netease.png',
         'google_search': '/images/google.png',

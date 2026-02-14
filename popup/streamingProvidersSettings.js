@@ -11,6 +11,7 @@ const STREAMING_PROVIDERS = {
     'kkbox': { name: 'KKBOX', icon: '/images/kkbox.png' },
     'soundcloud': { name: 'SoundCloud', icon: '/images/soundcloud.png' },
     'tidal': { name: 'Tidal', icon: '/images/tidal.png' },
+    'beatport': { name: 'Beatport', icon: '/images/beatport.png' },
     'qq_music': { name: 'QQ Music', icon: '/images/qqmusic.png' },
     'netease_music': { name: 'Netease Music', icon: '/images/netease.png' },
     'google_search': { name: 'Google Search', icon: '/images/google.png' },

@@ -115,7 +115,6 @@ import { t } from "./i18n.js"
         const valueDisplay = document.createElement('div');
         valueDisplay.className = 'duration-value-display';
         valueDisplay.textContent = formatDuration(duration);
-        valueDisplay.style.textAlign = 'center';
         valueDisplay.style.fontSize = '16px';
         valueDisplay.style.fontWeight = '500';
         valueDisplay.style.color = 'var(--md-sys-color-on-surface)';

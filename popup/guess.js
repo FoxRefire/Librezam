@@ -22,7 +22,7 @@ function init() {
 async function startTabRecognition() {
     // Initialize UI for recognition
     circler.style.opacity = "0"
-    circler.style.display = "block"
+    circler.style.display = "flex"
     circler.style.transition = "opacity 0.3s ease"
     setTimeout(() => {
         circler.style.opacity = "1"
@@ -150,7 +150,11 @@ async function getResult(audios, backend) {
             await writeResult(result)
             await saveHistory(result)
             await writeHistory() // Update history display immediately
+            banner.classList.remove("blur")
             notification.style.display = "none"
+            circler.style.opacity = "0"
+            circler.style.transition = "opacity 0.3s ease"
+    
             return true
         } catch(e) {
             console.log(e)
@@ -193,10 +197,10 @@ function renderHistoryTable(histories = currentHistories) {
                     ${dateStr ? `<div class="history-card-date">${dateStr}</div>` : ''}
                 </div>
                 <div class="history-card-actions">
-                    <button class="history-card-btn detail-btn" data-index="${index}">
+                    <button class="roundButton history-card-btn detail-btn" data-index="${index}">
                         <i class="material-icons">visibility</i>
                     </button>
-                    <button class="history-card-btn delete-btn" data-index="${index}">
+                    <button class="roundButton history-card-btn delete-btn" data-index="${index}">
                         <i class="material-icons">delete</i>
                     </button>
                 </div>
@@ -235,8 +239,10 @@ function setupHistoryControls() {
             if (e.target.closest(".detail-btn")) {
                 const index = parseInt(e.target.closest(".detail-btn").dataset.index)
                 await writeResult(currentHistories[index])
+
                 if(notification.style.color === "orange") {
                     notification.style.display = "none"
+                    banner.classList.remove("blur")
                 }
             } else if (e.target.closest(".delete-btn")) {
                 const index = parseInt(e.target.closest(".delete-btn").dataset.index)
@@ -345,19 +351,12 @@ async function sendMessagePromises(request) {
 }
 
 async function writeResult(result){
-    // Smooth transition out for spinner
-    circler.style.opacity = "0"
-    circler.style.transition = "opacity 0.3s ease"
-    setTimeout(() => {
-        circler.style.display = "none"
-    }, 300)
-    
     // Smooth fade in for results
     resultTable.style.opacity = "0"
-    resultTable.style.display = "block"
+    resultTable.style.display = "flex"
     resultTable.style.transition = "opacity 0.5s ease"
     streamProviders.style.opacity = "0"
-    streamProviders.style.display = "block"
+    streamProviders.style.display = "flex"
     streamProviders.style.transition = "opacity 0.5s ease"
     
     // Trigger fade in
@@ -414,7 +413,6 @@ async function updateStreamingProviders(result) {
             
             const img = document.createElement('img')
             img.src = providerIcons[providerId]
-            img.width = 32
             img.className = 'circle responsive-img'
             
             providerElement.appendChild(img)
@@ -440,12 +438,13 @@ async function saveHistory(result){
 function showError(msg) {
     circler.style.display = "none"
     notification.innerText = msg
-    notification.style.display = "block"
+    notification.style.display = ""
     notification.style.color = "orange"
     notification.classList.remove("show", "pulse", "recognizing")
     // Trigger reflow to restart animation
     void notification.offsetWidth
     notification.classList.add("show")
+    banner.classList.add("blur")
 }
 
 function showStatus(msg) {
@@ -467,6 +466,7 @@ function showStatus(msg) {
         // Trigger reflow to restart animation
         void notification.offsetWidth
         notification.classList.add("show", "pulse", "recognizing")
+        banner.classList.add("blur")
     } else {
         // Hide notification smoothly
         notification.classList.remove("show", "pulse", "recognizing")
@@ -474,8 +474,18 @@ function showStatus(msg) {
             notification.innerText = ""
             notification.innerHTML = ""
         }, 300)
+        banner.classList.remove("blur")
     }
 }
+
+// TODO: makni
+window.addEventListener("message", e => {
+  if (e.data?.type === "OOF") {
+    showStatus(e.data?.msg)
+    notification.classList.add("show", "pulse", "recognizing")
+    circler.style.display = "flex"
+  }
+});
 
 async function autoModeController() {
     isAutoMode.checked = await sendMessagePromises({action: "QueryAutoMode"}).then(r => Boolean(r?.[0]))
@@ -502,7 +512,6 @@ async function startMicRecognition() {
         }, 300)
         
         circler.style.opacity = "0"
-        circler.style.display = "block"
         circler.style.transition = "opacity 0.3s ease"
         setTimeout(() => {
             circler.style.opacity = "1"

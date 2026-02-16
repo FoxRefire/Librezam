@@ -8,7 +8,7 @@
     <body class="main">
         <div id="surfaceContainer" class="center">
             <!-- Dropdown trigger -->
-            <a class='dropdown-trigger right' href='#' data-target='dropdownMenu'>
+            <a class="roundButton dropdown-trigger" href='#' data-target="dropdownMenu">
                 <i id="menuButton" class="material-icons">more_vert</i>
             </a>
 
@@ -27,38 +27,43 @@
                 <li><a href="#" id="micRecognition"><i class="material-icons left">mic</i><span data-i18n="recognizeFromMicrophone">Recognize from Microphone</span></a></li>
             </ul>
 
-            <div id="circler" class="preloader-wrapper big active">
-                <div class="spinner-layer spinner-blue-only">
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
-                  </div><div class="gap-patch">
-                    <div class="circle"></div>
-                  </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                  </div>
+            <!-- Banner with spinner and notification -->
+            <div id="banner">
+                <div id="circler" class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                    </div>
                 </div>
+
+                <div id="notification"></div>
             </div>
+            
+            <!-- Result -->
+            <div id="result">
+                <div id="resultTable" style="display:none;">
+                    <div>
+                        <div class="category" data-i18n="title">Title</div>
+                        <div class="result title"></div>
+                    </div>
+                    <div>
+                        <div class="category" data-i18n="artist">Artist</div>
+                        <div class="result artist"></div>
+                    </div>
+                    <div>
+                        <div class="category" data-i18n="album">Album</div>
+                        <div class="result album"></div>
+                    </div>
+                </div>
 
-            <div id="notification"></div>
-
-            <table id="resultTable" style="display:none; text-align: center;">
-                <tbody>
-                  <tr>
-                    <td data-i18n="title">Title</td>
-                    <td class="result title"></td>
-                  </tr>
-                  <tr>
-                    <td data-i18n="artist">Artist</td>
-                    <td class="result artist"></td>
-                  </tr>
-                  <tr>
-                    <td data-i18n="album">Album</td>
-                    <td class="result album"></td>
-                  </tr>
-                </tbody>
-            </table><br>
-            <div id="streamProviders" style="display:none;">
-              <!-- Streaming providers will be dynamically added here -->
+                <div id="streamProviders" style="display:none;">
+                <!-- Streaming providers will be dynamically added here -->
+                </div>
             </div>
         </div>
 

@@ -2,6 +2,7 @@
     --brand-color: rgb(26,112,216);
     --banner-height: 56px;
     --outer-margin: 8px;
+    --round-button-size: 32px;
     color-scheme: dark;
     --md-sys-color-primary: var(--md-sys-color-primary-dark);
     --md-sys-color-on-primary: var(--md-sys-color-on-primary-dark);
@@ -53,8 +54,8 @@ body.main {
 /* Reusable elements */
 
 .roundButton {
-    width: 32px;
-    height: 32px;
+    width: var(--round-button-size);
+    height: var(--round-button-size);
     border-radius: 50%;
     border: none;
     display: flex;
@@ -113,18 +114,28 @@ body.main {
     opacity: 1;
 }
 
+/* menu button */
 
-.dropdown-trigger {
+#menuButtonContainer {
     position: absolute;
-    top: calc((var(--banner-height) - 32px) / 2);
-    right: var(--outer-margin);
     z-index: 100;
+    top: 0;
+    right: 0;
+    height: var(--banner-height);
+    width: calc(2 * var(--outer-margin) + var(--round-button-size));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* is set when a result is found */
+    &.tint {
+        background: rgba(0, 0, 0, 0.5);
+    }
 }
 
-/* menu button */
 #menuButton {
-    font-size: 30px;
     color: white;
+    outline: 1px solid rgb(56, 56, 56);
 }
 
 /* dropdown menu styles */
@@ -136,7 +147,7 @@ body.main {
 .dropdown-content {
     background-color: rgba(15,100,150,0.95) !important;
     backdrop-filter: blur(50px);
-    border: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
+    outline: 1px solid color-mix(in srgb,var(--md-sys-color-outline-variant) 50%, transparent 50%);
     border-radius: 8px;
     min-width: 200px !important;
 }
@@ -220,6 +231,11 @@ body.main {
 #notification.show {
     opacity: 1;
     transform: translateY(0) scale(1);
+}
+
+#notification.text-error {
+    justify-content: flex-start;
+    /* margin-left: 10px; */
 }
 
 #notification.pulse {
@@ -527,7 +543,6 @@ hr + div {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 0 var(--outer-margin);
     gap: 10px;
     overflow: auto;
     font-size: 14px;
@@ -543,7 +558,7 @@ hr + div {
     flex: 1;
     gap: 10px;
     height: 180px;
-    padding-left: 20px;
+    padding-left: 28px;
     width: 100%;
     margin-bottom: 10px;
     z-index: 2;
@@ -564,6 +579,7 @@ hr + div {
     color: #c7c7c7;
     text-transform: uppercase;
     font-weight: bold;
+    user-select: none;
 }
 
 #resultTable .result {
@@ -577,14 +593,30 @@ hr + div {
 
 /* streaming providers --------------------------------------*/
 
+#streamProvidersContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    z-index: 10;
+    /* gap between the separator and streamProviders div is the same distance to that between the separator
+    and the dropdown button for visual consistency */
+    gap: calc(3px + (var(--banner-height) - 32px) / 2);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 #streamProviders {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    width: 24px;
-    gap: 2px;
-    margin-right: 4px;
-    margin-bottom: var(--outer-margin);
+    justify-content: space-between;
+    gap: 10px;
+    width: var(--round-button-size);
+    flex: 0;
+    margin: var(--outer-margin);
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    outline: 1px solid rgb(56, 56, 56);
+    backdrop-filter: blur(2px);
 }
 
 #streamProviders a {
@@ -593,7 +625,6 @@ hr + div {
     justify-content: center;
     margin: 0;
     padding: 0;
-    /* outline: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 50%, transparent 50%); */
     outline: 1px solid grey;
     border-radius: 999px;
     background-color: rgba(15, 100, 150, 0.3);
@@ -603,8 +634,8 @@ hr + div {
     transition: 150ms;
 
     &>img {
-        width: 24px;
-        height: 24px;
+        width: calc(var(--round-button-size) - var(--outer-margin));
+        height: calc(var(--round-button-size) - var(--outer-margin));
     }
 
     &:hover {

@@ -1,6 +1,7 @@
 import { Recognize } from "/backendModules/Recognize.js"
 import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 import { t } from "./i18n.js"
+import { STREAMING_PROVIDERS } from "./streamingProvidersSettings.js"
 
 init()
 
@@ -29,7 +30,7 @@ async function startTabRecognition() {
     }, 50)
     
     resultTable.style.display = "none"
-    streamProviders.style.display = "none"
+    streamProvidersContainer.style.display = "none"
     notification.classList.remove("show", "pulse", "recognizing")
     
     let fallbackRules = await getStorage("fallbackRules")
@@ -351,12 +352,14 @@ async function sendMessagePromises(request) {
 }
 
 async function writeResult(result){
+    menuButtonContainer.classList.add("tint")
+
     // Smooth fade in for results
     resultTable.style.opacity = "0"
     resultTable.style.display = "flex"
     resultTable.style.transition = "opacity 0.5s ease"
+    streamProvidersContainer.style.display = "flex"
     streamProviders.style.opacity = "0"
-    streamProviders.style.display = "flex"
     streamProviders.style.transition = "opacity 0.5s ease"
     
     // Trigger fade in
@@ -383,23 +386,6 @@ async function updateStreamingProviders(result) {
     const selectedProviders = await getStorage("selectedStreamingProviders")
     
     // Provider icons mapping
-    const providerIcons = {
-        'apple': '/images/apple.png',
-        'deezer': '/images/deezer.png',
-        'spotify': '/images/spotify.png',
-        'youtube': '/images/youtube.png',
-        'youtube_music': '/images/ytmusic.png',
-        'kkbox': '/images/kkbox.png',
-        'soundcloud': '/images/soundcloud.png',
-        'tidal': '/images/tidal.png',
-        'beatport': '/images/beatport.png',
-        'qq_music': '/images/qqmusic.png',
-        'netease_music': '/images/netease.png',
-        'google_search': '/images/google.png',
-        'duckduckgo_search': '/images/duckduckgo.png',
-        'musicbrainz': '/images/musicbrainz.png'
-    }
-    
     // Clear existing providers
     streamProviders.innerHTML = ''
     
@@ -412,8 +398,9 @@ async function updateStreamingProviders(result) {
             providerElement.target = '_blank'
             
             const img = document.createElement('img')
-            img.src = providerIcons[providerId]
+            img.src = STREAMING_PROVIDERS[providerId]?.icon
             img.className = 'circle responsive-img'
+            img.title = `Search on ${STREAMING_PROVIDERS[providerId]?.name}`
             
             providerElement.appendChild(img)
             streamProviders.appendChild(providerElement)
@@ -443,7 +430,7 @@ function showError(msg) {
     notification.classList.remove("show", "pulse", "recognizing")
     // Trigger reflow to restart animation
     void notification.offsetWidth
-    notification.classList.add("show")
+    notification.classList.add("show", "text-error")
     banner.classList.add("blur")
 }
 
@@ -462,7 +449,7 @@ function showStatus(msg) {
         
         notification.style.display = "block"
         notification.style.color = "white"
-        notification.classList.remove("show", "pulse", "recognizing")
+        notification.classList.remove("show", "pulse", "recognizing", "text-error")
         // Trigger reflow to restart animation
         void notification.offsetWidth
         notification.classList.add("show", "pulse", "recognizing")
@@ -508,7 +495,7 @@ async function startMicRecognition() {
         streamProviders.style.opacity = "0"
         setTimeout(() => {
             resultTable.style.display = "none"
-            streamProviders.style.display = "none"
+            streamProvidersContainer.style.display = "none"
         }, 300)
         
         circler.style.opacity = "0"

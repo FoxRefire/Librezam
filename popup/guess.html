@@ -8,9 +8,11 @@
     <body class="main">
         <div id="surfaceContainer" class="center">
             <!-- Dropdown trigger -->
-            <a class="roundButton dropdown-trigger" href='#' data-target="dropdownMenu">
-                <i id="menuButton" class="material-icons">more_vert</i>
-            </a>
+            <div id="menuButtonContainer">
+                <a id="menuButton" class="roundButton dropdown-trigger" href='#' data-target="dropdownMenu">
+                    <i class="material-icons">more_vert</i>
+                </a>
+            </div>
 
             <!-- Dropdown Structure -->
             <ul id='dropdownMenu' class='dropdown-content'>
@@ -60,9 +62,11 @@
                         <div class="result album"></div>
                     </div>
                 </div>
-
-                <div id="streamProviders" style="display:none;">
-                <!-- Streaming providers will be dynamically added here -->
+                
+                <div id="streamProvidersContainer" style="display:none;">
+                    <div id="streamProviders">
+                    <!-- Streaming providers will be dynamically added here -->
+                    </div>
                 </div>
             </div>
         </div>

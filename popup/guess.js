@@ -1,6 +1,7 @@
 import { Recognize } from "/backendModules/Recognize.js"
 import { getStorage, setStorage } from "../storageHelper/storageHelper.js"
 import { t } from "./i18n.js"
+import { STREAMING_PROVIDERS } from "./streamingProvidersSettings.js"
 
 init()
 
@@ -22,14 +23,14 @@ function init() {
 async function startTabRecognition() {
     // Initialize UI for recognition
     circler.style.opacity = "0"
-    circler.style.display = "block"
+    circler.style.display = "flex"
     circler.style.transition = "opacity 0.3s ease"
     setTimeout(() => {
         circler.style.opacity = "1"
     }, 50)
     
     resultTable.style.display = "none"
-    streamProviders.style.display = "none"
+    streamProvidersContainer.style.display = "none"
     notification.classList.remove("show", "pulse", "recognizing")
     
     let fallbackRules = await getStorage("fallbackRules")
@@ -150,7 +151,11 @@ async function getResult(audios, backend) {
             await writeResult(result)
             await saveHistory(result)
             await writeHistory() // Update history display immediately
+            banner.classList.remove("blur")
             notification.style.display = "none"
+            circler.style.opacity = "0"
+            circler.style.transition = "opacity 0.3s ease"
+    
             return true
         } catch(e) {
             console.log(e)
@@ -193,10 +198,10 @@ function renderHistoryTable(histories = currentHistories) {
                     ${dateStr ? `<div class="history-card-date">${dateStr}</div>` : ''}
                 </div>
                 <div class="history-card-actions">
-                    <button class="history-card-btn detail-btn" data-index="${index}">
+                    <button class="roundButton history-card-btn detail-btn" data-index="${index}">
                         <i class="material-icons">visibility</i>
                     </button>
-                    <button class="history-card-btn delete-btn" data-index="${index}">
+                    <button class="roundButton history-card-btn delete-btn" data-index="${index}">
                         <i class="material-icons">delete</i>
                     </button>
                 </div>
@@ -235,8 +240,10 @@ function setupHistoryControls() {
             if (e.target.closest(".detail-btn")) {
                 const index = parseInt(e.target.closest(".detail-btn").dataset.index)
                 await writeResult(currentHistories[index])
+
                 if(notification.style.color === "orange") {
                     notification.style.display = "none"
+                    banner.classList.remove("blur")
                 }
             } else if (e.target.closest(".delete-btn")) {
                 const index = parseInt(e.target.closest(".delete-btn").dataset.index)
@@ -345,19 +352,14 @@ async function sendMessagePromises(request) {
 }
 
 async function writeResult(result){
-    // Smooth transition out for spinner
-    circler.style.opacity = "0"
-    circler.style.transition = "opacity 0.3s ease"
-    setTimeout(() => {
-        circler.style.display = "none"
-    }, 300)
-    
+    menuButtonContainer.classList.add("tint")
+
     // Smooth fade in for results
     resultTable.style.opacity = "0"
-    resultTable.style.display = "block"
+    resultTable.style.display = "flex"
     resultTable.style.transition = "opacity 0.5s ease"
+    streamProvidersContainer.style.display = "flex"
     streamProviders.style.opacity = "0"
-    streamProviders.style.display = "block"
     streamProviders.style.transition = "opacity 0.5s ease"
     
     // Trigger fade in
@@ -384,23 +386,6 @@ async function updateStreamingProviders(result) {
     const selectedProviders = await getStorage("selectedStreamingProviders")
     
     // Provider icons mapping
-    const providerIcons = {
-        'apple': '/images/apple.png',
-        'deezer': '/images/deezer.png',
-        'spotify': '/images/spotify.png',
-        'youtube': '/images/youtube.png',
-        'youtube_music': '/images/ytmusic.png',
-        'kkbox': '/images/kkbox.png',
-        'soundcloud': '/images/soundcloud.png',
-        'tidal': '/images/tidal.png',
-        'beatport': '/images/beatport.png',
-        'qq_music': '/images/qqmusic.png',
-        'netease_music': '/images/netease.png',
-        'google_search': '/images/google.png',
-        'duckduckgo_search': '/images/duckduckgo.png',
-        'musicbrainz': '/images/musicbrainz.png'
-    }
-    
     // Clear existing providers
     streamProviders.innerHTML = ''
     
@@ -413,9 +398,9 @@ async function updateStreamingProviders(result) {
             providerElement.target = '_blank'
             
             const img = document.createElement('img')
-            img.src = providerIcons[providerId]
-            img.width = 32
+            img.src = STREAMING_PROVIDERS[providerId]?.icon
             img.className = 'circle responsive-img'
+            img.title = `Search on ${STREAMING_PROVIDERS[providerId]?.name}`
             
             providerElement.appendChild(img)
             streamProviders.appendChild(providerElement)
@@ -440,12 +425,13 @@ async function saveHistory(result){
 function showError(msg) {
     circler.style.display = "none"
     notification.innerText = msg
-    notification.style.display = "block"
+    notification.style.display = ""
     notification.style.color = "orange"
     notification.classList.remove("show", "pulse", "recognizing")
     // Trigger reflow to restart animation
     void notification.offsetWidth
-    notification.classList.add("show")
+    notification.classList.add("show", "text-error")
+    banner.classList.add("blur")
 }
 
 function showStatus(msg) {
@@ -463,10 +449,11 @@ function showStatus(msg) {
         
         notification.style.display = "block"
         notification.style.color = "white"
-        notification.classList.remove("show", "pulse", "recognizing")
+        notification.classList.remove("show", "pulse", "recognizing", "text-error")
         // Trigger reflow to restart animation
         void notification.offsetWidth
         notification.classList.add("show", "pulse", "recognizing")
+        banner.classList.add("blur")
     } else {
         // Hide notification smoothly
         notification.classList.remove("show", "pulse", "recognizing")
@@ -474,8 +461,18 @@ function showStatus(msg) {
             notification.innerText = ""
             notification.innerHTML = ""
         }, 300)
+        banner.classList.remove("blur")
     }
 }
+
+// TODO: makni
+window.addEventListener("message", e => {
+  if (e.data?.type === "OOF") {
+    showStatus(e.data?.msg)
+    notification.classList.add("show", "pulse", "recognizing")
+    circler.style.display = "flex"
+  }
+});
 
 async function autoModeController() {
     isAutoMode.checked = await sendMessagePromises({action: "QueryAutoMode"}).then(r => Boolean(r?.[0]))
@@ -498,11 +495,10 @@ async function startMicRecognition() {
         streamProviders.style.opacity = "0"
         setTimeout(() => {
             resultTable.style.display = "none"
-            streamProviders.style.display = "none"
+            streamProvidersContainer.style.display = "none"
         }, 300)
         
         circler.style.opacity = "0"
-        circler.style.display = "block"
         circler.style.transition = "opacity 0.3s ease"
         setTimeout(() => {
             circler.style.opacity = "1"

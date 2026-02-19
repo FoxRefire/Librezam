@@ -2,7 +2,7 @@ import { getStorage, setStorage, Defaults } from "../storageHelper/storageHelper
 import { t } from "./i18n.js"
 
 // Available streaming providers with their display names and icons
-const STREAMING_PROVIDERS = {
+export const STREAMING_PROVIDERS = {
     'apple': { name: 'Apple Music', icon: '/images/apple.png' },
     'deezer': { name: 'Deezer', icon: '/images/deezer.png' },
     'spotify': { name: 'Spotify', icon: '/images/spotify.png' },

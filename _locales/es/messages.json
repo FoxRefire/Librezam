@@ -408,6 +408,36 @@
   "captureMethodTabCapture": {
     "message": "chrome.tabCapture",
     "description": "Tab capture method option"
+  },
+  "settingsExportFailed": {
+    "message": "Exportación fallida: ",
+    "description": "Message shown when settings export failed"
+  },
+  "importedBackupFileFormatIsInvalid": {
+    "message": "Formato de archivo no válido. Seleccione una copia de seguridad de Librezam.",
+    "description": "Error message for invalid backup file format"
+  },
+  "confirmOverwritingSettings": {
+    "message": "Esto sobrescribirá su configuración e historial actuales.\n¿Continuar?\n\nFecha de creación de la copia de seguridad: $1\nEntradas del historial: $2 elementos",
+    "description": "Confirm overwriting the settings and history",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "2026-03-28T16:23:29.976Z"
+      },
+      "histories": {
+        "content": "$2",
+        "example": "45"
+      }
+    }
+  },
+  "settingsImportCompleted": {
+    "message": "¡Configuración importada! Por favor, actualiza la página.",
+    "description": "Message shown when settings import is completed"
+  },
+  "settingsImportFailed": {
+    "message": "Falló la importación: ",
+    "description": "Message shown when settings import failed"
   }
 }
 

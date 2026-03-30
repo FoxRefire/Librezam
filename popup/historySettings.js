@@ -1,4 +1,5 @@
 import { getStorage, setStorage, Defaults } from "../common/storageHelper.js"
+import { t } from "./i18n.js"
 
 // Clear History
 M.Modal.init(modalConfirmClear, null);
@@ -49,7 +50,7 @@ exportAllData.addEventListener("click", async () => {
         URL.revokeObjectURL(url)
     } catch (error) {
         console.error("Export failed:", error)
-        alert("エクスポートに失敗しました: " + error.message)
+        alert(t('settingsExportFailed') + error.message)
     }
 });
 
@@ -69,16 +70,14 @@ importAllData.addEventListener("click", () => {
             
             // Validate metadata
             if (!data._metadata || !data._metadata.version) {
-                throw new Error("無効なファイル形式です。Librezamのバックアップファイルを選択してください。")
+                throw new Error(t('importedBackupFileFormatIsInvalid'))
             }
             
             // Confirm import
-            const confirmed = confirm(
-                "この操作は現在の設定と履歴を上書きします。\n" +
-                "続行しますか？\n\n" +
-                `バックアップ作成日: ${data._metadata.exportDate}\n` +
-                `履歴数: ${data.histories ? data.histories.length : 0}件`
-            )
+            const confirmed = confirm(t('confirmOverwritingSettings', [
+                data._metadata.exportDate,
+                data.histories ? data.histories.length : 0,
+            ]))
             
             if (!confirmed) return
             
@@ -89,11 +88,11 @@ importAllData.addEventListener("click", () => {
                 }
             }
             
-            alert("インポートが完了しました。ページを再読み込みしてください。")
+            alert(t('settingsImportCompleted'))
             
         } catch (error) {
             console.error("Import failed:", error)
-            alert("インポートに失敗しました: " + error.message)
+            alert(t('settingsImportFailed') + error.message)
         }
     })
     

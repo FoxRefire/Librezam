@@ -408,6 +408,36 @@
   "captureMethodTabCapture": {
     "message": "chrome.tabCapture",
     "description": "Tab capture method option"
+  },
+  "settingsExportFailed": {
+    "message": "설정 내보내기 실패: ",
+    "description": "Message shown when settings export failed"
+  },
+  "importedBackupFileFormatIsInvalid": {
+    "message": "잘못된 파일 형식입니다. Librezam 백업 파일을 선택하십시오.",
+    "description": "Error message for invalid backup file format"
+  },
+  "confirmOverwritingSettings": {
+    "message": "이렇게 하면 현재 설정과 기록이 덮어쓰여집니다.\n계속하다?\n\n백업 생성 날짜: $1\n이력 항목 수: $2개",
+    "description": "Confirm overwriting the settings and history",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "2026-03-28T16:23:29.976Z"
+      },
+      "histories": {
+        "content": "$2",
+        "example": "45"
+      }
+    }
+  },
+  "settingsImportCompleted": {
+    "message": "설정이 불러와졌습니다! 페이지를 새로고침해 주세요.",
+    "description": "Message shown when settings import is completed"
+  },
+  "settingsImportFailed": {
+    "message": "설정 가져오기 실패: ",
+    "description": "Message shown when settings import failed"
   }
 }
 

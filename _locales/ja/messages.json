@@ -408,5 +408,35 @@
   "captureMethodTabCapture": {
     "message": "chrome.tabCapture",
     "description": "Tab capture method option"
+  },
+  "settingsExportFailed": {
+    "message": "エクスポートに失敗しました: ",
+    "description": "Message shown when settings export failed"
+  },
+  "importedBackupFileFormatIsInvalid": {
+    "message": "無効なファイル形式です。Librezamのバックアップファイルを選択してください。",
+    "description": "Error message for invalid backup file format"
+  },
+  "confirmOverwritingSettings": {
+    "message": "この操作は現在の設定と履歴を上書きします。\n続行しますか？\n\nバックアップ作成日: $1\n履歴数: $2件",
+    "description": "Confirm overwriting the settings and history",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "2026-03-28T16:23:29.976Z"
+      },
+      "histories": {
+        "content": "$2",
+        "example": "45"
+      }
+    }
+  },
+  "settingsImportCompleted": {
+    "message": "インポートが完了しました。ページを再読み込みしてください。",
+    "description": "Message shown when settings import is completed"
+  },
+  "settingsImportFailed": {
+    "message": "インポートに失敗しました: ",
+    "description": "Message shown when settings import failed"
   }
 }

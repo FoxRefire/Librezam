@@ -67,6 +67,6 @@ export const STREAMING_PROVIDERS = {
     'musicbrainz': {
         name: 'MusicBrainz',
         icon: '/images/musicbrainz.png',
-        url: 'https://musicbrainz.org/search?query=$s&type=recording'
+        url: 'https://musicbrainz.org/search?query=$s&type=recording&method=advanced'
     }
 }

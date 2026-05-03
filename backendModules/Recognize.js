@@ -35,7 +35,11 @@ function addStreamLinks(result) {
     // Generate all possible streaming links
     const streamingLinks = {}
     for (const [providerKey, provider] of Object.entries(STREAMING_PROVIDERS)) {
-        streamingLinks[providerKey] = provider.url.replace('$s', query)
+        if (providerKey === 'musicbrainz') {
+            streamingLinks[providerKey] = provider.url.replace('$s', `${encodeURIComponent(result.title)}+AND+artist%3A${encodeURIComponent(result.artist)}`)
+        } else {
+            streamingLinks[providerKey] = provider.url.replace('$s', query)
+        }
     }
 
     // Add streaming links to result

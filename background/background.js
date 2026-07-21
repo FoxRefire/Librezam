@@ -17,6 +17,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 })
 
 chrome.commands?.onCommand.addListener(async (command) => {
+    if(!await getStorage("enableShortcuts")) return
+
     if(command == "tab-recognize"){
         await chrome.action.openPopup()
     }

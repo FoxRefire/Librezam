@@ -6,6 +6,11 @@ isRecordAnotherTab.addEventListener("change", () => {
     setStorage("isRecordAnotherTab", isRecordAnotherTab.checked)
 })
 
+enableShortcuts.checked = await getStorage("enableShortcuts")
+enableShortcuts.addEventListener("change", () => {
+    setStorage("enableShortcuts", enableShortcuts.checked)
+})
+
 // Capture Method setting
 const captureMethodSelect = document.getElementById("captureMethodSelect")
 const captureMethodContainer = document.getElementById("captureMethodContainer")

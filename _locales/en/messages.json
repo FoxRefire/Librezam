@@ -263,6 +263,10 @@
     "message": "Record another tab audio",
     "description": "Record another tab audio checkbox"
   },
+  "enableShortcuts": {
+    "message": "Enable keyboard shortcuts",
+    "description": "Enable keyboard shortcuts checkbox"
+  },
   "theme": {
     "message": "Theme",
     "description": "Theme section title"

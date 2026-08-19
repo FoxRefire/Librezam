@@ -6,6 +6,11 @@ isRecordAnotherTab.addEventListener("change", () => {
     setStorage("isRecordAnotherTab", isRecordAnotherTab.checked)
 })
 
+showAutomaticRecognitionNotifications.checked = await getStorage("showAutomaticRecognitionNotifications")
+showAutomaticRecognitionNotifications.addEventListener("change", () => {
+    setStorage("showAutomaticRecognitionNotifications", showAutomaticRecognitionNotifications.checked)
+})
+
 // Capture Method setting
 const captureMethodSelect = document.getElementById("captureMethodSelect")
 const captureMethodContainer = document.getElementById("captureMethodContainer")

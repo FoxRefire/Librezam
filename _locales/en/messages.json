@@ -263,6 +263,10 @@
     "message": "Record another tab audio",
     "description": "Record another tab audio checkbox"
   },
+  "showAutomaticRecognitionNotifications": {
+    "message": "Show automatic recognition notifications",
+    "description": "Show notifications when a song is recognized automatically"
+  },
   "theme": {
     "message": "Theme",
     "description": "Theme section title"

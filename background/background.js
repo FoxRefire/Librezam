@@ -92,6 +92,10 @@ function recordElem(elem, ms){
 }
 
 async function showNotification(result) {
+    if (!await getStorage("showAutomaticRecognitionNotifications")) {
+        return
+    }
+
     let prevResult = await getStorage("histories").then(h => h.at(-1))
 
     if(!(prevResult.title === result.title && prevResult.artist === result.artist)) {

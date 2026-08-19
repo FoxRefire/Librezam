@@ -1,0 +1,446 @@
+{
+  "extensionName": {
+    "message": "Librezam",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Otwarta wtyczka do rozpoznawania utworów korzystająca z API Shazam",
+    "description": "Extension description"
+  },
+  "settings": {
+    "message": "Ustawienia",
+    "description": "Settings menu title"
+  },
+  "backends": {
+    "message": "Moduły rozpoznawania",
+    "description": "Backends settings title"
+  },
+  "backendsOrder": {
+    "message": "Kolejność modułów rozpoznawania",
+    "description": "Backends order menu item"
+  },
+  "apiConfiguration": {
+    "message": "Konfiguracja API",
+    "description": "API configuration menu item"
+  },
+  "streamingProviders": {
+    "message": "Dostawcy streamingu",
+    "description": "Streaming providers menu item"
+  },
+  "miscellaneousSettings": {
+    "message": "Różne",
+    "description": "Miscellaneous settings menu item"
+  },
+  "workaroundsSettings": {
+    "message": "Obejścia",
+    "description": "Workarounds settings menu item"
+  },
+  "historyManagementAndExport": {
+    "message": "Zarządzanie historią i eksport",
+    "description": "History management menu item"
+  },
+  "autoRecognition": {
+    "message": "Automatyczne rozpoznawanie",
+    "description": "Auto recognition toggle label"
+  },
+  "recognizeFromMicrophone": {
+    "message": "Rozpoznaj z mikrofonu",
+    "description": "Recognize from microphone menu item"
+  },
+  "title": {
+    "message": "Tytuł",
+    "description": "Title label"
+  },
+  "artist": {
+    "message": "Wykonawca",
+    "description": "Artist label"
+  },
+  "album": {
+    "message": "Album",
+    "description": "Album label"
+  },
+  "date": {
+    "message": "Data",
+    "description": "Date label"
+  },
+  "listening": {
+    "message": "Słucham…",
+    "description": "Listening status message"
+  },
+  "queryingWith": {
+    "message": "Sprawdzam na $1…",
+    "description": "Querying status message",
+    "placeholders": {
+      "backend": {
+        "content": "$1",
+        "example": "Shazam"
+      }
+    }
+  },
+  "noAudioElementsDetected": {
+    "message": "Nie wykryto elementów audio…",
+    "description": "Error message when no audio elements detected"
+  },
+  "songNotRecognized": {
+    "message": "Nie rozpoznano utworu…",
+    "description": "Error message when song not recognized"
+  },
+  "noAudioRecordedFromMicrophone": {
+    "message": "Nie nagrano dźwięku z mikrofonu…",
+    "description": "Error message when no audio recorded from microphone"
+  },
+  "songNotRecognizedFromMicrophone": {
+    "message": "Nie rozpoznano utworu z mikrofonu…",
+    "description": "Error message when song not recognized from microphone"
+  },
+  "failedToAccessMicrophone": {
+    "message": "Nie udało się uzyskać dostępu do mikrofonu ani nagrać dźwięku",
+    "description": "Error message when microphone access fails"
+  },
+  "recognitionRules": {
+    "message": "Reguły rozpoznawania",
+    "description": "Recognition rules section title"
+  },
+  "recognitionRulesDescription": {
+    "message": "Zdefiniuj długości nagrań (ms) i kolejność modułów używanych po nieudanym rozpoznaniu.",
+    "description": "Recognition rules description"
+  },
+  "recognitionRulesMobileHint": {
+    "message": "Urządzenia mobilne: przytrzymaj element, aby wejść w tryb zmiany kolejności, a następnie dotykaj innych elementów, aby je uporządkować.",
+    "description": "Recognition rules mobile hint"
+  },
+  "addRule": {
+    "message": "Dodaj regułę",
+    "description": "Add rule button"
+  },
+  "resetToDefault": {
+    "message": "Przywróć domyślne",
+    "description": "Reset to default button"
+  },
+  "settingsResetToDefault": {
+    "message": "Przywrócono ustawienia domyślne",
+    "description": "Notification message when settings are reset"
+  },
+  "rule": {
+    "message": "Reguła",
+    "description": "Rule card title"
+  },
+  "deleteRule": {
+    "message": "Usuń regułę",
+    "description": "Delete rule button tooltip"
+  },
+  "clickToEditDuration": {
+    "message": "Kliknij, aby zmienić czas trwania",
+    "description": "Duration display tooltip"
+  },
+  "backendsClickToEnable": {
+    "message": "Moduły: kliknij, aby włączyć/wyłączyć; przeciągnij, aby zmienić kolejność (tylko włączone)",
+    "description": "Backends list label"
+  },
+  "atLeastOneFallbackRuleMustExist": {
+    "message": "Musi istnieć co najmniej jedna reguła zapasowa",
+    "description": "Error message when trying to delete last rule"
+  },
+  "atLeastOneBackendMustBeEnabled": {
+    "message": "Musi być włączony co najmniej jeden moduł",
+    "description": "Error message when trying to disable last backend"
+  },
+  "tapOtherChipsToReorder": {
+    "message": "Stuknij inne elementy, aby zmienić kolejność; stuknij ponownie, aby zakończyć",
+    "description": "Reorder mode instruction"
+  },
+  "adjustedToUniqueDuration": {
+    "message": "Dostosowano do unikalnego czasu trwania: $1",
+    "description": "Toast message when duration adjusted",
+    "placeholders": {
+      "duration": {
+        "content": "$1",
+        "example": "3.5s"
+      }
+    }
+  },
+  "durationMustBeBetween": {
+    "message": "Czas trwania musi wynosić od 1500 ms do 13000 ms",
+    "description": "Error message for invalid duration"
+  },
+  "fallbackRulesResetToDefault": {
+    "message": "Przywrócono domyślne reguły zapasowe",
+    "description": "Toast message when rules reset"
+  },
+  "apiSettings": {
+    "message": "Ustawienia API",
+    "description": "API settings title"
+  },
+  "audd": {
+    "message": "Audd",
+    "description": "Audd API section title"
+  },
+  "apiToken": {
+    "message": "Token API",
+    "description": "API token label"
+  },
+  "acrCloud": {
+    "message": "ACRCloud",
+    "description": "ACRCloud section title"
+  },
+  "both": {
+    "message": "Oba",
+    "description": "Both mode option"
+  },
+  "original": {
+    "message": "Oryginalny",
+    "description": "Original mode option"
+  },
+  "humming": {
+    "message": "Nucenie",
+    "description": "Humming mode option"
+  },
+  "useDefaultCredentials": {
+    "message": "Używaj domyślnych danych uwierzytelniających",
+    "description": "Use default credentials checkbox"
+  },
+  "host": {
+    "message": "Host",
+    "description": "Host label"
+  },
+  "accessKey": {
+    "message": "Klucz dostępu",
+    "description": "Access key label"
+  },
+  "accessSecret": {
+    "message": "Sekret dostępu",
+    "description": "Access secret label"
+  },
+  "tencent": {
+    "message": "Tencent",
+    "description": "Tencent section title"
+  },
+  "history": {
+    "message": "Historia",
+    "description": "History title"
+  },
+  "exportAsCSV": {
+    "message": "Eksportuj jako CSV",
+    "description": "Export as CSV button"
+  },
+  "exportAllSettingsHistories": {
+    "message": "Eksportuj wszystkie ustawienia i historie (JSON)",
+    "description": "Export all data button"
+  },
+  "importAllSettingsHistories": {
+    "message": "Importuj wszystkie ustawienia i historie (JSON)",
+    "description": "Import all data button"
+  },
+  "clearHistories": {
+    "message": "Wyczyść historie",
+    "description": "Clear histories button"
+  },
+  "confirm": {
+    "message": "Potwierdź",
+    "description": "Confirm dialog title"
+  },
+  "areYouSureToClearHistories": {
+    "message": "Czy na pewno wyczyścić historie?",
+    "description": "Confirm clear histories message"
+  },
+  "no": {
+    "message": "Nie",
+    "description": "No button"
+  },
+  "yes": {
+    "message": "Tak",
+    "description": "Yes button"
+  },
+  "miscellaneous": {
+    "message": "Różne",
+    "description": "Miscellaneous settings title"
+  },
+  "options": {
+    "message": "Opcje",
+    "description": "Options section title"
+  },
+  "recordAnotherTabAudio": {
+    "message": "Nagrywaj dźwięk z innej karty",
+    "description": "Record another tab audio checkbox"
+  },
+  "showAutomaticRecognitionNotifications": {
+    "message": "Pokazuj powiadomienia o automatycznym rozpoznaniu",
+    "description": "Show notifications when a song is recognized automatically"
+  },
+  "theme": {
+    "message": "Motyw",
+    "description": "Theme section title"
+  },
+  "providers": {
+    "message": "Dostawcy",
+    "description": "Providers settings title"
+  },
+  "selectStreamingProviders": {
+    "message": "Wybierz dostawców streamingu (maks. 5)",
+    "description": "Select streaming providers title"
+  },
+  "chooseUpTo5StreamingProviders": {
+    "message": "Wybierz maksymalnie 5 dostawców streamingu wyświetlanych po rozpoznaniu utworu. Możesz przeciągać ich elementy, aby zmienić kolejność.",
+    "description": "Select streaming providers description"
+  },
+  "selectedProviders": {
+    "message": "Wybrani dostawcy ($1/5)",
+    "description": "Selected providers label",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "availableProviders": {
+    "message": "Dostępni dostawcy",
+    "description": "Available providers label"
+  },
+  "workarounds": {
+    "message": "Obejścia problemów",
+    "description": "Workarounds settings title"
+  },
+  "enableExperimentalFix": {
+    "message": "Włącz eksperymentalną poprawkę",
+    "description": "Enable experimental fix checkbox"
+  },
+  "enableExperimentalFixDescription": {
+    "message": "Na niektórych stronach, na przykład w części serwisów z grami, do odtwarzania dźwięku używany jest AudioBufferSourceNode. Aby Librezam działał na tych stronach, należy włączyć tę opcję. Funkcja jest jednak eksperymentalna i bardzo niestabilna, a także może powodować poważne błędy, takie jak opóźnienie lub powielanie dźwięku.",
+    "description": "Enable experimental fix description"
+  },
+  "hosts": {
+    "message": "Hosty",
+    "description": "Hosts section title"
+  },
+  "hostsToPreventAudioDuplication": {
+    "message": "Hosty, dla których należy zapobiegać powielaniu dźwięku",
+    "description": "Hosts to prevent audio duplication label"
+  },
+  "hostsToPreventAudioDuplicationDescription": {
+    "message": "Jeśli podczas próby rozpoznania utworu w Librezam głośność się podwaja, dodaj nazwę hosta tej witryny. Dodanie hosta tutaj nie zadziała, jeśli problem jest powodowany przez eksperymentalną poprawkę.",
+    "description": "Hosts to prevent audio duplication description"
+  },
+  "hostsToPreventAppendHeadlessAudio": {
+    "message": "Hosty, dla których należy zapobiegać dodawaniu bezgłowego dźwięku",
+    "description": "Hosts to prevent append headless audio label"
+  },
+  "hostsToPreventAppendHeadlessAudioDescription": {
+    "message": "Jeśli przy zainstalowanym tylko Librezam występują problemy z niektórymi stronami, dodaj tutaj ich hosta.",
+    "description": "Hosts to prevent append headless audio description"
+  },
+  "hostsToBeTreatedAsCORSSource": {
+    "message": "Hosty traktowane jako źródło CORS",
+    "description": "Hosts to be treated as CORS source label"
+  },
+  "hostsToBeTreatedAsCORSSourceDescription": {
+    "message": "Jeśli podczas próby rozpoznania utworów na niektórych stronach dźwięk jest wyciszony, a elementy nie są wykrywane, dodaj tutaj ich hosta.",
+    "description": "Hosts to be treated as CORS source description"
+  },
+  "pleaseAllowMicrophoneAccess": {
+    "message": "Zezwól na dostęp do mikrofonu w oknie dialogowym",
+    "description": "Microphone access request message"
+  },
+  "recognizeFromTabAudio": {
+    "message": "Rozpoznaj dźwięk z karty",
+    "description": "Command description for tab recognition"
+  },
+  "recognizeFromMicrophoneCommand": {
+    "message": "Rozpoznaj z mikrofonu",
+    "description": "Command description for microphone recognition"
+  },
+  "language": {
+    "message": "Język",
+    "description": "Language setting label"
+  },
+  "languageAuto": {
+    "message": "Automatycznie (domyślny język przeglądarki)",
+    "description": "Auto language detection option"
+  },
+  "languageEnglish": {
+    "message": "Angielski",
+    "description": "English language option"
+  },
+  "languageJapanese": {
+    "message": "Japoński",
+    "description": "Japanese language option"
+  },
+  "languageGerman": {
+    "message": "Niemiecki",
+    "description": "German language option"
+  },
+  "languageFrench": {
+    "message": "Francuski",
+    "description": "French language option"
+  },
+  "languageKorean": {
+    "message": "Koreański",
+    "description": "Korean language option"
+  },
+  "languageRussian": {
+    "message": "Rosyjski",
+    "description": "Russian language option"
+  },
+  "languageSimplifiedChinese": {
+    "message": "Chiński uproszczony",
+    "description": "Simplified Chinese language option"
+  },
+  "languageTraditionalChinese": {
+    "message": "Chiński tradycyjny",
+    "description": "Traditional Chinese language option"
+  },
+  "languageSpanish": {
+    "message": "Hiszpański",
+    "description": "Spanish language option"
+  },
+  "languageItalian": {
+    "message": "Włoski",
+    "description": "Italian language option"
+  },
+  "languageChangeRequiresReload": {
+    "message": "Zmiana języka zacznie obowiązywać po ponownym załadowaniu rozszerzenia.",
+    "description": "Message shown when language is changed"
+  },
+  "captureMethod": {
+    "message": "Metoda nagrywania",
+    "description": "Capture method label"
+  },
+  "captureMethodContentScript": {
+    "message": "Skrypt treści",
+    "description": "Content script capture method option"
+  },
+  "captureMethodTabCapture": {
+    "message": "chrome.tabCapture",
+    "description": "Tab capture method option"
+  },
+  "settingsExportFailed": {
+    "message": "Eksport nie powiódł się: ",
+    "description": "Message shown when settings export failed"
+  },
+  "importedBackupFileFormatIsInvalid": {
+    "message": "Nieprawidłowy format pliku. Wybierz plik kopii zapasowej Librezam.",
+    "description": "Error message for invalid backup file format"
+  },
+  "confirmOverwritingSettings": {
+    "message": "Bieżące ustawienia i historia zostaną nadpisane.\nKontynuować?\n\nData utworzenia kopii zapasowej: $1\nLiczba wpisów historii: $2",
+    "description": "Confirm overwriting the settings and history",
+    "placeholders": {
+      "date": {
+        "content": "$1",
+        "example": "2026-03-28T16:23:29.976Z"
+      },
+      "histories": {
+        "content": "$2",
+        "example": "45"
+      }
+    }
+  },
+  "settingsImportCompleted": {
+    "message": "Ustawienia zaimportowano. Odśwież stronę.",
+    "description": "Message shown when settings import is completed"
+  },
+  "settingsImportFailed": {
+    "message": "Import nie powiódł się: ",
+    "description": "Message shown when settings import failed"
+  }
+}

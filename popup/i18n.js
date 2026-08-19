@@ -73,7 +73,7 @@ async function getEffectiveLanguage() {
             'zh': 'zh_CN',
             'es': 'es',
             'it': 'it',
-            'pt': 'pt'
+            'pl': 'pl'
         };
         
         // Try exact match first

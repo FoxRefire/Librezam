@@ -92,14 +92,20 @@ function recordElem(elem, ms){
 }
 
 async function showNotification(result) {
+    if (!await getStorage("showAutomaticRecognitionNotifications")) {
+        return
+    }
+
     let prevResult = await getStorage("histories").then(h => h.at(-1))
 
     if(!(prevResult.title === result.title && prevResult.artist === result.artist)) {
+        let album = result.album ? ` (${result.album})` : ""
+
         await chrome.notifications.create({
             type: "basic",
             iconUrl: result.art,
             title: "Song recognized!",
-            message: `${result.artist} - ${result.title} (${result.album})`,
+            message: `${result.artist} - ${result.title}${album}`,
             priority: 2
         })
     }

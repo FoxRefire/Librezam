@@ -72,7 +72,8 @@ async function getEffectiveLanguage() {
             'zh-TW': 'zh_TW',
             'zh': 'zh_CN',
             'es': 'es',
-            'it': 'it'
+            'it': 'it',
+            'pl': 'pl'
         };
         
         // Try exact match first

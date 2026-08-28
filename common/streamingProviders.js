@@ -42,7 +42,7 @@ export const STREAMING_PROVIDERS = {
     'beatport': {
         name: 'Beatport',
         icon: '/images/beatport.png',
-        url: 'https://www.beatport.com/de/search?q=$s'
+        url: 'https://www.beatport.com/search?q=$s'
     },
     'qq_music': {
         name: 'QQ Music',
@@ -67,6 +67,6 @@ export const STREAMING_PROVIDERS = {
     'musicbrainz': {
         name: 'MusicBrainz',
         icon: '/images/musicbrainz.png',
-        url: 'https://musicbrainz.org/search?query=$s&type=recording'
+        url: 'https://musicbrainz.org/search?query=$s&type=recording&method=advanced'
     }
 }

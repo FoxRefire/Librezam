@@ -382,6 +382,15 @@ async function writeResult(result){
     await updateStreamingProviders(result)
 }
 
+function openSpotifyApp(url, result) {
+    const trackId = url.match(/track[/:]([a-zA-Z0-9]{22})/)
+    chrome.tabs.update({
+        url: trackId
+            ? `spotify:track:${trackId[1]}`
+            : `spotify:search:${`${result.title} ${result.artist}`.replace(/ /g, '+')}`
+    })
+}
+
 async function updateStreamingProviders(result) {
     const selectedProviders = await getStorage("selectedStreamingProviders")
     
@@ -395,7 +404,14 @@ async function updateStreamingProviders(result) {
             const providerElement = document.createElement('a')
             providerElement.className = `result stream ${providerId}`
             providerElement.href = result[providerId]
-            providerElement.target = '_blank'
+            if (providerId === 'spotify') {
+                providerElement.addEventListener('click', e => {
+                    e.preventDefault()
+                    openSpotifyApp(result[providerId], result)
+                })
+            } else {
+                providerElement.target = '_blank'
+            }
             
             const img = document.createElement('img')
             img.src = STREAMING_PROVIDERS[providerId]?.icon

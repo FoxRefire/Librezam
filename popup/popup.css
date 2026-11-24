@@ -59,9 +59,26 @@ body {
     
 }
 
+/* Chrome sizes the action popup from the viewport's scroll size. With the
+   root overflow left at visible, body's overflow is propagated to the
+   viewport and then treated as visible, so recognition animations (spinner
+   rotation, pulse scale) change the popup size every frame. Firefox keeps
+   the specified body box. Lock the root so the viewport cannot grow. */
+html:has(body.main) {
+    width: 350px;
+    height: 500px;
+    max-width: 350px;
+    max-height: 500px;
+    overflow: hidden;
+}
+
 body.main {
     display: flex;
     flex-direction: column;
+    width: 350px;
+    height: 500px;
+    max-width: 350px;
+    max-height: 500px;
     overflow: hidden;
 }
 /* Reusable elements */
@@ -266,11 +283,13 @@ body.main {
     color: orange;
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
     width: 100%;
+    max-width: 100%;
     padding: 4px 8px;
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
-    transform: translateY(-10px) scale(0.95);
+    transform: translateY(-4px);
     position: relative;
     z-index: 2;
     text-shadow: 
@@ -280,7 +299,7 @@ body.main {
 
 #notification.show {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: none;
 }
 
 #notification.text-error {
@@ -295,19 +314,19 @@ body.main {
 @keyframes notification-pulse {
     0%, 100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
     }
     50% {
         opacity: 0.85;
-        transform: translateY(0) scale(1.03);
     }
 }
 
-/* Recognition status text animation */
+/* Recognition status text animation.
+   Scale is intentionally not used: Chrome includes the transformed box of a
+   full-width line in the popup size, so the window breathes while recognizing. */
 #notification.recognizing {
     color: #64B5F6;
     font-weight: 500;
-    animation: text-glow 2s ease-in-out infinite, text-wave 3s ease-in-out infinite;
+    animation: text-glow 2s ease-in-out infinite, notification-pulse 1.5s ease-in-out infinite;
     letter-spacing: 0.5px;
 }
 
@@ -317,15 +336,6 @@ body.main {
     }
     50% {
         text-shadow: 0 0 10px rgba(100, 181, 246, 0.8), 0 0 20px rgba(100, 181, 246, 0.4);
-    }
-}
-
-@keyframes text-wave {
-    0%, 100% {
-        transform: translateY(1px) scale(1);
-    }
-    50% {
-        transform: translateY(-1px) scale(1.02);
     }
 }
 
@@ -369,7 +379,7 @@ body.main {
 .preloader-wrapper.big {
     width: 36px !important;
     height: 36px !important;
-    margin: 0px 14px 0px;
+    margin: 0;
     position: relative;
 }
 
@@ -378,10 +388,31 @@ body.main {
     float:left;
 }
 
-/* Recognition animation - pulse effect around spinner */
+/* Recognition animation - pulse effect around spinner.
+   The Materialize spinner rotates a square and contains circles much wider
+   than itself (up to 1000%). Those boxes must stay inside a non-transformed
+   clip, otherwise Chrome resizes the popup as the spinner turns. */
 #circler {
     position: absolute;
     z-index: 100;
+    top: calc((var(--banner-height) - 36px) / 2);
+    left: 0;
+    width: 36px;
+    height: 36px;
+}
+
+.spinner-clip {
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    contain: paint;
+    border-radius: 50%;
+}
+
+.spinner-clip .preloader-wrapper {
+    display: block;
+    float: none;
+    margin: 0;
 }
 
 #circler::before {
@@ -429,7 +460,7 @@ body.main {
 
 /* Enhanced spinner animation */
 #circler .preloader-wrapper {
-    animation: spinner-glow 2s ease-in-out infinite;
+    animation: container-rotate 1568ms linear infinite, spinner-glow 2s ease-in-out infinite;
 }
 
 @keyframes spinner-glow {
